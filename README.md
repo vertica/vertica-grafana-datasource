@@ -1,7 +1,7 @@
 # Vertica data source
 Vertica data source plugin allows you to query and visualize data from a Vertica database. This topic explains options, variables, querying, and other options specific to this data source. For instructions about how to add a data source to Grafana, refer to [Add a data source](https://grafana.com/docs/grafana/v7.5/datasources/add-a-data-source/). Only users with the organization admin role can add data sources.
 ## Prerequisite 
-* [Grafana](https://grafana.com/docs/grafana/latest/installation/) (version >=7.5.5)
+* [Grafana](https://grafana.com/docs/grafana/latest/installation/) (version >=7.4.0)
 * [Vertica](https://www.vertica.com/download/vertica/) 
 * [NodeJS](https://nodejs.org/en/download/package-manager/) (version >=14) (Package Manager: [yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable)) 
 * [Go](https://golang.org/doc/install) 
