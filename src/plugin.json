@@ -11,7 +11,7 @@
     "description": "Data source for Vertica and compatible databases",
     "author": {
       "name": "Micro Focus",
-      "url": "https://github.com/vertica/-vertica-grafana-datasource-new"
+      "url": "https://github.com/vertica/vertica-grafana-datasource"
     },
     "keywords": ["grafana", "vertica", "datasource"],
     "logos": {
@@ -21,11 +21,11 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/vertica/-vertica-grafana-datasource-new"
+        "url": "https://github.com/vertica/vertica-grafana-datasource"
       },
       {
         "name": "License",
-        "url": "https://github.com/vertica/-vertica-grafana-datasource-new/blob/master/LICENSE"
+        "url": "https://github.com/vertica/vertica-grafana-datasource/blob/master/LICENSE"
       }
     ],
     "screenshots": [
