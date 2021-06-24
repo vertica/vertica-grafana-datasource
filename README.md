@@ -66,7 +66,7 @@ FROM TABLE - Lists tables that are available in the schema you selected. To manu
 
 Time column - Lists columns with data types such as time, date timestamp, etc. This field is mandatory. 
 
-Metric column - Lists columns with a text data type such as char, varchar, long varchar. If you want to use a column with a different data type, enter the column name with a cast:  `ip::text`. This field is optional. If a value is selected, the Metric column field will be used as the series name.
+Metric column - Lists columns with a text data type such as char, varchar, and long varchar. If you want to use a column with a different data type, enter the column name with a cast:  `ip::text`. This field is optional. If a value is selected, the Metric column field will be used as the series name.
 
 ### Aggregate Functions, Windows Functions, and Column (SELECT)
 In the `SELECT` row, you can specify the columns and functions you want to use. By default, Column has "value" instead of the column name and the alias has the same name as column name which you can change.  
@@ -84,14 +84,15 @@ Grafana fills in missing values when you group by time. The time function accept
 
 ### Raw Query Mode
 To switch to the raw query mode, click `Edit SQL`. You can also click `Query Inspector` to view the raw query. 
-> If you use the raw query mode, ensure your query at minimum has `ORDER BY time` and a filter on the returned time range.
+
+**Note:** If you use the raw query mode, ensure your query at minimum has `ORDER BY time` and a filter on the returned time range.
 
 ![Raw Query Mode](https://github.com/vertica/vertica-grafana-datasource/blob/plugin-code/src/img/datasource-panel-raw-query.png)
 
 ### Disable Query
 To disable a query, click the eye icon in the toolbar of the query builder. The query is not executed, and its result is removed from the dashboard.
 
-### Data source help
+### Data Source Help
 To view the data source help, click `?` icon in the toolbar of every query row.
 
 ![Query Help](https://github.com/vertica/vertica-grafana-datasource/blob/plugin-code/src/img/datasource-query-help.png)
