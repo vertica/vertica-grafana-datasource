@@ -59,7 +59,7 @@ For any change in the query builder, the raw query is generated and executed. Th
 
 ![Query Builder](https://github.com/vertica/vertica-grafana-datasource/blob/plugin-code/src/img/datasource-query-builder.png)
 
-### FROM SCHEMA. FROM TABLE, Time column, and Metric column
+### FROM SCHEMA, FROM TABLE, Time column, and Metric column
 FROM SCHEMA - Lists schemas that are available in the database for the configured user.
 
 FROM TABLE - Lists tables that are available in the schema you selected. To manually enter a table or view that is not available in the list, type the fully qualified name in the format schema.table, for example, `public.metrics`.
