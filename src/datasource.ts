@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 
-import { DataSourceInstanceSettings, DataQueryRequest, DataQueryResponse } from '@grafana/data';
+import { DataSourceInstanceSettings, DataQueryRequest, DataQueryResponse, MetricFindValue } from '@grafana/data';
 import { DataSourceWithBackend, frameToMetricFindValue, getTemplateSrv } from '@grafana/runtime';
 import { MyDataSourceOptions, MyQuery } from './types';
 
@@ -76,7 +76,25 @@ export class DataSource extends DataSourceWithBackend<MyQuery, MyDataSourceOptio
       .toPromise()
       .then((rsp) => {
         if (rsp.data?.length) {
-          return frameToMetricFindValue(rsp.data[0]);
+          const f = frameToMetricFindValue(rsp.data[0]);
+          // TODO: split this out to a method
+          const frame = rsp.data[0];
+          // frameToMetricFindValue is OK if the lookup is text-only (one column, __text)
+          if (frame.fields.length === 1) {
+            return f;
+          }
+          // if there are two fields, one is __text and the other __value, parse them out so we send the __value instead of the __text
+          const textFieldIdx = frame.fields[0].name === '__text' ? 0 : 1;
+          const valueFieldIdx = textFieldIdx === 0 ? 1 : 0;
+          let metricResponse: MetricFindValue[] = [];
+          var idx: number;
+          for (idx = 0; idx < frame.length; idx++) {
+            metricResponse.push({
+              text: frame.fields[textFieldIdx].values.get(idx),
+              value: frame.fields[valueFieldIdx].values.get(idx),
+            });
+          }
+          return metricResponse;
         }
         return [];
       });
