@@ -29,6 +29,9 @@ const setup = (propOverrides?: object) => {
         usePreparedStatements: false,
         tlsmode: 'none',
         useLoadBalancer: false,
+        maxOpenConnections: 0,
+        maxIdealConnections: 0,
+        maxConnectionIdealTime: 0,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -69,6 +72,9 @@ const setupForHostname = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+        maxOpenConnections: 0,
+        maxIdealConnections: 0,
+        maxConnectionIdealTime: 0,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -110,6 +116,9 @@ const setupForDatabasename = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         database: 'Vertica DB',
+        maxOpenConnections: 0,
+        maxIdealConnections: 0,
+        maxConnectionIdealTime: 0,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -152,6 +161,9 @@ const setupForUsername = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         user: 'Vertica Admin',
+        maxOpenConnections: 0,
+        maxIdealConnections: 0,
+        maxConnectionIdealTime: 0,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -192,6 +204,9 @@ const setupForPassword = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+        maxOpenConnections: 0,
+        maxIdealConnections: 0,
+        maxConnectionIdealTime: 0,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -232,6 +247,9 @@ const setupForSSLMode = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+        maxOpenConnections: 0,
+        maxIdealConnections: 0,
+        maxConnectionIdealTime: 0,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -288,6 +306,50 @@ const setupForSSLMode = (propOverrides?: object) => {
 //   return shallow(<ConfigEditor {...props} />);
 // };
 
+// setting up the props verifying Rendering the Config Screen with value in SSL Mode
+const setupForVerticaConnections = (propOverrides?: object) => {
+  const props: Props = {
+    options: {
+      id: 11,
+      orgId: 1,
+      name: 'vertica-grafana-plugin',
+      type: 'datasource',
+      typeName: 'vertica',
+      typeLogoUrl: '',
+      access: 'proxy',
+      url: '',
+      password: '',
+      user: '',
+      database: '',
+      basicAuth: false,
+      basicAuthUser: '',
+      basicAuthPassword: '',
+      withCredentials: false,
+      isDefault: false,
+      jsonData: {
+        usePreparedStatements: false,
+        tlsmode: 'server',
+        useLoadBalancer: false,
+        url: 'localhost:verticaserver',
+        maxOpenConnections: 3,
+        maxIdealConnections: 2,
+        maxConnectionIdealTime: 10,
+      },
+      secureJsonFields: {},
+      secureJsonData: {
+        password: '',
+      },
+      version: 3,
+      readOnly: false,
+    },
+    onOptionsChange: jest.fn(),
+  };
+
+  Object.assign(props, propOverrides);
+
+  return shallow(<ConfigEditor {...props} />);
+};
+
 describe('Render', () => {
   it('should render component', () => {
     const wrapper = setup();
@@ -316,6 +378,11 @@ describe('Render', () => {
   });
   it('should render component with value in SSL Mode field', () => {
     const wrapper = setupForSSLMode();
+
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
+  it('should render component with value in Connection and Timeout fields', () => {
+    const wrapper = setupForVerticaConnections();
 
     expect(wrapper.debug()).toMatchSnapshot();
   });

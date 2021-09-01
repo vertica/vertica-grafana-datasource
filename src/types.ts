@@ -44,6 +44,9 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
   tlsmode?: string;
   usePreparedStatements: boolean;
   useLoadBalancer: boolean;
+  maxOpenConnections: number;
+  maxIdealConnections: number;
+  maxConnectionIdealTime: number;
 }
 
 /**

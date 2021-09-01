@@ -3,14 +3,18 @@ package main
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
-	"reflect"
-	"strings"
+	"net/http"
 	"testing"
+	"time"
 
 	"bou.ke/monkey"
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,7 +32,7 @@ func Test_CheckHealth(t *testing.T) {
 		{
 			name:          "Success in connecting the Vertica DB",
 			ctx:           context.Background(),
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testUrl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testUrl", UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedStatus: &backend.CheckHealthResult{
 				Status:  backend.HealthStatusOk,
 				Message: "Successfully connected to Vertica Analytic Database v10.1.0-0",
@@ -41,19 +45,13 @@ func Test_CheckHealth(t *testing.T) {
 			pluginContext: getCredentials(configArgs{URL: "InvalidUrl"}),
 			expectedStatus: &backend.CheckHealthResult{
 				Status:  backend.HealthStatusError,
-				Message: "sql: database is closed",
+				Message: "sql: connection is already closed",
 			},
 			expectingErr: nil,
 		},
 	}
 
 	v := &VerticaDatasource{}
-
-	// Mock Database
-	db, mock, err := sqlmock.New()
-	mock.ExpectQuery("SELECT version()").WillReturnRows(sqlmock.NewRows([]string{"version"}).AddRow("Vertica Analytic Database v10.1.0-0"))
-
-	monkey.UnpatchAll()
 
 	for i, tc := range tests {
 
@@ -62,18 +60,8 @@ func Test_CheckHealth(t *testing.T) {
 
 		t.Run(tc.name, func(tt *testing.T) {
 
-			monkey.Patch(sql.Open, func(_ string, connStr string) (*sql.DB, error) {
-
-				if err != nil || strings.Contains(connStr, "InvalidUrl") {
-					return db, sql.ErrConnDone
-				}
-				return db, nil
-			})
-
-			monkey.PatchInstanceMethod(reflect.TypeOf(db), "PingContext", func(_ *sql.DB, _ context.Context) error {
-				return nil
-			})
-
+			im := datasource.NewInstanceManager(mockDataSourceInstance)
+			v.im = im
 			healthStatus, _ := v.CheckHealth(tc.ctx, &backend.CheckHealthRequest{PluginContext: tc.pluginContext})
 
 			if tc.expectingErr != nil {
@@ -85,8 +73,31 @@ func Test_CheckHealth(t *testing.T) {
 			}
 		})
 	}
-
-	defer db.Close()
-
 	monkey.UnpatchAll()
+}
+
+func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+	var config configArgs
+	//secret := setting.DecryptedSecureJSONData["password"]
+	err := json.Unmarshal(setting.JSONData, &config)
+	if err != nil {
+		log.DefaultLogger.Error("newDataSourceInstance : error in unmarshaler: %s", err)
+	}
+	if config.URL == "InvalidUrl" {
+		return nil, sql.ErrConnDone
+	}
+	db, mock, err := sqlmock.NewWithDSN("test")
+	if err != nil {
+		return nil, err
+	}
+	mock.ExpectQuery("SELECT version()").WillReturnRows(sqlmock.NewRows([]string{"version"}).AddRow("Vertica Analytic Database v10.1.0-0"))
+	db.SetMaxOpenConns(config.MaxOpenConnections)
+	db.SetMaxIdleConns(config.MaxIdealConnections)
+	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance fo datasource created: %s", setting.Name))
+	return &instanceSettings{
+		httpClient: &http.Client{},
+		Db:         db,
+		Name:       setting.Name,
+	}, nil
 }

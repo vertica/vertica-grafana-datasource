@@ -80,10 +80,16 @@ func (v *VerticaDatasource) query(ctx context.Context, query backend.DataQuery, 
 		log.DefaultLogger.Error("Error while sanitizing the query: " + response.Error.Error())
 		return response
 	}
-
+	connection, err := connDB.Conn(ctx)
+	if err != nil {
+		log.DefaultLogger.Error(fmt.Sprintf("queryData :connection: %s", err))
+		response.Error = err
+		return response
+	}
+	defer connection.Close()
 	// Excute the query
 	var rows *sql.Rows
-	rows, response.Error = connDB.Query(queryArgs.RawSQL)
+	rows, response.Error = connection.QueryContext(ctx, queryArgs.RawSQL)
 	if response.Error != nil {
 		log.DefaultLogger.Error("Error while fetching the Query Result", response.Error)
 		return response
