@@ -377,7 +377,6 @@ func (v *VerticaDatasource) query(ctx context.Context, query backend.DataQuery, 
 					} else {
 						columns[i].StringData = append(columns[i].StringData, nil)
 					}
-					columns[i].StringData = append(columns[i].StringData, nil)
 				} else {
 					columns[i].StringData = append(columns[i].StringData, &value)
 				}
