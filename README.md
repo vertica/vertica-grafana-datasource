@@ -36,8 +36,12 @@ After you add the Vertica data source, you need to configure it by entering the 
 | `Password`  | Database user password. |
 | `SSL Mode`  | Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. When SSL Mode is disabled, SSL Method and Auth Details are not visible. |
 | `Use Connection Load Balancing`  | To enable connection load balancing on the client-side.|
+| `Max Open Connections` |  Maximum number of connections a user can open concurrently on individual nodes or across the database cluster.|
+| `Max Ideal Connections` | Maximum number of idle connections. This number should be less than or equal to Max Open Connections. |
+| `Max Connection Ideal Time` | Idle time after which the session times out. |
 
 **Note:** To enable load balancing, the server side needs to be configured. For more information, see [Connection Load Balancing](https://www.vertica.com/docs/10.1.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/LoadBalancing/ConnectionLoadBalancing.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7CConnection%20Load%20Balancing%7C_____0) in the Vertica documentation.
+For more information on managing client connections, see [Managing Client Connections](https://www.vertica.com/docs/11.0.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/OverviewClientConnections.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7C_____0).
 
 ![Data Source Config](https://github.com/vertica/vertica-grafana-datasource/blob/main/src/img/datasource-config.png)
 
