@@ -1,7 +1,7 @@
 # Vertica Grafana Data Source Plugin
 Vertica Grafana data source plugin allows you to query and visualize data from a Vertica database. This plugin supports features such as SSL and Native Load Balancing. This version of the plugin is updated from Angular to React framework and is a signed plugin.
 
-To modify and build your own version of the plugin, refer to the [Setting Up Your Development Environment](#DevEnv) section in this readme.
+To modify and build your own version of the plugin, refer to the [Setting Up Your Development Environment](https://github.com/vertica/vertica-grafana-datasource#setting-up-your-development-environment) section in this readme.
 
 ## Migrating from an Older Version of the Data Source Plugin
 •	If you have an older version of the plugin with the same ID as vertica-grafana-datasource, remove the older version using grafana-cli and replace it with the new version:
@@ -122,7 +122,7 @@ For troubleshooting, enabled logs are available in the grafana.log file. By defa
 ## Known Limitations
 TimeGroup macro only fills missing values in the data fetched from the Vertica database. It does not create more samples based on the selected time range and interval value.
 
-## <a name="DevEnv"></a>Setting Up your Development Environment
+## Setting Up your Development Environment
 
 If you plan to modify the source code and build your own version of the plugin, follow the steps in this section to set up the development environment.
 
