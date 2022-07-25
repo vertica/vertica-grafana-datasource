@@ -122,6 +122,8 @@ For troubleshooting, enabled logs are available in the grafana.log file. By defa
 ## Known Limitations
 TimeGroup macro only fills missing values in the data fetched from the Vertica database. It does not create more samples based on the selected time range and interval value.
 
+To know more about data type limitations when using Grafana with Vertica, see [Vertica Integration with Grafana: Connection Guide](https://www.vertica.com/kb/Grafana_CG/Content/Partner/Grafana_CG.htm).
+
 ## Setting Up your Development Environment
 
 If you plan to modify the source code and build your own version of the plugin, follow the steps in this section to set up the development environment.
