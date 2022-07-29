@@ -57,7 +57,7 @@ alter user grafana_user default role sysmonitor;
 ```
 ## Importing and Viewing the Vertica Performance Dashboard
 To import the dashboard, 
-1.	Go to left panel, go to Dashboards icon and click **Import**.
+1.	On the left panel, click the Dashboards icon, and then click **Import**.
 2.	In the Import via grafana.com field, enter the **dashboard ID: 16615** and click **Load**.
 ![Import Dashboard](https://github.com/vertica/vertica-grafana-datasource/blob/main/src/img/import-dashboard.png)
 3.	In the Importing dashboard window, select the datasource you created and click **Import**.
