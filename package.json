@@ -1,6 +1,6 @@
 {
   "name": "vertica-grafana-plugin",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Data source for Vertica and compatible databases",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
