@@ -35,7 +35,7 @@ export default class QueryModel {
     if (target.rawQuery) {
       target.rawSql =
         target.rawSql ||
-        'SELECT \n  $__time(end_time), \n  average_cpu_usage_percent \n  FROM \n  v_monitor.cpu_usage \n  WHERE \n  $__timeFilter(end_time)  \n  ORDER BY  \  time';
+        'SELECT \n  $__time(end_time), \n  average_cpu_usage_percent \n  FROM \n  v_monitor.cpu_usage \n  WHERE \n  $__timeFilter(end_time)  \n  ORDER BY  \n  time';
     } else {
       target.rawSql = target.rawSql || this.buildQuery();
     }
