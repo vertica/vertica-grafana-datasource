@@ -45,6 +45,10 @@ For more information on managing client connections, see [Managing Client Connec
 
 ![Data Source Config](https://github.com/vertica/vertica-grafana-datasource/blob/main/src/img/datasource-config.png)
 
+**Note:** *We recently found a bug in the connection pooling parameters which does not set them as expected. This bug affects loading of the dashboards where the panels come up empty/blank and show ‘test 1’ error.*
+
+*For now, a workaround for this issue is to not change the connection pooling parameters and set them as ‘0’ for all the three options- **Max Open Connections, Max Ideal Connections, Max Connection Ideal Time**. It is not efficient to open up multiple connections for each query but we are working to resolve it soon.*
+
 ## User Permission 
 When you add the data source, the database user you specify must only be granted SELECT permissions on the specified database and tables you want to query. Grafana does not validate that the query is safe. The query could include any SQL statement. For example, statements like `DELETE FROM user;`  and  `DROP TABLE user;`  will be executed. We **highly** recommend you create a specific Vertica user with restricted permissions.
 
