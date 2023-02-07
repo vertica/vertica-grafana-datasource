@@ -1,0 +1,540 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render should render component 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;
+
+exports[`Render should render component with value in Connection and Timeout fields 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={3} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={3} onChange={[Function (anonymous)]} value={2} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={10} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;
+
+exports[`Render should render component with value in Database field 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"Vertica DB\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;
+
+exports[`Render should render component with value in Host field 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;
+
+exports[`Render should render component with value in SSL Mode field 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;
+
+exports[`Render should render component with value in User field 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"Vertica Admin\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;
+
+exports[`Render should render component with value in password field 1`] = `
+"<Fragment>
+  <h3 className=\\"page-heading\\">
+    Vertica Connection
+  </h3>
+  <div className=\\"gf-form-group\\">
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"localhost:5433\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form max-width-30\\">
+      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    </div>
+    <div className=\\"gf-form-inline\\">
+      <div className=\\"gf-form\\">
+        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+      </div>
+      <div className=\\"gf-form\\">
+        <SecretFormField isConfigured={[undefined]} value=\\"Demo Password\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+        SSL Mode
+      </InlineLabel>
+      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <b>
+      Environment
+    </b>
+    <div className=\\"gf-form\\">
+      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+        Use Connection Load Balancing
+      </InlineLabel>
+      <div className=\\"gf-form-switch\\">
+        <Switch value={false} css=\\"\\" onChange={[Function (anonymous)]} />
+      </div>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
+        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
+        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+    <div className=\\"gf-form\\">
+      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
+        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+      </Field>
+    </div>
+  </div>
+  <div className=\\"gf-form-group\\">
+    <InfoBox title=\\"User Permission\\">
+      <p>
+        The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
+        <code>
+          DELETE FROM user;
+        </code>
+         and 
+        <code>
+          DROP TABLE user;
+        </code>
+         would be executed. To protect against this we
+        <strong>
+           Highly
+        </strong>
+         recommmend you create a specific Vertica user with restricted permissions.
+      </p>
+    </InfoBox>
+  </div>
+</Fragment>"
+`;

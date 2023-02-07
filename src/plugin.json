@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "Vertica",
+  "id": "vertica-grafana-datasource",
+  "category": "sql",
+  "metrics": true,
+  "backend": true,
+  "executable": "gpx_vertica-grafana-plugin",
+  "alerting" : true,
+  "info": {
+    "description": "Data source for Vertica and compatible databases",
+    "author": {
+      "name": "Micro Focus",
+      "url": "https://github.com/vertica/vertica-grafana-datasource"
+    },
+    "keywords": ["grafana", "vertica", "datasource"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/vertica/vertica-grafana-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/vertica/vertica-grafana-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [
+      { "name": "add datasource", "path": "img/datasource-add.png" },
+      { "name": "configure datasource", "path": "img/datasource-config.png" },
+      { "name": "dashboard raw query", "path": "img/datasource-panel-raw-query.png" },
+      { "name": "dashboard query builder", "path": "img/datasource-query-builder.png" },
+      { "name": "dashboard query builder switch", "path": "img/datasource-query-builder-switch-warning.png" },
+      { "name": "dashboard datasource help", "path": "img/datasource-query-help.png" },
+      { "name": "dashboard template variables", "path": "img/datasource-template-variables.png" }
+    ],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=7.4.0",
+    "plugins": []
+  }
+}

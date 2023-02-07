@@ -1,0 +1,39 @@
+name: Go Test
+
+on:
+  pull_request:
+  push:
+    branches: 
+      - main
+
+jobs:
+  test:
+    name: Backend unit testing
+   
+    runs-on: ubuntu-20.04
+    steps:
+            
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16.2
+        
+    - name: Debug for ENVs
+      shell: bash
+      run: |
+        pwd
+        echo ${HOME}
+        echo ${GITHUB_WORKSPACE}
+        echo ${GOPATH}
+        echo ${GOROOT}
+      env:
+        GOPATH: /home/runner/work/vertica-grafana-test-repo/go
+      
+    - name: Test
+      run: go test -v ./...
+      env:
+        GOPATH: /home/runner/work/vertica-grafana-test-repo/go
+      
