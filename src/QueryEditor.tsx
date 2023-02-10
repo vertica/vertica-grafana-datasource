@@ -9,7 +9,6 @@ import { getTemplateSrv } from '@grafana/runtime';
 import { cloneDeep } from 'lodash';
 import { PartListSection } from 'PartListSection';
 import { SELECT_OPTIONS, WHERE_OPTIONS, FORMAT_OPTIONS } from './constants';
-// import {QueryEditorRow} from '../../../../../../usr/share/grafana/public/app/features/query/components/QueryEditorRow';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
@@ -51,10 +50,9 @@ export const QueryEditor = (props: Props): JSX.Element => {
     marginLeft: '5px',
   };
   // this is to run query variable declared here with styling
-  // var runValue :string;
-  // var runOverride: boolean | undefined = false;
   const [runValue, setRunValue] = useState('');
   const [runOverride, setRunOverRide] = useState<boolean | undefined>(true);
+  const [eyeLash, setEyeLash] = useState<boolean>(false);
   const buttonPosition = {
     justifyContent: 'right',
   };
@@ -64,16 +62,12 @@ export const QueryEditor = (props: Props): JSX.Element => {
     if (isFirstTime.current) {
       onApplyQueryChange(query);
       isFirstTime.current = false;
-      console.log('this.eyelash', props);
-      // console.log("this.states",this.state);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // handler for query field change action
   const onQueryTextChange = (value: string, override?: boolean) => {
-    // setRunOverRide = true;
-    // runValue = '';
     // onApplyQueryChange({ ...query, rawSql: value }, override);
     setRunValue(value);
     setRunOverRide(override);
@@ -123,6 +117,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // method invoked when any change in query is made
   const onApplyQueryChange = (changedQuery: MyQuery, runQuery = true) => {
+    setEyeLash(document.getElementsByClassName('css-ogsgx4')[2].getAttribute('class') === 'css-ogsgx4' ? false : true);
+    console.log('eyeladkasksbfkb', eyeLash);
     if (onChange) {
       if (!changedQuery.rawQuery) {
         const queryModel = new QueryModel(changedQuery, getTemplateSrv());
@@ -611,7 +607,14 @@ export const QueryEditor = (props: Props): JSX.Element => {
       {rawQuery ? (
         <>
           <div className="gf-form col-md-12" style={buttonPosition}>
-            <Button icon="play" variant="primary" size="sm" onClick={onClickQueryChange}>
+            <Button
+              icon="play"
+              variant="primary"
+              // style={hide ? { cursor: 'none' } : { cursor: 'pointer' }}
+              disabled={hide}
+              size="sm"
+              onClick={onClickQueryChange}
+            >
               Run query
             </Button>
           </div>
