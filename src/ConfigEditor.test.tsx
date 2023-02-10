@@ -24,6 +24,7 @@ const setup = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         url: 'localhost:verticaserver',
         usePreparedStatements: false,
@@ -32,6 +33,8 @@ const setup = (propOverrides?: object) => {
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -67,6 +70,7 @@ const setupForHostname = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         usePreparedStatements: false,
         tlsmode: 'none',
@@ -75,6 +79,8 @@ const setupForHostname = (propOverrides?: object) => {
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -110,6 +116,7 @@ const setupForDatabasename = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         url: 'localhost:verticaserver',
         usePreparedStatements: false,
@@ -119,6 +126,8 @@ const setupForDatabasename = (propOverrides?: object) => {
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -155,6 +164,7 @@ const setupForUsername = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         url: 'localhost:verticaserver',
         usePreparedStatements: false,
@@ -164,6 +174,8 @@ const setupForUsername = (propOverrides?: object) => {
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -199,6 +211,7 @@ const setupForPassword = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         usePreparedStatements: false,
         tlsmode: 'none',
@@ -207,6 +220,8 @@ const setupForPassword = (propOverrides?: object) => {
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -242,6 +257,7 @@ const setupForSSLMode = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         usePreparedStatements: false,
         tlsmode: 'server',
@@ -250,6 +266,8 @@ const setupForSSLMode = (propOverrides?: object) => {
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -326,6 +344,7 @@ const setupForVerticaConnections = (propOverrides?: object) => {
       basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
+      backupServerNodes: '',
       jsonData: {
         usePreparedStatements: false,
         tlsmode: 'server',
@@ -334,6 +353,8 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         maxOpenConnections: 3,
         maxIdealConnections: 2,
         maxConnectionIdealTime: 10,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -349,7 +370,98 @@ const setupForVerticaConnections = (propOverrides?: object) => {
 
   return shallow(<ConfigEditor {...props} />);
 };
+// setting up the props verifying Rendering the Config Screen with value in useBackUpServer
+const setupForuseBackupserver = (propOverrides?: object) => {
+  const props: Props = {
+    options: {
+      id: 11,
+      orgId: 1,
+      name: 'vertica-grafana-plugin',
+      type: 'datasource',
+      typeName: 'vertica',
+      typeLogoUrl: '',
+      access: 'proxy',
+      url: '',
+      password: '',
+      user: '',
+      database: '',
+      basicAuth: false,
+      basicAuthUser: '',
+      basicAuthPassword: '',
+      withCredentials: false,
+      isDefault: false,
+      backupServerNodes: '',
+      jsonData: {
+        usePreparedStatements: false,
+        tlsmode: 'server',
+        useLoadBalancer: false,
+        url: 'localhost:verticaserver',
+        maxOpenConnections: 3,
+        maxIdealConnections: 2,
+        maxConnectionIdealTime: 10,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
+      },
+      secureJsonFields: {},
+      secureJsonData: {
+        password: '',
+      },
+      version: 3,
+      readOnly: false,
+    },
+    onOptionsChange: jest.fn(),
+  };
 
+  Object.assign(props, propOverrides);
+
+  return shallow(<ConfigEditor {...props} />);
+};
+// setting up the props verifying Rendering the Config Screen with value in backUPServerNodes
+const setupForBackupServerNode = (propOverrides?: object) => {
+  const props: Props = {
+    options: {
+      id: 11,
+      orgId: 1,
+      name: 'vertica-grafana-plugin',
+      type: 'datasource',
+      typeName: 'vertica',
+      typeLogoUrl: '',
+      access: 'proxy',
+      url: '',
+      password: '',
+      user: '',
+      database: '',
+      basicAuth: false,
+      basicAuthUser: '',
+      basicAuthPassword: '',
+      withCredentials: false,
+      isDefault: false,
+      backupServerNodes: '',
+      jsonData: {
+        usePreparedStatements: false,
+        tlsmode: 'server',
+        useLoadBalancer: false,
+        url: 'localhost:verticaserver',
+        maxOpenConnections: 3,
+        maxIdealConnections: 2,
+        maxConnectionIdealTime: 10,
+        useBackupserver: false,
+        backUpServerNodes: 'localhost:verticaserver1',
+      },
+      secureJsonFields: {},
+      secureJsonData: {
+        password: '',
+      },
+      version: 3,
+      readOnly: false,
+    },
+    onOptionsChange: jest.fn(),
+  };
+
+  Object.assign(props, propOverrides);
+
+  return shallow(<ConfigEditor {...props} />);
+};
 describe('Render', () => {
   it('should render component', () => {
     const wrapper = setup();
@@ -383,6 +495,16 @@ describe('Render', () => {
   });
   it('should render component with value in Connection and Timeout fields', () => {
     const wrapper = setupForVerticaConnections();
+
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
+  it('should render component with value in Use Backup Server field', () => {
+    const wrapper = setupForuseBackupserver();
+
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
+  it('should render component with value in BackUp Server Nodes', () => {
+    const wrapper = setupForBackupServerNode();
 
     expect(wrapper.debug()).toMatchSnapshot();
   });

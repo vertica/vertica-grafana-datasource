@@ -18,6 +18,14 @@ export class ConfigEditor extends PureComponent<Props, State> {
     };
     onOptionsChange({ ...options, jsonData, url: event.target.value });
   };
+  onBackServerNodeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      backupServerNode: event.target.value,
+    };
+    onOptionsChange({ ...options, jsonData, backupServerNodes: event.target.value });
+  };
   onDBnameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -56,6 +64,15 @@ export class ConfigEditor extends PureComponent<Props, State> {
       ...options.jsonData,
       useLoadBalancer: (event.target as HTMLInputElement).checked,
     };
+    onOptionsChange({ ...options, jsonData });
+  };
+  onBackupServerChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      useBackupserver: (event.target as HTMLInputElement).checked,
+    };
+    console.log('useBackupServer', jsonData.useBackupserver);
     onOptionsChange({ ...options, jsonData });
   };
   // Secure field (only sent to the backend)
@@ -207,6 +224,27 @@ export class ConfigEditor extends PureComponent<Props, State> {
               options={SSL_MODE_OPTIONS}
               onChange={this.onModeChange}
               value={selectedTLSMode}
+            />
+          </div>
+          <div className="gf-form">
+            <InlineLabel width={30}>useBackupserver</InlineLabel>
+            <div className="gf-form-switch">
+              <Switch
+                value={jsonData.useBackupserver === undefined ? false : jsonData.useBackupserver}
+                css=""
+                onChange={this.onBackupServerChange}
+              />
+            </div>
+          </div>
+          <div className="gf-form max-width-30">
+            <FormField
+              label="Back Server"
+              labelWidth={7}
+              inputWidth={21}
+              onChange={this.onBackServerNodeChange}
+              value={jsonData.backUpServerNodes}
+              placeholder="localhost:5400"
+              disabled={!jsonData.useBackupserver}
             />
           </div>
         </div>

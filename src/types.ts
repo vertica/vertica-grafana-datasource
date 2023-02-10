@@ -47,6 +47,8 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
   maxOpenConnections: number;
   maxIdealConnections: number;
   maxConnectionIdealTime: number;
+  useBackupserver: boolean;
+  backUpServerNodes: string;
 }
 
 /**

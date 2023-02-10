@@ -9,6 +9,7 @@ import { getTemplateSrv } from '@grafana/runtime';
 import { cloneDeep } from 'lodash';
 import { PartListSection } from 'PartListSection';
 import { SELECT_OPTIONS, WHERE_OPTIONS, FORMAT_OPTIONS } from './constants';
+// import {QueryEditorRow} from '../../../../../../usr/share/grafana/public/app/features/query/components/QueryEditorRow';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
@@ -50,9 +51,10 @@ export const QueryEditor = (props: Props): JSX.Element => {
     marginLeft: '5px',
   };
   // this is to run query variable declared here with styling
-  var runValue = '';
-  var runOverride: boolean | undefined = false;
-
+  // var runValue :string;
+  // var runOverride: boolean | undefined = false;
+  const [runValue, setRunValue] = useState('');
+  const [runOverride, setRunOverRide] = useState<boolean | undefined>(true);
   const buttonPosition = {
     justifyContent: 'right',
   };
@@ -62,16 +64,19 @@ export const QueryEditor = (props: Props): JSX.Element => {
     if (isFirstTime.current) {
       onApplyQueryChange(query);
       isFirstTime.current = false;
+      console.log('this.eyelash', props);
+      // console.log("this.states",this.state);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // handler for query field change action
   const onQueryTextChange = (value: string, override?: boolean) => {
-    runOverride = false;
+    // setRunOverRide = true;
+    // runValue = '';
     // onApplyQueryChange({ ...query, rawSql: value }, override);
-    runValue = value;
-    runOverride = override;
+    setRunValue(value);
+    setRunOverRide(override);
     console.log('runoverride', runOverride);
     console.log('runvalue', runValue);
   };
@@ -93,9 +98,13 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // handler for query field change action
   const onClickQueryChange = () => {
-    const queryModel = new QueryModel(query, getTemplateSrv());
-    console.log('query', queryModel.buildQuery());
-    onApplyQueryChange({ ...query, rawSql: runValue }, runOverride);
+    // const queryModel = new QueryModel(query, getTemplateSrv());
+    console.log('rawSql', rawSql);
+    if (!runValue) {
+      onApplyQueryChange({ ...query, rawSql: rawSql }, true);
+    } else {
+      onApplyQueryChange({ ...query, rawSql: runValue }, true);
+    }
   };
   // method to toggle query edit mode
   const toggleQueryBuilder = () => {
@@ -602,7 +611,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
       {rawQuery ? (
         <>
           <div className="gf-form col-md-12" style={buttonPosition}>
-            <Button icon="play" variant="primary" size="sm" onClick={() => onClickQueryChange()}>
+            <Button icon="play" variant="primary" size="sm" onClick={onClickQueryChange}>
               Run query
             </Button>
           </div>
