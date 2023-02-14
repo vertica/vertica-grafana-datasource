@@ -24,7 +24,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
       ...options.jsonData,
       backupServerNode: event.target.value,
     };
-    onOptionsChange({ ...options, jsonData, backupServerNodes: event.target.value });
+    onOptionsChange({ ...options, jsonData });
   };
   onDBnameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;

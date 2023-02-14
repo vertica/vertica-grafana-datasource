@@ -50,7 +50,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
     marginLeft: '5px',
   };
   // this is to run query variable declared here with styling
-  const [runValue, setRunValue] = useState('');
+  const [runValue, setRunValue] = useState<string | undefined>('');
   const [runOverride, setRunOverRide] = useState<boolean | undefined>(true);
   const [eyeLash, setEyeLash] = useState<boolean>(false);
   const buttonPosition = {
@@ -67,7 +67,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   }, []);
 
   // handler for query field change action
-  const onQueryTextChange = (value: string, override?: boolean) => {
+  const onQueryTextChange = (value?: string, override?: boolean) => {
     // onApplyQueryChange({ ...query, rawSql: value }, override);
     setRunValue(value);
     setRunOverRide(override);

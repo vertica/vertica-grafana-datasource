@@ -39,7 +39,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-	"strings"
+	// "strings"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
@@ -66,10 +66,11 @@ func newDatasource() datasource.ServeOpts {
 // new datasource plugins with a backend.
 type VerticaDatasource struct {
 	im instancemgmt.InstanceManager
+	
 }
 
-//GetVerticaDb will return the vertica db connection
-//stored in the instance setting when the instance is created or update
+// GetVerticaDb will return the vertica db connection
+// stored in the instance setting when the instance is created or update
 func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*sql.DB, error) {
 	instance, err := v.im.Get(pluginContext)
 	if err != nil {
@@ -86,18 +87,20 @@ func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*
 }
 
 type configArgs struct {
-	User                   string		`json:"user"`
-	Database               string 		`json:"database"`
-	TLSMode                string 		`json:"tlsmode"`
-	URL                    string 		`json:"url"`
-	UsePreparedStmts       bool   		`json:"usePreparedStatements"`
-	UseLoadBalancer        bool   		`json:"useLoadBalancer"`
-	MaxOpenConnections     int    		`json:"maxOpenConnections"`
-	MaxIdealConnections    int    		`json:"maxIdealConnections"`
-	MaxConnectionIdealTime int    		`json:"maxConnectionIdealTime"`
+	User                   string `json:"user"`
+	Database               string `json:"database"`
+	TLSMode                string `json:"tlsmode"`
+	URL                    string `json:"url"`
+	UseBackupServer      bool   `json:"UseBackupServer"`
+	BackupServerNodes      string `json:"BackupServerNodes"`
+	UsePreparedStmts       bool   `json:"usePreparedStatements"`
+	UseLoadBalancer        bool   `json:"useLoadBalancer"`
+	MaxOpenConnections     int    `json:"maxOpenConnections"`
+	MaxIdealConnections    int    `json:"maxIdealConnections"`
+	MaxConnectionIdealTime int    `json:"maxConnectionIdealTime"`
 }
 
-//ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
+// ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
 func (config *configArgs) ConnectionURL(password string) string {
 	var tlsmode string
 	if config.TLSMode == "" {
@@ -105,9 +108,11 @@ func (config *configArgs) ConnectionURL(password string) string {
 	} else {
 		tlsmode = config.TLSMode
 	}
-
-	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s",
-		config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode)
+	if config.UseBackupServer == true {
+		return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode,config.BackupServerNodes)
+	} else {
+		return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode)
+	}
 }
 
 type queryModel struct {
@@ -188,43 +193,60 @@ type instanceSettings struct {
 func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
 	secret := setting.DecryptedSecureJSONData["password"]
+	log.DefaultLogger.Info("Inside datasource :host-url-", config.URL)
+	err := json.Unmarshal(setting.JSONData, &config)
+	if err != nil {
+		log.DefaultLogger.Error("newDataSourceInstance : error in unmarshaler: %s", err)
+	}
+	connStr := config.ConnectionURL(secret)
+
+	db, err := sql.Open("vertica", connStr)
+	if err != nil {
+		return nil, err
 	
-	hosts := strings.Split(config.URL, ",")
-	j := 0;
-	for i := 0; i < len(hosts); i++ {
-		config.URL = hosts[i]
-		err := json.Unmarshal(setting.JSONData, &config)
-		if err != nil {
-			log.DefaultLogger.Error("newDataSourceInstance : error in unmarshaler: %s", err)
-		}
-		connStr := config.ConnectionURL(secret)
-		db, err := sql.Open("vertica", connStr)
+		// log.DefaultLogger.Error("not able to connect to %s server due to error: %s", config.URL, err)
 
-		if err != nil{
-			log.DefaultLogger.Error("not able to connect to %s server due to error: %s", config.URL, err)
-			j++
-			if j == len(hosts) {
-				return nil, err
-			}else {
-				continue
-			}
-			
-		}
+		// j := 0
+		// hosts := strings.Split(config.BackupServerNodes, ",")
+		// for i := 0; i < len(hosts); i++ {
+		// 	config.URL = hosts[i]
+		// 	connStr := config.ConnectionURL(secret, config.URL)
+		// 	db, err := sql.Open("vertica", connStr)
 
-		db.SetMaxOpenConns(config.MaxOpenConnections)
-		db.SetMaxIdleConns(config.MaxIdealConnections)
-		db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
-		log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %s", setting.Name))
-		return &instanceSettings{
-			httpClient: &http.Client{},
-			Db:         db,
-			Name:       setting.Name,
-		}, nil
+		// 	if err != nil {
+		// 		log.DefaultLogger.Error("not able to connect to %s server due to error: %s", config.URL, err)
+		// 		if j == len(hosts) {
+		// 			return nil, err
+		// 		} else {
+		// 			continue
+		// 		}
+		// 	}
+		// 	db.SetMaxOpenConns(config.MaxOpenConnections)
+		// 	db.SetMaxIdleConns(config.MaxIdealConnections)
+		// 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
+		// 	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %s", setting.Name))
+		// 	return &instanceSettings{
+		// 		httpClient: &http.Client{},
+		// 		Db:         db,
+		// 		Name:       setting.Name,
+		// 	}, nil
+
+		// }
+	}
+	db.SetMaxOpenConns(config.MaxOpenConnections)
+	db.SetMaxIdleConns(config.MaxIdealConnections)
+	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %s", setting.Name))
+	return &instanceSettings{
+		httpClient: &http.Client{},
+		Db:         db,
+		Name:       setting.Name,
+	}, nil
 	
 	}
-	return nil, nil //this is added to avoid syntax error but this line will never gets executed
-	
-}
+// 	return nil, nil //this is added to avoid syntax error but this line will never gets executed
+
+// }
 
 // CheckHealth handles health checks sent from Grafana to the plugin.
 // The main use case for these health checks is the test button on the
@@ -232,10 +254,11 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 // a datasource is working as expected.
 func (v *VerticaDatasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult, error) {
 
-	log.DefaultLogger.Debug("Inside datasource.CheckHealth Function", "request", req)
+	log.DefaultLogger.Info("Inside datasource.CheckHealth Function", "request", req)
 
 	var status = backend.HealthStatusOk
 	connDB, err := v.GetVerticaDb(req.PluginContext)
+
 	if err != nil {
 		log.DefaultLogger.Error("unable to get sql.DB connection: " + err.Error())
 		return &backend.CheckHealthResult{
@@ -292,6 +315,7 @@ func (v *VerticaDatasource) CheckHealth(ctx context.Context, req *backend.CheckH
 		Status:  status,
 		Message: fmt.Sprintf("Successfully connected to %s", queryResult),
 	}, nil
+
 }
 
 func (s *instanceSettings) Dispose() {

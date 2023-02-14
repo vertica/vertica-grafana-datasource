@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="14" failures="0" time="3.367">
-  <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-02-09T13:39:23" time="0.45" tests="10">
+<testsuites name="jest tests" tests="14" failures="0" time="3.008">
+  <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-02-13T18:11:23" time="1.676" tests="10">
     <testcase classname="Query Editor Test cases should handle minimal query" name="Query Editor Test cases should handle minimal query" time="0.002">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle minimal query with rawQuery on" name="Query Editor Test cases should handle minimal query with rawQuery on" time="0">
+    <testcase classname="Query Editor Test cases should handle minimal query with rawQuery on" name="Query Editor Test cases should handle minimal query with rawQuery on" time="0.001">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle basic query with From fields filled" name="Query Editor Test cases should handle basic query with From fields filled" time="0.001">
+    <testcase classname="Query Editor Test cases should handle basic query with From fields filled" name="Query Editor Test cases should handle basic query with From fields filled" time="0">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle basic query with values in from field and rawquery On" name="Query Editor Test cases should handle basic query with values in from field and rawquery On" time="0">
+    <testcase classname="Query Editor Test cases should handle basic query with values in from field and rawquery On" name="Query Editor Test cases should handle basic query with values in from field and rawquery On" time="0.001">
     </testcase>
     <testcase classname="Query Editor Test cases should handle basic query with From and Select fields filled" name="Query Editor Test cases should handle basic query with From and Select fields filled" time="0">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle basic query with values in From ,Select fields and rawquery On" name="Query Editor Test cases should handle basic query with values in From ,Select fields and rawquery On" time="0.001">
+    <testcase classname="Query Editor Test cases should handle basic query with values in From ,Select fields and rawquery On" name="Query Editor Test cases should handle basic query with values in From ,Select fields and rawquery On" time="0">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle basic query with all fields filled" name="Query Editor Test cases should handle basic query with all fields filled" time="0">
+    <testcase classname="Query Editor Test cases should handle basic query with all fields filled" name="Query Editor Test cases should handle basic query with all fields filled" time="0.001">
     </testcase>
     <testcase classname="Query Editor Test cases should handle basic query with values in all fields and rawquery On" name="Query Editor Test cases should handle basic query with values in all fields and rawquery On" time="0">
     </testcase>
@@ -22,16 +22,16 @@
     <testcase classname="Query Editor Test cases should handle complex query with value in group,select,where with rawQuery On" name="Query Editor Test cases should handle complex query with value in group,select,where with rawQuery On" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-09T13:39:23" time="0.35" tests="3">
-    <testcase classname=" Verifying functionality of unwrap function keeping value null" name=" Verifying functionality of unwrap function keeping value null" time="0.003">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-13T18:11:24" time="0.337" tests="1">
+    <testcase classname=" Checking working functionality of toSelectableValue function" name=" Checking working functionality of toSelectableValue function" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-13T18:11:25" time="0.318" tests="3">
+    <testcase classname=" Verifying functionality of unwrap function keeping value null" name=" Verifying functionality of unwrap function keeping value null" time="0.002">
     </testcase>
     <testcase classname=" Verifying functionality of unwrap function keeping value undefined" name=" Verifying functionality of unwrap function keeping value undefined" time="0.001">
     </testcase>
-    <testcase classname="  Verifying functionality of unwrap function passing numeric value" name="  Verifying functionality of unwrap function passing numeric value" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-09T13:39:24" time="0.294" tests="1">
-    <testcase classname=" Checking working functionality of toSelectableValue function" name=" Checking working functionality of toSelectableValue function" time="0.001">
+    <testcase classname="  Verifying functionality of unwrap function passing numeric value" name="  Verifying functionality of unwrap function passing numeric value" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
