@@ -32,7 +32,7 @@ func Test_CheckHealth(t *testing.T) {
 		{
 			name:          "Success in connecting the Vertica DB",
 			ctx:           context.Background(),
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testUrl", UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testUrl",backupServerNode:"host1:port1,host2:port",port:"5433", UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedStatus: &backend.CheckHealthResult{
 				Status:  backend.HealthStatusOk,
 				Message: "Successfully connected to Vertica Analytic Database v10.1.0-0",
@@ -78,11 +78,7 @@ func Test_CheckHealth(t *testing.T) {
 
 func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
-	//secret := setting.DecryptedSecureJSONData["password"]
-	// hosts := strings.Split(config.URL, ",")
-	// j := 0;
-	// for i := 0; i < len(hosts); i++ {
-	// config.URL = hosts[i]
+
 	err := json.Unmarshal(setting.JSONData, &config)
 	if err != nil {
 		log.DefaultLogger.Error("newDataSourceInstance : error in unmarshaler: %s", err)
@@ -92,12 +88,6 @@ func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instanc
 	}
 	db, mock, err := sqlmock.NewWithDSN("test")
 	if err != nil {
-		// j++
-		// 	if j == len(hosts) {
-		// 		return nil, err
-		// 	}else {
-		// 		continue
-		// 	}
 		return nil, err
 	}
 	mock.ExpectQuery("SELECT version()").WillReturnRows(sqlmock.NewRows([]string{"version"}).AddRow("Vertica Analytic Database v10.1.0-0"))
