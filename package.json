@@ -20,7 +20,7 @@
   "devDependencies": {
     "@babel/helper-compilation-targets": "^7.20.7",
     "@babel/preset-typescript": "^7.13.0",
-    "@grafana/experimental": "7.5.8",
+    "@grafana/experimental": "1.1.0",
     "@grafana/runtime": "7.5.8",
     "@grafana/toolkit": "7.5.8",
     "@grafana/ui": "^9.3.6",
