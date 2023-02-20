@@ -4,9 +4,11 @@ on:
   push:
     branches:
      - master
+     - code_cleaup
   pull_request:
     branches:
      - master
+     - code_cleaup
 
 jobs:
   build:
