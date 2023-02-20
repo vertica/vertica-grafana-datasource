@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="21" failures="0" time="4.164">
-  <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-02-07T19:33:16" time="1.656" tests="10">
+<testsuites name="jest tests" tests="14" failures="0" time="3.307">
+  <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-02-17T13:31:30" time="1.866" tests="10">
     <testcase classname="Query Editor Test cases should handle minimal query" name="Query Editor Test cases should handle minimal query" time="0.001">
     </testcase>
     <testcase classname="Query Editor Test cases should handle minimal query with rawQuery on" name="Query Editor Test cases should handle minimal query with rawQuery on" time="0.001">
@@ -17,37 +17,21 @@
     </testcase>
     <testcase classname="Query Editor Test cases should handle basic query with values in all fields and rawquery On" name="Query Editor Test cases should handle basic query with values in all fields and rawquery On" time="0">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle complex query with value in group,select,where" name="Query Editor Test cases should handle complex query with value in group,select,where" time="0.001">
+    <testcase classname="Query Editor Test cases should handle complex query with value in group,select,where" name="Query Editor Test cases should handle complex query with value in group,select,where" time="0">
     </testcase>
     <testcase classname="Query Editor Test cases should handle complex query with value in group,select,where with rawQuery On" name="Query Editor Test cases should handle complex query with value in group,select,where with rawQuery On" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Render" errors="0" failures="0" skipped="0" timestamp="2023-02-07T19:33:18" time="1.211" tests="7">
-    <testcase classname="Render should render component" name="Render should render component" time="0.013">
-    </testcase>
-    <testcase classname="Render should render component with value in Host field" name="Render should render component with value in Host field" time="0.004">
-    </testcase>
-    <testcase classname="Render should render component with value in Database field" name="Render should render component with value in Database field" time="0.004">
-    </testcase>
-    <testcase classname="Render should render component with value in User field" name="Render should render component with value in User field" time="0.003">
-    </testcase>
-    <testcase classname="Render should render component with value in password field" name="Render should render component with value in password field" time="0.003">
-    </testcase>
-    <testcase classname="Render should render component with value in SSL Mode field" name="Render should render component with value in SSL Mode field" time="0.003">
-    </testcase>
-    <testcase classname="Render should render component with value in Connection and Timeout fields" name="Render should render component with value in Connection and Timeout fields" time="0.003">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-07T19:33:19" time="0.32" tests="1">
-    <testcase classname=" Checking working functionality of toSelectableValue function" name=" Checking working functionality of toSelectableValue function" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-07T19:33:20" time="0.293" tests="3">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-17T13:31:32" time="0.391" tests="3">
     <testcase classname=" Verifying functionality of unwrap function keeping value null" name=" Verifying functionality of unwrap function keeping value null" time="0.003">
     </testcase>
     <testcase classname=" Verifying functionality of unwrap function keeping value undefined" name=" Verifying functionality of unwrap function keeping value undefined" time="0.001">
     </testcase>
-    <testcase classname="  Verifying functionality of unwrap function passing numeric value" name="  Verifying functionality of unwrap function passing numeric value" time="0">
+    <testcase classname="  Verifying functionality of unwrap function passing numeric value" name="  Verifying functionality of unwrap function passing numeric value" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-02-17T13:31:32" time="0.349" tests="1">
+    <testcase classname=" Checking working functionality of toSelectableValue function" name=" Checking working functionality of toSelectableValue function" time="0.008">
     </testcase>
   </testsuite>
 </testsuites>

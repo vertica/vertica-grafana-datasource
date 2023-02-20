@@ -9,7 +9,9 @@ const { SecretFormField, FormField } = LegacyForms;
 export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> {}
 
 interface State {}
+
 export class ConfigEditor extends PureComponent<Props, State> {
+  portValue = '5433';
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -24,7 +26,28 @@ export class ConfigEditor extends PureComponent<Props, State> {
       ...options.jsonData,
       backupServerNode: event.target.value,
     };
-    onOptionsChange({ ...options, jsonData, backupServerNodes: event.target.value });
+    onOptionsChange({ ...options, jsonData });
+  };
+  onPortChange = (event: ChangeEvent<HTMLInputElement>) => {
+    this.onValueChange(event);
+    const reg = /^[0-9\b]+$/;
+    let preval = event.target.value;
+    if (event.target.value === '' || reg.test(event.target.value)) {
+      const { onOptionsChange, options } = this.props,
+        jsonData = {
+          ...options.jsonData,
+          port: event.target.value,
+        };
+      onOptionsChange({ ...options, jsonData });
+    } else {
+      event.target.value = preval.substring(0, preval.length - 1);
+    }
+  };
+  onValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.value) {
+      this.portValue = '';
+      // onOptionsChange({ ...options, jsonData });
+    }
   };
   onDBnameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
@@ -72,7 +95,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
       ...options.jsonData,
       useBackupserver: (event.target as HTMLInputElement).checked,
     };
-    console.log('useBackupServer', jsonData.useBackupserver);
     onOptionsChange({ ...options, jsonData });
   };
   // Secure field (only sent to the backend)
@@ -175,6 +197,18 @@ export class ConfigEditor extends PureComponent<Props, State> {
           <div className="gf-form max-width-30">
             <FormField
               required
+              label="Port"
+              labelWidth={7}
+              inputWidth={21}
+              onChange={this.onPortChange}
+              value={jsonData.port || this.portValue}
+              placeholder="localhost:5433"
+              // onBlur={() => this.onBlurField(FIELD_TYPES.PORT)}
+            />
+          </div>
+          <div className="gf-form max-width-30">
+            <FormField
+              required
               label="Database"
               labelWidth={7}
               inputWidth={21}
@@ -231,7 +265,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
             <div className="gf-form-switch">
               <Switch
                 value={jsonData.useBackupserver === undefined ? false : jsonData.useBackupserver}
-                css=""
                 onChange={this.onBackupServerChange}
               />
             </div>
@@ -242,9 +275,10 @@ export class ConfigEditor extends PureComponent<Props, State> {
               labelWidth={7}
               inputWidth={21}
               onChange={this.onBackServerNodeChange}
-              value={jsonData.backUpServerNodes}
+              value={jsonData.backupServerNode}
               placeholder="localhost:5400"
               disabled={!jsonData.useBackupserver}
+              // onBlur={() => this.onBlurField(FIELD_TYPES.BACKUPSERVERNODE)}
             />
           </div>
         </div>
@@ -272,7 +306,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
             <div className="gf-form-switch">
               <Switch
                 value={jsonData.useLoadBalancer === undefined ? false : jsonData.useLoadBalancer}
-                css=""
                 onChange={this.onUseLoadBalancerChange}
               />
             </div>
