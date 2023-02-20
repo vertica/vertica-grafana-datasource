@@ -1,11 +1,15 @@
 name: Go Test
 
 on:
-  pull_request:
   push:
-    branches: 
-      - main
-
+    branches:
+     - main
+     - code_cleaup
+  pull_request:
+    branches:
+     - main
+     - code_cleaup
+      
 jobs:
   test:
     name: Backend unit testing
