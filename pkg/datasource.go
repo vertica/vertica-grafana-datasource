@@ -111,7 +111,7 @@ func (config *configArgs) ConnectionURL(password string) string {
 		tlsmode = config.TLSMode
 	}
 	
-	return fmt.Sprintf("vertica://%s:%s@%s:%d/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, int(config.Port), config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
+	return fmt.Sprintf("vertica://%s:%s@%s:%d/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Port, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
 
 }
 
@@ -200,17 +200,14 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 	err := json.Unmarshal([]byte(setting.JSONData), &cnf)
 
 	json.Unmarshal(setting.JSONData, &config)
-
-	config.BackupServerNode = cnf["BackupServerNode"].(string)
-	port := cnf["Port"].(string)
+	
+	port := cnf["port"].(string)
 	if port == "" {
 		config.Port = 5433
 	} else {
 		config.Port, _ = strconv.Atoi(port)
 	}
-
 	connStr := config.ConnectionURL(secret)
-
 	db, err := sql.Open("vertica", connStr)
 
 	if err != nil {
