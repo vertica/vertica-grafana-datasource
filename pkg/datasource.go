@@ -110,11 +110,9 @@ func (config *configArgs) ConnectionURL(password string) string {
 	} else {
 		tlsmode = config.TLSMode
 	}
-	// if config.UseBackupServer == true {
+	
 	return fmt.Sprintf("vertica://%s:%s@%s:%d/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, int(config.Port), config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
-	// } else {
-	// 	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode)
-	// }
+
 }
 
 type queryModel struct {
@@ -222,7 +220,6 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
-	log.DefaultLogger.Info(fmt.Sprintf("DB connection param %+v", db))
 	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", setting.Name))
 	return &instanceSettings{
 		httpClient: &http.Client{},
@@ -232,9 +229,7 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 
 }
 
-// 	return nil, nil //this is added to avoid syntax error but this line will never gets executed
 
-// }
 
 // CheckHealth handles health checks sent from Grafana to the plugin.
 // The main use case for these health checks is the test button on the
@@ -242,7 +237,7 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 // a datasource is working as expected.
 func (v *VerticaDatasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult, error) {
 
-	log.DefaultLogger.Info("Inside datasource.CheckHealth Function", "request", req.PluginContext.DataSourceInstanceSettings.JSONData)
+	log.DefaultLogger.Debug("Inside datasource.CheckHealth Function", "request", req)
 
 	var status = backend.HealthStatusOk
 	connDB, err := v.GetVerticaDb(req.PluginContext)
