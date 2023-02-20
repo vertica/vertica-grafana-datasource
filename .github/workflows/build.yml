@@ -5,10 +5,7 @@ on:
     branches:
      - main
      - code_cleaup
-  pull_request:
-    branches:
-     - main
-     - code_cleaup
+  
 
 jobs:
   build:
