@@ -261,7 +261,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             />
           </div>
           <div className="gf-form">
-            <InlineLabel width={30}>useBackupserver</InlineLabel>
+            <InlineLabel width={30}>Use Backup Server Node</InlineLabel>
             <div className="gf-form-switch">
               <Switch
                 value={jsonData.useBackupserver === undefined ? false : jsonData.useBackupserver}
@@ -271,8 +271,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
           </div>
           <div className="gf-form max-width-30">
             <FormField
-              label="Back Server"
-              labelWidth={7}
+              label="Backup Server Node List"
+              labelWidth={15}
               inputWidth={21}
               onChange={this.onBackServerNodeChange}
               value={jsonData.backupServerNode}
