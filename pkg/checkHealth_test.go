@@ -32,7 +32,7 @@ func Test_CheckHealth(t *testing.T) {
 		{
 			name:          "Success in connecting the Vertica DB",
 			ctx:           context.Background(),
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testUrl", UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testUrl",BackupServerNode:"host1:port1,host2:port",Port:5433, UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedStatus: &backend.CheckHealthResult{
 				Status:  backend.HealthStatusOk,
 				Message: "Successfully connected to Vertica Analytic Database v10.1.0-0",
@@ -78,7 +78,7 @@ func Test_CheckHealth(t *testing.T) {
 
 func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
-	//secret := setting.DecryptedSecureJSONData["password"]
+
 	err := json.Unmarshal(setting.JSONData, &config)
 	if err != nil {
 		log.DefaultLogger.Error("newDataSourceInstance : error in unmarshaler: %s", err)
@@ -101,3 +101,5 @@ func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instanc
 		Name:       setting.Name,
 	}, nil
 }
+
+// return nil, nil //this is added to avoid syntax error but this line will never gets executed
