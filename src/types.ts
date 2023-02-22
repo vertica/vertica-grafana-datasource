@@ -19,7 +19,7 @@ export interface MyQuery extends DataQuery {
   table: string;
   format: ResultFormat;
   rawQuery: boolean;
-  rawSql: string;
+  rawSql?: string;
   queryText?: string;
   hide: boolean;
 }

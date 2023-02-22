@@ -67,6 +67,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const [runValue, setRunValue] = useState<string | undefined>('');
   // Value used  for ace-editor in field
   const [queryValue, setQueryValue] = useState<string | undefined>('');
+  const [clearValue, setClearValue] = useState(0);
 
   const buttonPosition = {
     justifyContent: 'right',
@@ -87,13 +88,21 @@ export const QueryEditor = (props: Props): JSX.Element => {
     // onApplyQueryChange({ ...query, rawSql: value }, override);
     setRunValue(value);
     setQueryValue(value);
+    if (!value) {
+      setClearValue(1);
+    }
+    onCommonApplyAQuery({ ...query, rawSql: value });
   };
 
   // handler for change action for formats dropdown
   const onFormatChange = (value: SelectableValue) => {
-    onApplyQueryChange({ ...query, format: value.value });
+    if (query.rawQuery) {
+      onCommonApplyAQuery({ ...query, format: value.value });
+    } else {
+      onApplyQueryChange({ ...query, format: value.value });
+    }
   };
-
+  const onCommonApplyAQuery = (changedQuery: MyQuery, runQuery = true) => {};
   // method to show the confirm prompt when user clicks on "Query Builder" button from raw sql mode
   const showConfirmPrompt = () => {
     if (query.rawQuery) {
@@ -109,8 +118,13 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const onClickQueryChange = () => {
     // const queryModel = new QueryModel(query, getTemplateSrv());
     if (!runValue) {
-      setQueryValue(rawSql);
-      onApplyQueryChange({ ...query, rawSql: rawSql }, true);
+      if (clearValue === 1) {
+        setQueryValue(runValue);
+        onApplyQueryChange({ ...query, rawSql: runValue }, true);
+      } else {
+        setQueryValue(rawSql);
+        onApplyQueryChange({ ...query, rawSql: rawSql }, true);
+      }
     } else {
       setQueryValue(runValue);
       onApplyQueryChange({ ...query, rawSql: runValue }, true);
@@ -134,7 +148,9 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // method invoked when any change in query is made
   const onApplyQueryChange = (changedQuery: MyQuery, runQuery = true) => {
-    setQueryValue(changedQuery.rawSql);
+    if (!runValue) {
+      setQueryValue(changedQuery.rawSql);
+    }
     if (onChange) {
       if (!changedQuery.rawQuery) {
         const queryModel = new QueryModel(changedQuery, getTemplateSrv());
