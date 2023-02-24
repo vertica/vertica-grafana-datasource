@@ -1,6 +1,6 @@
 {
   "name": "vertica-grafana-plugin",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "Data source for Vertica and compatible databases",
   "jest": {
     "snapshotSerializers": [
