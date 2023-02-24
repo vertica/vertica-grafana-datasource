@@ -11,7 +11,19 @@ export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOp
 interface State {}
 
 export class ConfigEditor extends PureComponent<Props, State> {
+  componentDidMount() {
+    // Runs after the first render() lifecycle
+    this.onloadPortValue('5433');
+  }
   portValue = '5433';
+  onloadPortValue = (event: string) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      port: event,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -190,7 +202,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
               inputWidth={21}
               onChange={this.onHostChange}
               value={options.url || jsonData.url || ''}
-              placeholder="localhost:5433"
+              placeholder="<Ipv4 host> / [<Ipv6 host>]"
               onBlur={() => this.onBlurField(FIELD_TYPES.URL)}
             />
           </div>
@@ -202,7 +214,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
               inputWidth={21}
               onChange={this.onPortChange}
               value={jsonData.port || this.portValue}
-              placeholder="localhost:5433"
+              placeholder="Port : 5433"
+              disabled={true}
               // onBlur={() => this.onBlurField(FIELD_TYPES.PORT)}
             />
           </div>

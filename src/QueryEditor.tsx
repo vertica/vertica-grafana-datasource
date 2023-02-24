@@ -135,6 +135,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
     setIsModalOpen((prevState) => !prevState);
     const queryModel = new QueryModel(query, getTemplateSrv());
     setQueryValue(!query.rawQuery ? queryModel.buildQuery() : rawSql);
+    setRunValue(queryValue);
     onApplyQueryChange(
       { ...query, rawQuery: !query.rawQuery, rawSql: !query.rawQuery ? queryModel.buildQuery() : rawSql },
       false
@@ -150,11 +151,13 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const onApplyQueryChange = (changedQuery: MyQuery, runQuery = true) => {
     if (!runValue) {
       setQueryValue(changedQuery.rawSql);
+      setRunValue(changedQuery.rawSql);
     }
     if (onChange) {
       if (!changedQuery.rawQuery) {
         const queryModel = new QueryModel(changedQuery, getTemplateSrv());
         setQueryValue(queryModel.buildQuery());
+        setRunValue(queryModel.buildQuery());
         changedQuery.rawSql = queryModel.buildQuery();
       }
       onChange({ ...changedQuery });
