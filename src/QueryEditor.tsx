@@ -96,11 +96,11 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // handler for change action for formats dropdown
   const onFormatChange = (value: SelectableValue) => {
-    if (query.rawQuery) {
-      onCommonApplyAQuery({ ...query, format: value.value });
-    } else {
-      onApplyQueryChange({ ...query, format: value.value });
-    }
+    // if (query.rawQuery) {
+    //   onCommonApplyAQuery({ ...query, format: value.value });
+    // } else {
+    onApplyQueryChange({ ...query, format: value.value });
+    // }
   };
   const onCommonApplyAQuery = (changedQuery: MyQuery, runQuery = true) => {};
   // method to show the confirm prompt when user clicks on "Query Builder" button from raw sql mode
