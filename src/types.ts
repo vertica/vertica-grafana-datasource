@@ -19,7 +19,7 @@ export interface MyQuery extends DataQuery {
   table: string;
   format: ResultFormat;
   rawQuery: boolean;
-  rawSql: string;
+  rawSql?: string;
   queryText?: string;
   hide: boolean;
 }
@@ -39,14 +39,28 @@ export type Part = {
  */
 export interface MyDataSourceOptions extends DataSourceJsonData {
   url: string;
+
+  port?: string;
+
   database?: string;
+
   user?: string;
+
   tlsmode?: string;
+
   usePreparedStatements: boolean;
+
   useLoadBalancer: boolean;
+
   maxOpenConnections: number;
+
   maxIdealConnections: number;
+
   maxConnectionIdealTime: number;
+
+  useBackupserver: boolean;
+
+  backupServerNode: string;
 }
 
 /**
