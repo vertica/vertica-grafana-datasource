@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, configure, mount } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import { Props, ConfigEditor } from './ConfigEditor';
 
 // setup file
@@ -522,6 +522,10 @@ describe('Render', () => {
   });
   it('Render should render component with value in setUp', () => {
     const wrapper = setup();
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
+  it('Render should render component with value in Vertica Connection', () => {
+    const wrapper = setupForVerticaConnections();
     expect(wrapper.debug()).toMatchSnapshot();
   });
   // it('should render component with value in Use Unprepared Statements switch on', () => {

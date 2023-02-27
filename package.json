@@ -2,11 +2,6 @@
   "name": "vertica-grafana-plugin",
   "version": "2.0.4",
   "description": "Data source for Vertica and compatible databases",
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
