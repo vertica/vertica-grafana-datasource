@@ -289,7 +289,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
               inputWidth={21}
               onChange={this.onBackServerNodeChange}
               value={jsonData.backupServerNode}
-              placeholder="localhost:5400"
+              placeholder="host1:port,host2:port"
               disabled={!jsonData.useBackupserver}
               // onBlur={() => this.onBlurField(FIELD_TYPES.BACKUPSERVERNODE)}
             />

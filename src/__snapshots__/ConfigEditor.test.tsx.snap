@@ -38,7 +38,7 @@ exports[`Render Render should render component with value in BackUp Server Nodes
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -129,7 +129,7 @@ exports[`Render Render should render component with value in Database 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -220,7 +220,7 @@ exports[`Render Render should render component with value in Host 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -311,7 +311,7 @@ exports[`Render Render should render component with value in Password 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -402,7 +402,7 @@ exports[`Render Render should render component with value in Port 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -493,7 +493,7 @@ exports[`Render Render should render component with value in SSL 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -584,7 +584,7 @@ exports[`Render Render should render component with value in Use Backup Server f
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -675,7 +675,7 @@ exports[`Render Render should render component with value in User 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -766,7 +766,7 @@ exports[`Render Render should render component with value in Vertica Connection 
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
@@ -857,7 +857,7 @@ exports[`Render Render should render component with value in setUp 1`] = `
       </div>
     </div>
     <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"localhost:5400\\" disabled={true} />
+      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
     </div>
   </div>
   <div className=\\"gf-form-group\\">
