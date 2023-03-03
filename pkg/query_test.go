@@ -9,7 +9,6 @@ import (
 	"reflect"
 	"testing"
 	"time"
-
 	"bou.ke/monkey"
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
@@ -60,7 +59,7 @@ func Test_Query(t *testing.T) {
 			dataQuery:     getDataQuery(queryModel{RawSQL: "test"}),
 			fieldsCount:   0,
 			rowsPerField:  0,
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl",BackupServerNode:"host1:port1,host2:port",Port:5433, UsePreparedStmts: false, UseLoadBalancer: false,MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedReponse: backend.DataResponse{
 				Error: errors.New("sql error occurred"),
 			},
@@ -72,7 +71,7 @@ func Test_Query(t *testing.T) {
 			dataQuery:     getDataQuery(queryModel{RawSQL: "SELECT 1"}),
 			fieldsCount:   1,
 			rowsPerField:  1,
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl",BackupServerNode:"host1:port1,host2:port",Port:5433, UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedReponse: backend.DataResponse{
 				Frames: data.Frames{
 					data.NewFrame("response").SetMeta(&data.FrameMeta{ExecutedQueryString: "SELECT 1"}),
@@ -87,7 +86,7 @@ func Test_Query(t *testing.T) {
 			dataQuery:     getDataQuery(queryModel{RawSQL: "select name, value from table"}),
 			fieldsCount:   2,
 			rowsPerField:  2,
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl",BackupServerNode:"host1:port1,host2:port",Port:5433, UsePreparedStmts: false, UseLoadBalancer: false, MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedReponse: backend.DataResponse{
 				Frames: data.Frames{
 					data.NewFrame(
@@ -106,7 +105,7 @@ func Test_Query(t *testing.T) {
 			dataQuery:     getDataQuery(queryModel{RawSQL: "SELECT value, $__time(start_time) FROM test_table"}),
 			fieldsCount:   2,
 			rowsPerField:  3,
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl",BackupServerNode:"host1:port1,host2:port",Port:5433, MaxOpenConnections: 2, MaxIdealConnections: 2, UsePreparedStmts: false, UseLoadBalancer: false}),
 			expectedReponse: backend.DataResponse{
 				Frames: data.Frames{
 					data.NewFrame(

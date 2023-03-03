@@ -16,6 +16,7 @@ module.exports = {
     'ts-jest': {
       isolatedModules: true,
       tsconfig: path.resolve(process.cwd(), 'tsconfig.json'),
+      snapshotSerializers: ["enzyme-to-json/serializer"],
     },
   },
   transformIgnorePatterns: ['/node_modules/', '\\.pnp\\.[^\\/]+$'],

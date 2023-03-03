@@ -33,7 +33,7 @@ func Test_Query_Timeseries(t *testing.T) {
 			ctx:           context.Background(),
 			dataQuery:     getDataQuery(queryModel{RawSQL: "SELECT name, value FROM table", Format: "table"}),
 			fieldsCount:   2,
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl",BackupServerNode:"host1:port1,host2:port",Port:5433,MaxOpenConnections: 2, MaxIdealConnections: 2, UsePreparedStmts: false, UseLoadBalancer: false}),
 			expectedReponse: backend.DataResponse{
 				Frames: data.Frames{
 					data.NewFrame(
@@ -51,7 +51,7 @@ func Test_Query_Timeseries(t *testing.T) {
 			ctx:           context.Background(),
 			dataQuery:     getDataQuery(queryModel{RawSQL: "SELECT value, start_time FROM test_table", Format: "time series"}),
 			fieldsCount:   2,
-			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl", UsePreparedStmts: false, UseLoadBalancer: false}),
+			pluginContext: getCredentials(configArgs{User: "testUser", Database: "testDB", TLSMode: "none", URL: "testurl",BackupServerNode:"host1:port1,host2:port",Port:5433, UsePreparedStmts: false, UseLoadBalancer: false,MaxOpenConnections: 2, MaxIdealConnections: 2}),
 			expectedReponse: backend.DataResponse{
 				Frames: data.Frames{
 					data.NewFrame(

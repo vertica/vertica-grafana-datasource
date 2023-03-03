@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { Select, InlineLabel, SegmentAsync, QueryField, ConfirmModal, useTheme } from '@grafana/ui';
+import { Select, InlineLabel, SegmentAsync, ConfirmModal, useTheme, Button } from '@grafana/ui';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
-import { DataSource } from './datasource';
 import { MetaQuery } from './meta_query';
 import QueryModel from './query_model';
 import { MyDataSourceOptions, MyQuery } from './types';
@@ -9,6 +8,12 @@ import { getTemplateSrv } from '@grafana/runtime';
 import { cloneDeep } from 'lodash';
 import { PartListSection } from 'PartListSection';
 import { SELECT_OPTIONS, WHERE_OPTIONS, FORMAT_OPTIONS } from './constants';
+import { DataSource } from './datasource';
+// added for autoSuggestion in SQL Field
+import AceEditor from 'react-ace';
+import 'ace-builds/src-min-noconflict/ext-language_tools';
+import 'brace/mode/mysql';
+import 'brace/theme/monokai';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
@@ -49,6 +54,24 @@ export const QueryEditor = (props: Props): JSX.Element => {
     color: theme.colors.textBlue,
     marginLeft: '5px',
   };
+  const editorColor = {
+    backgroundColor: '#111217',
+    color: '#ccccdc',
+    lineHeight: '18px',
+    backgroundImage: 'none',
+    border: '1px solid #ccccdc26',
+    borderRadius: '2px',
+    caretColor: 'red',
+  };
+  // this is to run query variable declared here with styling
+  const [runValue, setRunValue] = useState<string | undefined>('');
+  // Value used  for ace-editor in field
+  const [queryValue, setQueryValue] = useState<string | undefined>('');
+  const [clearValue, setClearValue] = useState(0);
+
+  const buttonPosition = {
+    justifyContent: 'right',
+  };
 
   // this is to make sure query is executed first time when user opens a new panel or adds new query
   useEffect(() => {
@@ -60,29 +83,59 @@ export const QueryEditor = (props: Props): JSX.Element => {
   }, []);
 
   // handler for query field change action
-  const onQueryTextChange = (value: string, override?: boolean) => {
-    onApplyQueryChange({ ...query, rawSql: value }, override);
+  const onQueryTextChange = (value?: any, override?: boolean) => {
+    // comment to stop on change of runquery
+    // onApplyQueryChange({ ...query, rawSql: value }, override);
+    setRunValue(value);
+    setQueryValue(value);
+    if (!value) {
+      setClearValue(1);
+    }
+    onCommonApplyAQuery({ ...query, rawSql: value });
   };
 
   // handler for change action for formats dropdown
   const onFormatChange = (value: SelectableValue) => {
+    // if (query.rawQuery) {
+    //   onCommonApplyAQuery({ ...query, format: value.value });
+    // } else {
     onApplyQueryChange({ ...query, format: value.value });
+    // }
   };
-
+  const onCommonApplyAQuery = (changedQuery: MyQuery, runQuery = true) => {};
   // method to show the confirm prompt when user clicks on "Query Builder" button from raw sql mode
   const showConfirmPrompt = () => {
     if (query.rawQuery) {
       setIsModalOpen(true);
     } else {
       const queryModel = new QueryModel(query, getTemplateSrv());
+      setQueryValue(queryModel.buildQuery());
       onApplyQueryChange({ ...query, rawQuery: true, rawSql: queryModel.buildQuery() }, false);
     }
   };
 
+  // handler for query field change action
+  const onClickQueryChange = () => {
+    // const queryModel = new QueryModel(query, getTemplateSrv());
+    if (!runValue) {
+      if (clearValue === 1) {
+        setQueryValue(runValue);
+        onApplyQueryChange({ ...query, rawSql: runValue }, true);
+      } else {
+        setQueryValue(rawSql);
+        onApplyQueryChange({ ...query, rawSql: rawSql }, true);
+      }
+    } else {
+      setQueryValue(runValue);
+      onApplyQueryChange({ ...query, rawSql: runValue }, true);
+    }
+  };
   // method to toggle query edit mode
   const toggleQueryBuilder = () => {
     setIsModalOpen((prevState) => !prevState);
     const queryModel = new QueryModel(query, getTemplateSrv());
+    setQueryValue(!query.rawQuery ? queryModel.buildQuery() : rawSql);
+    setRunValue(queryValue);
     onApplyQueryChange(
       { ...query, rawQuery: !query.rawQuery, rawSql: !query.rawQuery ? queryModel.buildQuery() : rawSql },
       false
@@ -96,9 +149,15 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // method invoked when any change in query is made
   const onApplyQueryChange = (changedQuery: MyQuery, runQuery = true) => {
+    if (!runValue) {
+      setQueryValue(changedQuery.rawSql);
+      setRunValue(changedQuery.rawSql);
+    }
     if (onChange) {
       if (!changedQuery.rawQuery) {
         const queryModel = new QueryModel(changedQuery, getTemplateSrv());
+        setQueryValue(queryModel.buildQuery());
+        setRunValue(queryModel.buildQuery());
         changedQuery.rawSql = queryModel.buildQuery();
       }
       onChange({ ...changedQuery });
@@ -164,7 +223,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
         break;
       case 'alias':
         const part = clonedQuery.select[index];
-        const aliasIndex = part.findIndex((p) => p.type === 'column');
+        const aliasIndex = part.findIndex((p: { type: string }) => p.type === 'column');
         if (aliasIndex !== -1) {
           defaultParams = [part[aliasIndex].params[0]];
         } else {
@@ -247,7 +306,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
       default:
         defaultParams = [];
     }
-    const partIndex = clonedQuery.where.findIndex((p) => p.type === 'macro');
+    const partIndex = clonedQuery.where.findIndex((p: { type: string }) => p.type === 'macro');
     if ((partIndex === -1 && type === 'macro') || type === 'expression') {
       clonedQuery.where.push({
         type: type,
@@ -277,7 +336,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // handler when GROUP part is added
   const handleGroupParamsAdd = (type: string, data: any = { label: '', value: '', type: '' }) => {
-    const clonedQuery = cloneDeep(query);
+    // const clonedQuery = cloneDeep(query);
+    const clonedQuery = cloneDeep<any | undefined>(query);
     let defaultParams: Array<string | number> = [];
     let partName = '';
     switch (type) {
@@ -292,7 +352,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
       default:
         defaultParams = [];
     }
-    const partIndex = clonedQuery.where.findIndex((p) => p.type === 'time');
+    const partIndex = clonedQuery.where.findIndex((p: { type: string }) => p.type === 'time');
     if ((partIndex === -1 && type === 'time') || type === 'column') {
       clonedQuery.group.push({
         type: type,
@@ -583,17 +643,41 @@ export const QueryEditor = (props: Props): JSX.Element => {
     <>
       {rawQuery ? (
         <>
-          <div className="gf-form">
-            <QueryField
+          <div className="gf-form col-md-12" style={buttonPosition}>
+            <Button icon="play" variant="primary" disabled={hide} size="sm" onClick={onClickQueryChange}>
+              Run query
+            </Button>
+          </div>
+          <div className="gf-form" style={hide ? { cursor: 'none' } : { cursor: 'pointer' }}>
+            <AceEditor
+              // id="editorAutoComplete"
               key={datasource?.name}
+              aria-label="editorAutoComplete"
+              mode="mysql"
+              theme="monokai"
+              name="editorAutoComplete"
+              fontSize={16}
+              style={{ ...editorColor }}
+              minLines={15}
+              maxLines={10}
+              width="100%"
+              showPrintMargin={false}
+              showGutter
+              editorProps={{ $blockScrolling: true }}
+              setOptions={{
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                enableSnippets: true,
+              }}
+              value={queryValue}
               portalOrigin="vertica"
-              query={rawSql}
-              disabled={hide}
+              readOnly={hide}
               onBlur={onBlur}
               onRunQuery={onRunQuery}
               onChange={onQueryTextChange}
             />
           </div>
+
           <div className="gf-form-inline">
             <InlineLabel style={divStyle} width={10}>
               Format as
