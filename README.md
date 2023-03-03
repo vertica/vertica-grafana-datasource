@@ -35,6 +35,8 @@ After you add the Vertica data source, you need to configure it by entering the 
 | `User`  | Database username. |
 | `Password`  | Database user password. |
 | `SSL Mode`  | Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. When SSL Mode is disabled, SSL Method and Auth Details are not visible. |
+| `Use Backup Server Node`  | To enable backup hosts on server side. |
+| ` Backup Server Node List`  | Comma delimited list of backup hosts for the client to try to connect if the primary host is unreachable. |
 | `Use Connection Load Balancing`  | To enable connection load balancing on the client-side.|
 | `Max Open Connections` |  Maximum number of connections a user can open concurrently on individual nodes or across the database cluster.|
 | `Max Ideal Connections` | Maximum number of idle connections. This number should be less than or equal to Max Open Connections. |
@@ -45,9 +47,6 @@ For more information on managing client connections, see [Managing Client Connec
 
 ![Data Source Config](https://github.com/vertica/vertica-grafana-datasource/blob/main/src/img/datasource-config.png)
 
-**Note:** *We recently found a bug in the connection pooling parameters which does not set them as expected. This bug affects loading of the dashboards where the panels come up empty/blank and show ‘test 1’ error.*
-
-*For now, a workaround for this issue is to not change the connection pooling parameters and set them as ‘0’ for all the three options- **Max Open Connections, Max Ideal Connections, Max Connection Ideal Time**. It is not efficient to open up multiple connections for each query but we are working to resolve it soon.*
 
 ## User Permission 
 When you add the data source, the database user you specify must only be granted SELECT permissions on the specified database and tables you want to query. Grafana does not validate that the query is safe. The query could include any SQL statement. For example, statements like `DELETE FROM user;`  and  `DROP TABLE user;`  will be executed. We **highly** recommend you create a specific Vertica user with restricted permissions.
@@ -101,7 +100,9 @@ To group by time or other columns, click the plus button to the right of the GRO
 Grafana fills in missing values when you group by time. The time function accepts two arguments. The first argument is the time window that you want to group by, and the second argument is the value you want Grafana to fill missing items with.
 
 ### Raw Query Mode
-To switch to the raw query mode, click `Edit SQL`. You can also click `Query Inspector` to view the raw query. 
+To switch to the raw query mode, click `Edit SQL`. You can also click `Query Inspector` to view the raw query.
+You can now use the new Auto-completion feature in Raw Query Mode to predict keywords in your queries as you type.
+To run your query, click `Run Query`.
 
 **Note:** If you use the raw query mode, ensure your query at minimum has `ORDER BY time` and a filter on the returned time range.
 
@@ -159,11 +160,11 @@ For the plugin to load, add the following configuration parameter to the  `/etc/
 
 **Note:** This plugin is tested in **Linux(Ubuntu)** with the following  versions:
 
-* Grafana - v7.5.5 and 8.0.0
-* NodeJS - v16.1.0
-* Yarn - v1.22.5
-* Npm - v7.11.2
-* Go - v1.6.2
+* Grafana - v9.3.6
+* NodeJS - v16.10.0
+* Yarn - v1.22.19
+* Npm - v7.24.0
+* Go - v1.20.1
  
 ### Installing Vertica Grafana Data Source Plugin 
 **Note:** If you have the older version of the Vertica Grafana plugin, remove it using grafana-cli:
