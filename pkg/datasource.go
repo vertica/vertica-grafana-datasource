@@ -41,7 +41,7 @@ import (
 	"strconv"
 	"time"
 
-	// "strings"
+	"strings"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
@@ -93,7 +93,6 @@ type configArgs struct {
 	URL                    string `json:"url"`
 	UseBackupServer        bool   `json:"useBackupserver"`
 	BackupServerNode       string `json:"backupServerNode"`
-	Port                   int    `json:"port"`
 	UsePreparedStmts       bool   `json:"usePreparedStatements"`
 	UseLoadBalancer        bool   `json:"useLoadBalancer"`
 	MaxOpenConnections     int    `json:"maxOpenConnections"`
@@ -102,7 +101,7 @@ type configArgs struct {
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
-func (config *configArgs) ConnectionURL(password string) string {
+func (config *configArgs) ConnectionURL(password string,Port int) string {
 	var tlsmode string
 
 	if config.TLSMode == "" {
@@ -111,7 +110,7 @@ func (config *configArgs) ConnectionURL(password string) string {
 		tlsmode = config.TLSMode
 	}
 	
-	return fmt.Sprintf("vertica://%s:%s@%s:%d/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Port, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
+	return fmt.Sprintf("vertica://%s:%s@%s:%d/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, Port, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
 
 }
 
@@ -195,19 +194,14 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 
 	secret := setting.DecryptedSecureJSONData["password"]
 
-	cnf := make(map[string]interface{})
-
-	err := json.Unmarshal([]byte(setting.JSONData), &cnf)
-
-	json.Unmarshal(setting.JSONData, &config)
-	
-	port := cnf["port"].(string)
-	if port == "" {
-		config.Port = 5433
-	} else {
-		config.Port, _ = strconv.Atoi(port)
+	err := json.Unmarshal(setting.JSONData, &config)
+	if err != nil {
+		return nil, err
 	}
-	connStr := config.ConnectionURL(secret)
+	res := strings.Split(config.URL, ":")
+	config.URL= res[0]
+	Port,_ := strconv.Atoi(res[1])
+	connStr := config.ConnectionURL(secret,Port)
 	db, err := sql.Open("vertica", connStr)
 
 	if err != nil {
