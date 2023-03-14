@@ -73,6 +73,7 @@ const setupForHostname = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+   
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
@@ -113,6 +114,7 @@ const setupForDatabasename = (propOverrides?: object) => {
       isDefault: false,
       jsonData: {
         url: 'localhost:verticaserver',
+
         usePreparedStatements: false,
         tlsmode: 'none',
         useLoadBalancer: false,
@@ -157,6 +159,7 @@ const setupForUsername = (propOverrides?: object) => {
       isDefault: false,
       jsonData: {
         url: 'localhost:verticaserver',
+
         usePreparedStatements: false,
         tlsmode: 'none',
         useLoadBalancer: false,
@@ -204,6 +207,7 @@ const setupForPassword = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
@@ -247,6 +251,7 @@ const setupForSSLMode = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
@@ -328,6 +333,7 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
+
         maxOpenConnections: 3,
         maxIdealConnections: 2,
         maxConnectionIdealTime: 10,

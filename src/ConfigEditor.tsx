@@ -11,6 +11,7 @@ export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOp
 interface State {}
 
 export class ConfigEditor extends PureComponent<Props, State> {
+ 
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {

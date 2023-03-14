@@ -7,8 +7,9 @@ exports[`Render Render should render component with value in BackUp Server Nodes
   </h3>
   <div className=\\"gf-form-group\\">
     <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"<Ipv4 host> / [<Ipv6 host>]\\" onBlur={[Function: onBlur]} />
     </div>
+    
     <div className=\\"gf-form max-width-30\\">
       <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
     </div>
