@@ -38,11 +38,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
-	"strconv"
+	// "strconv"
 	"time"
 
-	"strings"
+	// "strings"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
@@ -106,7 +105,7 @@ type configArgs struct {
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
-func (config *configArgs) ConnectionURL(password string,Port int) string {
+func (config *configArgs) ConnectionURL(password string) string {
 	var tlsmode string
 
 
@@ -116,7 +115,7 @@ func (config *configArgs) ConnectionURL(password string,Port int) string {
 		tlsmode = config.TLSMode
 	}
 	
-	return fmt.Sprintf("vertica://%s:%s@%s:%d/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, Port, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
+	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
 
 }
 
@@ -205,10 +204,10 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 	if err != nil {
 		return nil, err
 	}
-	res := strings.Split(config.URL, ":")
-	config.URL= res[0]
-	Port,_ := strconv.Atoi(res[1])
-	connStr := config.ConnectionURL(secret,Port)
+	// res := strings.Split(config.URL, ":")
+	// config.URL= res[0]
+	// Port,_ := strconv.Atoi(res[1])
+	connStr := config.ConnectionURL(secret)
 	db, err := sql.Open("vertica", connStr)
 
 
