@@ -40,8 +40,6 @@ export type Part = {
 export interface MyDataSourceOptions extends DataSourceJsonData {
   url: string;
 
-  port?: string;
-
   database?: string;
 
   user?: string;
