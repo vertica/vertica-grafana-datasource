@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="23" failures="0" time="4.197">
-  <testsuite name="Render" errors="0" failures="0" skipped="0" timestamp="2023-03-15T08:01:08" time="2.51" tests="9">
-    <testcase classname="Render Render should render component with value in BackUp Server Nodes" name="Render Render should render component with value in BackUp Server Nodes" time="0.015">
+<testsuites name="jest tests" tests="23" failures="0" time="4.526">
+  <testsuite name="Render" errors="0" failures="0" skipped="0" timestamp="2023-03-15T10:54:01" time="2.81" tests="9">
+    <testcase classname="Render Render should render component with value in BackUp Server Nodes" name="Render Render should render component with value in BackUp Server Nodes" time="0.016">
     </testcase>
     <testcase classname="Render Render should render component with value in Use Backup Server field" name="Render Render should render component with value in Use Backup Server field" time="0.004">
     </testcase>
-    <testcase classname="Render Render should render component with value in Host" name="Render Render should render component with value in Host" time="0.004">
+    <testcase classname="Render Render should render component with value in Host" name="Render Render should render component with value in Host" time="0.003">
     </testcase>
-    <testcase classname="Render Render should render component with value in Database" name="Render Render should render component with value in Database" time="0.003">
+    <testcase classname="Render Render should render component with value in Database" name="Render Render should render component with value in Database" time="0.004">
     </testcase>
     <testcase classname="Render Render should render component with value in User" name="Render Render should render component with value in User" time="0.004">
     </testcase>
     <testcase classname="Render Render should render component with value in Password" name="Render Render should render component with value in Password" time="0.003">
     </testcase>
-    <testcase classname="Render Render should render component with value in SSL" name="Render Render should render component with value in SSL" time="0.004">
+    <testcase classname="Render Render should render component with value in SSL" name="Render Render should render component with value in SSL" time="0.009">
     </testcase>
-    <testcase classname="Render Render should render component with value in setUp" name="Render Render should render component with value in setUp" time="0.009">
+    <testcase classname="Render Render should render component with value in setUp" name="Render Render should render component with value in setUp" time="0.003">
     </testcase>
-    <testcase classname="Render Render should render component with value in Vertica Connection" name="Render Render should render component with value in Vertica Connection" time="0.003">
+    <testcase classname="Render Render should render component with value in Vertica Connection" name="Render Render should render component with value in Vertica Connection" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-03-15T08:01:11" time="0.37" tests="10">
+  <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-03-15T10:54:03" time="0.385" tests="10">
     <testcase classname="Query Editor Test cases should handle minimal query" name="Query Editor Test cases should handle minimal query" time="0.001">
     </testcase>
     <testcase classname="Query Editor Test cases should handle minimal query with rawQuery on" name="Query Editor Test cases should handle minimal query with rawQuery on" time="0">
@@ -42,15 +42,15 @@
     <testcase classname="Query Editor Test cases should handle complex query with value in group,select,where with rawQuery On" name="Query Editor Test cases should handle complex query with value in group,select,where with rawQuery On" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-15T08:01:11" time="0.339" tests="3">
-    <testcase classname=" Verifying functionality of unwrap function keeping value null" name=" Verifying functionality of unwrap function keeping value null" time="0.003">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-15T10:54:04" time="0.331" tests="3">
+    <testcase classname=" Verifying functionality of unwrap function keeping value null" name=" Verifying functionality of unwrap function keeping value null" time="0.002">
     </testcase>
     <testcase classname=" Verifying functionality of unwrap function keeping value undefined" name=" Verifying functionality of unwrap function keeping value undefined" time="0.001">
     </testcase>
-    <testcase classname="  Verifying functionality of unwrap function passing numeric value" name="  Verifying functionality of unwrap function passing numeric value" time="0">
+    <testcase classname="  Verifying functionality of unwrap function passing numeric value" name="  Verifying functionality of unwrap function passing numeric value" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-15T08:01:11" time="0.309" tests="1">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-15T10:54:04" time="0.309" tests="1">
     <testcase classname=" Checking working functionality of toSelectableValue function" name=" Checking working functionality of toSelectableValue function" time="0.001">
     </testcase>
   </testsuite>
