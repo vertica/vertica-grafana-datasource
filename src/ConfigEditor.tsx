@@ -68,11 +68,15 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
   onBackupServerChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log('event.target as HTMLInputElement).checked', (event.target as HTMLInputElement).checked);
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
       useBackupserver: (event.target as HTMLInputElement).checked,
     };
+    if (!(event.target as HTMLInputElement).checked) {
+      jsonData.backupServerNode = '';
+    }
     onOptionsChange({ ...options, jsonData });
   };
   // Secure field (only sent to the backend)
