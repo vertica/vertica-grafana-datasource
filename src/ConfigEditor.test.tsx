@@ -27,7 +27,6 @@ const setup = (propOverrides?: object) => {
       isDefault: false,
       jsonData: {
         url: 'localhost:verticaserver',
-        port: '5433',
         usePreparedStatements: false,
         tlsmode: 'none',
         useLoadBalancer: false,
@@ -74,51 +73,6 @@ const setupForHostname = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
-        port: '5433',
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-      },
-      version: 3,
-      readOnly: false,
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props verifying Rendering the Config Screen with value in host field
-const setupForPort = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      password: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      basicAuthPassword: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'none',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        port: '5433',
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
@@ -159,7 +113,6 @@ const setupForDatabasename = (propOverrides?: object) => {
       isDefault: false,
       jsonData: {
         url: 'localhost:verticaserver',
-        port: '5433',
         usePreparedStatements: false,
         tlsmode: 'none',
         useLoadBalancer: false,
@@ -204,7 +157,6 @@ const setupForUsername = (propOverrides?: object) => {
       isDefault: false,
       jsonData: {
         url: 'localhost:verticaserver',
-        port: '5433',
         usePreparedStatements: false,
         tlsmode: 'none',
         useLoadBalancer: false,
@@ -252,7 +204,6 @@ const setupForPassword = (propOverrides?: object) => {
         tlsmode: 'none',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
-        port: '5433',
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
@@ -296,7 +247,6 @@ const setupForSSLMode = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
-        port: '5433',
         maxOpenConnections: 0,
         maxIdealConnections: 0,
         maxConnectionIdealTime: 0,
@@ -378,7 +328,6 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
-        port: '5433',
         maxOpenConnections: 3,
         maxIdealConnections: 2,
         maxConnectionIdealTime: 10,
@@ -423,7 +372,6 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
-        port: '5433',
         maxOpenConnections: 3,
         maxIdealConnections: 2,
         maxConnectionIdealTime: 10,
@@ -468,7 +416,6 @@ const setUpUseBackServer = (propOverrides?: object) => {
         tlsmode: 'server',
         useLoadBalancer: false,
         url: 'localhost:verticaserver',
-        port: '5433',
         maxOpenConnections: 3,
         maxIdealConnections: 2,
         maxConnectionIdealTime: 10,
@@ -498,10 +445,6 @@ describe('Render', () => {
   });
   it('Render should render component with value in Host', () => {
     const wrapper = setupForHostname();
-    expect(wrapper.debug()).toMatchSnapshot();
-  });
-  it('Render should render component with value in Port', () => {
-    const wrapper = setupForPort();
     expect(wrapper.debug()).toMatchSnapshot();
   });
   it('Render should render component with value in Database', () => {
