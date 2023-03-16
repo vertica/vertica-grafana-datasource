@@ -7,6 +7,7 @@
     </testcase>
     <testcase classname="Render Render should render component with value in Host" name="Render Render should render component with value in Host" time="0.004">
     </testcase>
+>>>>>>> tpise
     <testcase classname="Render Render should render component with value in Database" name="Render Render should render component with value in Database" time="0.003">
     </testcase>
     <testcase classname="Render Render should render component with value in User" name="Render Render should render component with value in User" time="0.004">
