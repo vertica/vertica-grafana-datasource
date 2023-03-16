@@ -48,6 +48,7 @@ For more information on managing client connections, see [Managing Client Connec
 ![Data Source Config](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-config.png)
 
 
+
 ## User Permission 
 When you add the data source, the database user you specify must only be granted SELECT permissions on the specified database and tables you want to query. Grafana does not validate that the query is safe. The query could include any SQL statement. For example, statements like `DELETE FROM user;`  and  `DROP TABLE user;`  will be executed. We **highly** recommend you create a specific Vertica user with restricted permissions.
 
@@ -74,7 +75,9 @@ To open the query builder, click **Panel Title**, and then click **Edit**.
 You can switch to raw query mode to run SQL queries. To do this, click **Edit SQL**.
 For any change in the query builder, the raw query is generated and executed. The result is displayed in the dashboard.
 
+
 ![Query Builder](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-query-builder.png)
+
 
 ### FROM SCHEMA, FROM TABLE, Time column, and Metric column
 FROM SCHEMA - Lists schemas that are available in the database for the configured user.
@@ -106,13 +109,16 @@ To run your query, click `Run Query`.
 
 **Note:** If you use the raw query mode, ensure your query at minimum has `ORDER BY time` and a filter on the returned time range.
 
+
 ![Raw Query Mode](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-panel-raw-query.png)
+
 
 ### Disable Query
 To disable a query, click the eye icon in the toolbar of the query builder. The query is not executed, and its result is removed from the dashboard.
 
 ### Data Source Help
 To view the data source help, click `?` icon in the toolbar of every query row.
+
 
 ![Query Help](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-query-help.png)
 
