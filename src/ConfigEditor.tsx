@@ -11,20 +11,6 @@ export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOp
 interface State {}
 
 export class ConfigEditor extends PureComponent<Props, State> {
-  componentDidMount() {
-    // Runs after the first render() lifecycle
-    // this.onloadPortValue('5433');
-  }
-  portValue = '';
-  portdisbaled = false;
-  // onloadPortValue = (event: string) => {
-  //   const { onOptionsChange, options } = this.props;
-  //   const jsonData = {
-  //     ...options.jsonData,
-  //     port: event,
-  //   };
-  //   onOptionsChange({ ...options, jsonData });
-  // };
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -40,27 +26,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
       backupServerNode: event.target.value,
     };
     onOptionsChange({ ...options, jsonData });
-  };
-  onPortChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.onValueChange(event);
-    const reg = /^[0-9\b]+$/;
-    let preval = event.target.value;
-    if (event.target.value === '' || reg.test(event.target.value)) {
-      const { onOptionsChange, options } = this.props,
-        jsonData = {
-          ...options.jsonData,
-          port: event.target.value,
-        };
-      onOptionsChange({ ...options, jsonData });
-    } else {
-      event.target.value = preval.substring(0, preval.length - 1);
-    }
-  };
-  onValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.value) {
-      this.portValue = '';
-      // onOptionsChange({ ...options, jsonData });
-    }
   };
   onDBnameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
@@ -103,11 +68,15 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
   onBackupServerChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log('event.target as HTMLInputElement).checked', (event.target as HTMLInputElement).checked);
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
       useBackupserver: (event.target as HTMLInputElement).checked,
     };
+    if (!(event.target as HTMLInputElement).checked) {
+      jsonData.backupServerNode = '';
+    }
     onOptionsChange({ ...options, jsonData });
   };
   // Secure field (only sent to the backend)
@@ -203,22 +172,11 @@ export class ConfigEditor extends PureComponent<Props, State> {
               inputWidth={21}
               onChange={this.onHostChange}
               value={options.url || jsonData.url || ''}
-              placeholder="<Ipv4 host> / [<Ipv6 host>]"
+              placeholder="Ipv4/[Ipv6]:Port"
               onBlur={() => this.onBlurField(FIELD_TYPES.URL)}
             />
           </div>
-          <div className="gf-form max-width-30">
-            <FormField
-              required
-              label="Port"
-              labelWidth={7}
-              inputWidth={21}
-              onChange={this.onPortChange}
-              value={jsonData.port || this.portValue}
-              placeholder="Port : 5433"
-              // onBlur={() => this.onBlurField(FIELD_TYPES.PORT)}
-            />
-          </div>
+
           <div className="gf-form max-width-30">
             <FormField
               required

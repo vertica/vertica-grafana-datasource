@@ -7,6 +7,7 @@
     </testcase>
     <testcase classname="Render Render should render component with value in Host" name="Render Render should render component with value in Host" time="0.004">
     </testcase>
+>>>>>>> tpise
     <testcase classname="Render Render should render component with value in Database" name="Render Render should render component with value in Database" time="0.003">
     </testcase>
     <testcase classname="Render Render should render component with value in User" name="Render Render should render component with value in User" time="0.004">
@@ -17,7 +18,7 @@
     </testcase>
     <testcase classname="Render Render should render component with value in setUp" name="Render Render should render component with value in setUp" time="0.009">
     </testcase>
-    <testcase classname="Render Render should render component with value in Vertica Connection" name="Render Render should render component with value in Vertica Connection" time="0.004">
+    <testcase classname="Render Render should render component with value in Vertica Connection" name="Render Render should render component with value in Vertica Connection" time="0.003">
     </testcase>
   </testsuite>
   <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-03-15T08:01:11" time="0.37" tests="10">
@@ -27,7 +28,7 @@
     </testcase>
     <testcase classname="Query Editor Test cases should handle basic query with From fields filled" name="Query Editor Test cases should handle basic query with From fields filled" time="0">
     </testcase>
-    <testcase classname="Query Editor Test cases should handle basic query with values in from field and rawquery On" name="Query Editor Test cases should handle basic query with values in from field and rawquery On" time="0">
+    <testcase classname="Query Editor Test cases should handle basic query with values in from field and rawquery On" name="Query Editor Test cases should handle basic query with values in from field and rawquery On" time="0.001">
     </testcase>
     <testcase classname="Query Editor Test cases should handle basic query with From and Select fields filled" name="Query Editor Test cases should handle basic query with From and Select fields filled" time="0">
     </testcase>
