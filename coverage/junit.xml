@@ -5,7 +5,7 @@
     </testcase>
     <testcase classname="Render Render should render component with value in Use Backup Server field" name="Render Render should render component with value in Use Backup Server field" time="0.004">
     </testcase>
-    <testcase classname="Render Render should render component with value in Host" name="Render Render should render component with value in Host" time="0.003">
+    <testcase classname="Render Render should render component with value in Host" name="Render Render should render component with value in Host" time="0.004">
     </testcase>
     <testcase classname="Render Render should render component with value in Database" name="Render Render should render component with value in Database" time="0.004">
     </testcase>
@@ -15,9 +15,9 @@
     </testcase>
     <testcase classname="Render Render should render component with value in SSL" name="Render Render should render component with value in SSL" time="0.009">
     </testcase>
-    <testcase classname="Render Render should render component with value in setUp" name="Render Render should render component with value in setUp" time="0.003">
+    <testcase classname="Render Render should render component with value in setUp" name="Render Render should render component with value in setUp" time="0.009">
     </testcase>
-    <testcase classname="Render Render should render component with value in Vertica Connection" name="Render Render should render component with value in Vertica Connection" time="0.004">
+    <testcase classname="Render Render should render component with value in Vertica Connection" name="Render Render should render component with value in Vertica Connection" time="0.003">
     </testcase>
   </testsuite>
   <testsuite name="Query Editor Test cases" errors="0" failures="0" skipped="0" timestamp="2023-03-15T10:54:03" time="0.385" tests="10">

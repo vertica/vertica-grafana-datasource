@@ -72,9 +72,6 @@ type VerticaDatasource struct {
 
 // GetVerticaDb will return the vertica db connection
 // stored in the instance setting when the instance is created or update
-// GetVerticaDb will return the vertica db connection
-// stored in the instance setting when the instance is created or update
-
 func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*sql.DB, error) {
 	instance, err := v.im.Get(pluginContext)
 	if err != nil {
@@ -110,12 +107,14 @@ func (config *configArgs) ConnectionURL(password string) string {
 	var tlsmode string
 
 
+
 	if config.TLSMode == "" {
 		tlsmode = "none"
 	} else {
 		tlsmode = config.TLSMode
 	}
 	
+	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
 	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
 
 }
@@ -199,21 +198,27 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 	var config configArgs
 
 
+
 	secret := setting.DecryptedSecureJSONData["password"]
 
 	err := json.Unmarshal(setting.JSONData, &config)
 	if err != nil {
 		return nil, err
 	}
+	// res := strings.Split(config.URL, ":")
+	// config.URL= res[0]
+	// Port,_ := strconv.Atoi(res[1])
 	connStr := config.ConnectionURL(secret)
 	db, err := sql.Open("vertica", connStr)
 	if err != nil {
 		return nil, err
 	}
 
+
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", setting.Name))
 	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", setting.Name))
 	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", setting.Name))
 	return &instanceSettings{
@@ -222,7 +227,10 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 		Name:       setting.Name,
 	}, nil
 
+
 }
+
+
 
 
 
@@ -238,6 +246,7 @@ func (v *VerticaDatasource) CheckHealth(ctx context.Context, req *backend.CheckH
 	connDB, err := v.GetVerticaDb(req.PluginContext)
 
 
+
 	if err != nil {
 		log.DefaultLogger.Error("unable to get sql.DB connection: " + err.Error())
 		return &backend.CheckHealthResult{
@@ -248,6 +257,7 @@ func (v *VerticaDatasource) CheckHealth(ctx context.Context, req *backend.CheckH
 	// https://golang.org/pkg/database/sql/#DBStats
 	log.DefaultLogger.Debug(fmt.Sprintf("%s connection stats open connections =%d, InUse = %d, Ideal = %d", req.PluginContext.DataSourceInstanceSettings.Name, connDB.Stats().MaxOpenConnections, connDB.Stats().InUse, connDB.Stats().Idle))
 	connection, err := connDB.Conn(ctx)
+
 
 
 	if err != nil {

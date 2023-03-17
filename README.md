@@ -30,13 +30,13 @@ After you add the Vertica data source, you need to configure it by entering the 
 | -------- | ----------- |
 | `Name`  | The data source name. |
 | `Default`  | The data source is pre-selected for new panels. |
-| `Host`  | The IP address/hostname and the optional port of your Vertica instance. Do not include the database name as the connection string for connecting to Vertica may cause errors. |
+| `Host`  | The IP address/hostname and the port of your Vertica instance separated by colon (host:port). Do not include the database name as the connection string for connecting to Vertica may cause errors. |
 | `Database`  | Name of your Vertica database. |
 | `User`  | Database username. |
 | `Password`  | Database user password. |
 | `SSL Mode`  | Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. When SSL Mode is disabled, SSL Method and Auth Details are not visible. |
 | `Use Backup Server Node`  | To enable backup hosts on server side. |
-| ` Backup Server Node List`  | Comma delimited list of backup hosts for the client to try to connect if the primary host is unreachable. |
+| ` Backup Server Node List`  | Comma delimited list of backup host:port for the client to try to connect if the primary host is unreachable. |
 | `Use Connection Load Balancing`  | To enable connection load balancing on the client-side.|
 | `Max Open Connections` |  Maximum number of connections a user can open concurrently on individual nodes or across the database cluster.|
 | `Max Ideal Connections` | Maximum number of idle connections. This number should be less than or equal to Max Open Connections. |
@@ -45,7 +45,8 @@ After you add the Vertica data source, you need to configure it by entering the 
 **Note:** To enable load balancing, the server side needs to be configured. For more information, see [Connection Load Balancing](https://www.vertica.com/docs/10.1.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/LoadBalancing/ConnectionLoadBalancing.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7CConnection%20Load%20Balancing%7C_____0) in the Vertica documentation.
 For more information on managing client connections, see [Managing Client Connections](https://www.vertica.com/docs/11.0.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/OverviewClientConnections.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7C_____0).
 
-![Data Source Config](https://github.com/vertica/vertica-grafana-datasource/blob/tpise/src/img/datasource-config.png)
+![Data Source Config](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-config.png)
+
 
 
 ## User Permission 
@@ -62,9 +63,9 @@ alter user grafana_user default role sysmonitor;
 To import the dashboard, 
 1.	On the left panel, click the Dashboards icon, and then click **Import**.
 2.	In the Import via grafana.com field, enter the **dashboard ID: 16615** and click **Load**.
-![Import Dashboard](https://github.com/vertica/vertica-grafana-datasource/blob/tpise/src/img/import-dashboard.png)
+![Import Dashboard](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/import-dashboard.png)
 3.	In the Importing dashboard window, select the datasource you created and click **Import**.
-![Import Dashboard Datasource](https://github.com/vertica/vertica-grafana-datasource/blob/tpise/src/img/import-dashboard-datasource.png)
+![Import Dashboard Datasource](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/import-dashboard-datasource.png)
 
 You can now start exploring the dashboard to monitor Vertica.
 
@@ -74,7 +75,9 @@ To open the query builder, click **Panel Title**, and then click **Edit**.
 You can switch to raw query mode to run SQL queries. To do this, click **Edit SQL**.
 For any change in the query builder, the raw query is generated and executed. The result is displayed in the dashboard.
 
-![Query Builder](https://github.com/vertica/vertica-grafana-datasource/blob/tpise/src/img/datasource-query-builder.png)
+
+![Query Builder](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-query-builder.png)
+
 
 ### FROM SCHEMA, FROM TABLE, Time column, and Metric column
 FROM SCHEMA - Lists schemas that are available in the database for the configured user.
@@ -106,7 +109,9 @@ To run your query, click `Run Query`.
 
 **Note:** If you use the raw query mode, ensure your query at minimum has `ORDER BY time` and a filter on the returned time range.
 
-![Raw Query Mode](https://github.com/vertica/vertica-grafana-datasource/blob/tpise/src/img/datasource-panel-raw-query.png)
+
+![Raw Query Mode](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-panel-raw-query.png)
+
 
 ### Disable Query
 To disable a query, click the eye icon in the toolbar of the query builder. The query is not executed, and its result is removed from the dashboard.
@@ -114,7 +119,8 @@ To disable a query, click the eye icon in the toolbar of the query builder. The 
 ### Data Source Help
 To view the data source help, click `?` icon in the toolbar of every query row.
 
-![Query Help](https://github.com/vertica/vertica-grafana-datasource/blob/tpise/src/img/datasource-query-help.png)
+
+![Query Help](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-query-help.png)
 
 ## Supported Macros
 Macros can be used within a query to simplify syntax and allow for dynamic parts.
@@ -149,7 +155,7 @@ For the plugin to load, add the following configuration parameter to the  `/etc/
 
 `allow_loading_unsigned_plugins = vertica-grafana-datasource`
 
-![Allow Unsigned Plugin]( https://github.com/vertica/vertica-grafana-datasource/blob/main/src/img/allow-unsigned-plugin.png)
+![Allow Unsigned Plugin](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/allow-unsigned-plugin.png)
 
 ### Prerequisites 
 * [Grafana](https://grafana.com/docs/grafana/latest/installation/) (version 7.0.0 or higher)
