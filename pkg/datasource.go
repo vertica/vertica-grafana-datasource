@@ -74,7 +74,7 @@ func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*
 		log.DefaultLogger.Error("getVerticaDb: %s", err)
 		return nil, err
 	}
-	else if instanceSetting, ok := instance.(*instanceSettings); ok {
+	if instanceSetting, ok := instance.(*instanceSettings); ok {
 		return instanceSetting.Db, nil
 	} else {
 		log.DefaultLogger.Error("getVerticaDb: %s", err)
