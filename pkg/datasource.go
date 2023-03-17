@@ -74,21 +74,22 @@ type VerticaDatasource struct {
 // stored in the instance setting when the instance is created or update
 // GetVerticaDb will return the vertica db connection
 // stored in the instance setting when the instance is created or update
+
 func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*sql.DB, error) {
 	instance, err := v.im.Get(pluginContext)
-
-
 	if err != nil {
 		log.DefaultLogger.Error("getVerticaDb: %s", err)
 		return nil, err
 	}
 	if instanceSetting, ok := instance.(*instanceSettings); ok {
 		return instanceSetting.Db, nil
+	} else {
+		log.DefaultLogger.Error("getVerticaDb: %s", err)
+		return nil, err
 	}
-	return nil, nil //this is added to avoid syntax error but this line will never gets executed
-	return nil, nil //this is added to avoid syntax error but this line will never gets executed
 
 }
+
 
 type configArgs struct {
 	User                   string `json:"user"`
@@ -204,17 +205,11 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 	if err != nil {
 		return nil, err
 	}
-	// res := strings.Split(config.URL, ":")
-	// config.URL= res[0]
-	// Port,_ := strconv.Atoi(res[1])
 	connStr := config.ConnectionURL(secret)
 	db, err := sql.Open("vertica", connStr)
-
-
 	if err != nil {
 		return nil, err
 	}
-
 
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
@@ -227,10 +222,7 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 		Name:       setting.Name,
 	}, nil
 
-
 }
-
-
 
 
 
