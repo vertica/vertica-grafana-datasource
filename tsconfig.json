@@ -1,13 +1,23 @@
 {
-  "extends": "./node_modules/@grafana/toolkit/src/config/tsconfig.plugin.json",
-  "include": ["src", "types"],
-  "compilerOptions":{
-    "jsx": "react",
-    "rootDir": "./src",
-    "baseUrl": "./src",
-    "paths": {
-      "tslib" : ["./node_modules/tslib/tslib.d.ts"],
-    },
-  "typeRoots": ["./node_modules/@types"],
+  // TypeScript configuration provided by @grafana/create-plugin
+  "extends": "./.config/tsconfig.json",
+  "compilerOptions": {
+    "preserveConstEnums": true
   }
 }
+
+// {
+//   // "extends": "./.config/tsconfig.json"
+//   // "extends": "./node_modules/@grafana/toolkit/src/config/tsconfig.plugin.json",
+//   "include": ["src", "types"],
+//   "compilerOptions":{
+//     "jsx": "react",
+//     "preserveConstEnums": true, 
+//     "rootDir": "./src",
+//     "baseUrl": "./src",
+//     "paths": {
+//       "tslib" : ["./node_modules/tslib/tslib.d.ts"]
+//     },     
+//   "typeRoots": ["./node_modules/@types"],
+//   }
+// }
