@@ -670,10 +670,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
                 enableSnippets: true,
               }}
               value={queryValue}
-              portalOrigin="vertica"
               readOnly={hide}
               onBlur={onBlur}
-              onRunQuery={onRunQuery}
               onChange={onQueryTextChange}
             />
           </div>
