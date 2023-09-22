@@ -2,6 +2,7 @@ import { DataQuery, DataSourceJsonData, SelectableValue } from '@grafana/data';
 
 export interface QueryPart {
   type: string;
+  // eslint-disable-next-line @typescript-eslint/array-type
   params: Array<string | number>;
   name?: string;
 }
@@ -22,8 +23,10 @@ export interface MyQuery extends DataQuery {
   rawSql?: string;
   queryText?: string;
   hide: boolean;
+  
 }
 
+// eslint-disable-next-line @typescript-eslint/array-type
 export type PartParams = Array<{
   value: string;
   options: (() => Promise<SelectableValue<string>>) | null;
