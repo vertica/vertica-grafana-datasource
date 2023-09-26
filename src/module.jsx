@@ -9,3 +9,6 @@ export const plugin = new DataSourcePlugin<DataSource, MyQuery, MyDataSourceOpti
   .setConfigEditor(ConfigEditor)
   .setQueryEditor(QueryEditor)
   .setQueryEditorHelp(QueryEditorHelp);
+
+
+  
