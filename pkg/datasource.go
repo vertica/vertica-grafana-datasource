@@ -75,7 +75,7 @@ type VerticaDatasource struct {
 // GetVerticaDb will return the vertica db connection
 // stored in the instance setting when the instance is created or update
 func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*sql.DB, error) {
-	instance, err := v.im.Get(pluginContext)
+	instance, err := v.im.Get(context.Background(), pluginContext)
 
 
 	if err != nil {
@@ -86,8 +86,6 @@ func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*
 		return instanceSetting.Db, nil
 	}
 	return nil, nil //this is added to avoid syntax error but this line will never gets executed
-	return nil, nil //this is added to avoid syntax error but this line will never gets executed
-
 }
 
 type configArgs struct {
