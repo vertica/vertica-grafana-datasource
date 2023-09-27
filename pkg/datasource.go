@@ -60,6 +60,9 @@ func newDatasource() datasource.ServeOpts {
 	}
 }
 
+
+
+
 // VerticaDatasource is an datasource used to create
 // new datasource plugins with a backend.
 type VerticaDatasource struct {
@@ -69,7 +72,7 @@ type VerticaDatasource struct {
 // GetVerticaDb will return the vertica db connection
 // stored in the instance setting when the instance is created or update
 func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*sql.DB, error) {
-	instance, err := v.im.Get(pluginContext)
+	instance, err := v.im.Get(context.Background(), pluginContext)
 	if err != nil {
 		log.DefaultLogger.Error("getVerticaDb: %s", err)
 		return nil, err
@@ -207,6 +210,7 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 		Db:         db,
 		Name:       setting.Name,
 	}, nil
+
 }
 
 

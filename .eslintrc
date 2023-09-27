@@ -1,5 +1,3 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "extends": ["./node_modules/@grafana/eslint-config/index.js"] // this is optional 
+  "extends": "./.config/.eslintrc"
 }

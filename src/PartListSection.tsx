@@ -5,12 +5,15 @@ import { toSelectableValue } from './toSelectableValue';
 import { AddButton } from './AddButton';
 import { unwrap } from './unwrap';
 
+// eslint-disable-next-line @typescript-eslint/array-type
 export type PartParams = Array<{
   value: string;
   options: (() => Promise<SelectableValue<string>>) | null;
 }>;
 
+
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/array-type
   parts: Array<{
     name: string;
     params: PartParams;
@@ -133,7 +136,7 @@ const Part = ({ name, params, onChange, onRemove }: PartProps): JSX.Element => {
     >
       <RemovableName name={name} onRemove={onRemove} />(
       {params.map((p, i) => {
-        const results = new Promise<Array<SelectableValue<string>>>((resolve) => resolve([]));
+        const results = new Promise<any[]>((resolve) => resolve([]));
         const { value, options } = p;
         const isLast = i === params.length - 1;
         const loadOptions =
