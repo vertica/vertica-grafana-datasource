@@ -76,10 +76,11 @@ func Test_CheckHealth(t *testing.T) {
 	monkey.UnpatchAll()
 }
 
-func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func mockDataSourceInstance(_ context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+
 	var config configArgs
 
-	err := json.Unmarshal(setting.JSONData, &config)
+	err := json.Unmarshal(settings.JSONData, &config)
 	if err != nil {
 		log.DefaultLogger.Error("newDataSourceInstance : error in unmarshaler: %s", err)
 	}
@@ -94,11 +95,11 @@ func mockDataSourceInstance(setting backend.DataSourceInstanceSettings) (instanc
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
-	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance fo datasource created: %s", setting.Name))
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance fo datasource created: %s", settings.Name))
 	return &instanceSettings{
 		httpClient: &http.Client{},
 		Db:         db,
-		Name:       setting.Name,
+		Name:       settings.Name,
 	}, nil
 }
 
