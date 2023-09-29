@@ -1,6 +1,6 @@
 {
   "name": "vertica-grafana-plugin",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Data source for Vertica and compatible databases",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
@@ -16,7 +16,7 @@
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "typecheck": "tsc --noEmit"
   },
-  "author": "Micro Focus",
+  "author": "OpenText",
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7.21.4",
