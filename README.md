@@ -197,3 +197,4 @@ For the plugin to load, add the following configuration parameter to the  `/etc/
           mage -v
        ```
 4. Restart the Grafana server.
+
