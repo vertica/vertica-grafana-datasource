@@ -5,6 +5,7 @@ import { Props, ConfigEditor } from './ConfigEditor';
 // setup file
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
+
 // setting up the props verifying Rendering of config screen
 const setup = (propOverrides?: object) => {
   const props: Props = {
