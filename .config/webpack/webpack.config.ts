@@ -82,7 +82,7 @@ const config = async (env): Promise<Configuration> => {
             loader: 'swc-loader',
             options: {
               jsc: {
-                baseUrl: '/src',
+                baseUrl: './src',
                 target: 'es2015',
                 loose: false,
                 parser: {
