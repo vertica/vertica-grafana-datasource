@@ -60,6 +60,9 @@ func newDatasource() datasource.ServeOpts {
 	}
 }
 
+
+
+
 // VerticaDatasource is an datasource used to create
 // new datasource plugins with a backend.
 type VerticaDatasource struct {
@@ -69,7 +72,7 @@ type VerticaDatasource struct {
 // GetVerticaDb will return the vertica db connection
 // stored in the instance setting when the instance is created or update
 func (v *VerticaDatasource) GetVerticaDb(pluginContext backend.PluginContext) (*sql.DB, error) {
-	instance, err := v.im.Get(pluginContext)
+	instance, err := v.im.Get(context.Background(), pluginContext)
 	if err != nil {
 		log.DefaultLogger.Error("getVerticaDb: %s", err)
 		return nil, err
@@ -184,11 +187,12 @@ type instanceSettings struct {
 }
 
 // Create new datasource.
-func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+// func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
-	secret := setting.DecryptedSecureJSONData["password"]
+	secret := settings.DecryptedSecureJSONData["password"]
 
-	err := json.Unmarshal(setting.JSONData, &config)
+	err := json.Unmarshal(settings.JSONData, &config)
 	if err != nil {
 		return nil, err
 	}
@@ -201,13 +205,15 @@ func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instance
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
-	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", setting.Name))
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", settings.Name))
 	return &instanceSettings{
 		httpClient: &http.Client{},
 		Db:         db,
-		Name:       setting.Name,
+		Name:       settings.Name,
 	}, nil
+
 }
+
 
 
 // CheckHealth handles health checks sent from Grafana to the plugin.

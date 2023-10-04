@@ -5,6 +5,7 @@ import { Props, ConfigEditor } from './ConfigEditor';
 // setup file
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
+
 // setting up the props verifying Rendering of config screen
 const setup = (propOverrides?: object) => {
   const props: Props = {
@@ -17,12 +18,10 @@ const setup = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -42,6 +41,7 @@ const setup = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -60,12 +60,10 @@ const setupForHostname = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -85,6 +83,7 @@ const setupForHostname = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -103,12 +102,10 @@ const setupForDatabasename = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -129,6 +126,7 @@ const setupForDatabasename = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -147,12 +145,10 @@ const setupForUsername = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -173,6 +169,7 @@ const setupForUsername = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -191,12 +188,10 @@ const setupForPassword = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -216,6 +211,7 @@ const setupForPassword = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -234,12 +230,10 @@ const setupForSSLMode = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -259,6 +253,7 @@ const setupForSSLMode = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -315,12 +310,10 @@ const setupForVerticaConnections = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -340,6 +333,7 @@ const setupForVerticaConnections = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -359,12 +353,10 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -384,6 +376,7 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };
@@ -403,12 +396,10 @@ const setUpUseBackServer = (propOverrides?: object) => {
       typeLogoUrl: '',
       access: 'proxy',
       url: '',
-      password: '',
       user: '',
       database: '',
       basicAuth: false,
       basicAuthUser: '',
-      basicAuthPassword: '',
       withCredentials: false,
       isDefault: false,
       jsonData: {
@@ -428,6 +419,7 @@ const setUpUseBackServer = (propOverrides?: object) => {
       },
       version: 3,
       readOnly: false,
+      uid: ''
     },
     onOptionsChange: jest.fn(),
   };

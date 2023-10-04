@@ -204,7 +204,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
     const label = type.split('|')[0];
     const value = type.split('|')[1];
     const partType = type.split('|')[2];
-    let defaultParams: Array<string | number> = [];
+    let defaultParams: any[] = [];
     switch (value) {
       case 'column':
         defaultParams = ['value'];
@@ -292,7 +292,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   // handler when WHERE section part is added
   const handleWhereParamsAdd = (type: string) => {
     const clonedQuery = cloneDeep(query);
-    let defaultParams: Array<string | number> = [];
+    let defaultParams: any[] = [];
     let partName = '';
     switch (type) {
       case 'macro':
@@ -338,7 +338,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const handleGroupParamsAdd = (type: string, data: any = { label: '', value: '', type: '' }) => {
     // const clonedQuery = cloneDeep(query);
     const clonedQuery = cloneDeep<any | undefined>(query);
-    let defaultParams: Array<string | number> = [];
+    let defaultParams: any[] = [];
     let partName = '';
     switch (type) {
       case 'time':
@@ -374,7 +374,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const getSchemaOptions = () => {
     const queryModel = new QueryModel(query, getTemplateSrv());
     const metaBuilder = new MetaQuery(query, queryModel);
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await datasource.metricFindQuery(metaBuilder.buildSchemaQuery());
         const result = response.map((res: any) => {
@@ -389,7 +389,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const getTableOptions = () => {
     const queryModel = new QueryModel(query, getTemplateSrv());
     const metaBuilder = new MetaQuery(query, queryModel);
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await datasource.metricFindQuery(metaBuilder.buildTableQuery());
         const result = response.map((res: any) => {
@@ -398,13 +398,15 @@ export const QueryEditor = (props: Props): JSX.Element => {
         resolve(result);
       }, 0);
     });
+
+
   };
 
   // method to fetch all the time columns for the selected table
   const getTimeColumnOptions = () => {
     const queryModel = new QueryModel(query, getTemplateSrv());
     const metaBuilder = new MetaQuery(query, queryModel);
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await datasource.metricFindQuery(metaBuilder.buildColumnQuery('time'));
         const result = response.map((res: any) => {
@@ -419,7 +421,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const getMetricColumnOptions = () => {
     const queryModel = new QueryModel(query, getTemplateSrv());
     const metaBuilder = new MetaQuery(query, queryModel);
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await datasource.metricFindQuery(metaBuilder.buildColumnQuery('metric'));
         const result = response.map((res: any) => {
@@ -434,7 +436,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const getColumnOptions = useCallback(async () => {
     const queryModel = new QueryModel(query, getTemplateSrv());
     const metaBuilder = new MetaQuery(query, queryModel);
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await datasource.metricFindQuery(metaBuilder.buildColumnQuery('value'));
         const result = response.map((res: any) => {
@@ -447,7 +449,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   // method to fetch all the columns selected in the SELECT section and TIME section
   const getSelectedColumnOptions = useCallback(() => {
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(() => {
         const result: any = [];
         result.push(query.timeColumn);
@@ -466,7 +468,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   // method to fetch all the group columns for the selected table
   const getGroupByOptions = () => {
     const queryModel = new QueryModel(query, getTemplateSrv());
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await getSelectedColumnOptions();
         const options = [];
@@ -486,7 +488,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
     const { datasource } = props;
     const queryModel = new QueryModel(query, getTemplateSrv());
     const metaBuilder = new MetaQuery(query, queryModel);
-    return new Promise<Array<SelectableValue<string>>>((resolve) => {
+    return new Promise<any[]>((resolve) => {
       setTimeout(async () => {
         const response = await datasource.metricFindQuery(metaBuilder.buildColumnQuery(''));
         const result = response.map((res: any) => {
@@ -504,6 +506,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
       query.select.map((item) => {
         const data: any = [];
         item.map((row) => {
+          // eslint-disable-next-line @typescript-eslint/array-type
           const params: Array<{ value: string; options: (() => Promise<SelectableValue<string>>) | null }> = [];
           row.params.map((param, paramIndex) => {
             if (row.type === 'column') {
@@ -555,6 +558,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const whereParts = useMemo(() => {
     const results: any = [];
     query.where?.map((part) => {
+
+      // eslint-disable-next-line @typescript-eslint/array-type
       const params: Array<{ value: string; options: (() => Promise<SelectableValue<string>>) | null }> = [];
       let partName = '';
       part.params.map((param, index) => {
@@ -600,6 +605,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
     const results: any = [];
     query.group &&
       query.group.map((part) => {
+        // eslint-disable-next-line @typescript-eslint/array-type
         const params: Array<{ value: string; options: (() => Promise<SelectableValue<string>>) | null }> = [];
         let partName = '';
         part.params.map((param, index) => {
@@ -670,10 +676,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
                 enableSnippets: true,
               }}
               value={queryValue}
-              portalOrigin="vertica"
               readOnly={hide}
               onBlur={onBlur}
-              onRunQuery={onRunQuery}
               onChange={onQueryTextChange}
             />
           </div>

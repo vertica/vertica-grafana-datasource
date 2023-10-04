@@ -87,7 +87,7 @@ export class DataSource extends DataSourceWithBackend<MyQuery, MyDataSourceOptio
           const textFieldIdx = frame.fields[0].name === '__text' ? 0 : 1;
           const valueFieldIdx = textFieldIdx === 0 ? 1 : 0;
           let metricResponse: MetricFindValue[] = [];
-          var idx: number;
+          let idx: number;
           for (idx = 0; idx < frame.length; idx++) {
             metricResponse.push({
               text: frame.fields[textFieldIdx].values.get(idx),

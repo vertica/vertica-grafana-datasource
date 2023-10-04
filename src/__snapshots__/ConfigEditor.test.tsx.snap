@@ -2,72 +2,72 @@
 
 exports[`Render Render should render component with value in BackUp Server Nodes 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={3} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={3} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={3} onChange={[Function (anonymous)]} value={2} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={3} onChange={[Function: onMaxIdealConnectionsChange]} value={2} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={10} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={10} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -90,72 +90,72 @@ exports[`Render Render should render component with value in BackUp Server Nodes
 
 exports[`Render Render should render component with value in Database 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"Vertica DB\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="Vertica DB" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={0} onChange={[Function: onMaxIdealConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={0} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -178,72 +178,72 @@ exports[`Render Render should render component with value in Database 1`] = `
 
 exports[`Render Render should render component with value in Host 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={0} onChange={[Function: onMaxIdealConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={0} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -266,72 +266,72 @@ exports[`Render Render should render component with value in Host 1`] = `
 
 exports[`Render Render should render component with value in Password 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"Demo Password\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="Demo Password" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={0} onChange={[Function: onMaxIdealConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={0} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -354,72 +354,72 @@ exports[`Render Render should render component with value in Password 1`] = `
 
 exports[`Render Render should render component with value in SSL 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={0} onChange={[Function: onMaxIdealConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={0} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -442,72 +442,72 @@ exports[`Render Render should render component with value in SSL 1`] = `
 
 exports[`Render Render should render component with value in Use Backup Server field 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={3} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={3} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={3} onChange={[Function (anonymous)]} value={2} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={3} onChange={[Function: onMaxIdealConnectionsChange]} value={2} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={10} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={10} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -530,72 +530,72 @@ exports[`Render Render should render component with value in Use Backup Server f
 
 exports[`Render Render should render component with value in User 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"Vertica Admin\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="Vertica Admin" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={0} onChange={[Function: onMaxIdealConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={0} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -618,72 +618,72 @@ exports[`Render Render should render component with value in User 1`] = `
 
 exports[`Render Render should render component with value in Vertica Connection 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={3} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={3} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={3} onChange={[Function (anonymous)]} value={2} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={3} onChange={[Function: onMaxIdealConnectionsChange]} value={2} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={10} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={10} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
@@ -706,72 +706,72 @@ exports[`Render Render should render component with value in Vertica Connection 
 
 exports[`Render Render should render component with value in setUp 1`] = `
 "<Fragment>
-  <h3 className=\\"page-heading\\">
+  <h3 className="page-heading">
     Vertica Connection
   </h3>
-  <div className=\\"gf-form-group\\">
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Host\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"localhost:verticaserver\\" placeholder=\\"Ipv4/[Ipv6]:Port\\" onBlur={[Function: onBlur]} />
+  <div className="gf-form-group">
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Host" labelWidth={7} inputWidth={21} onChange={[Function: onHostChange]} value="localhost:verticaserver" placeholder="Ipv4/[Ipv6]:Port" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField required={true} label=\\"Database\\" labelWidth={7} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"database name\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form max-width-30">
+      <FormField required={true} label="Database" labelWidth={7} inputWidth={21} onChange={[Function: onDBnameChange]} value="" placeholder="database name" onBlur={[Function: onBlur]} />
     </div>
-    <div className=\\"gf-form-inline\\">
-      <div className=\\"gf-form\\">
-        <FormField label=\\"User\\" labelWidth={7} inputWidth={6} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"user\\" onBlur={[Function: onBlur]} />
+    <div className="gf-form-inline">
+      <div className="gf-form">
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
       </div>
-      <div className=\\"gf-form\\">
-        <SecretFormField isConfigured={[undefined]} value=\\"\\" label=\\"Password\\" placeholder=\\"password\\" labelWidth={7} inputWidth={6} onReset={[Function (anonymous)]} onChange={[Function (anonymous)]} />
+      <div className="gf-form">
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={14} tooltip=\\"This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.\\">
+    <div className="gf-form">
+      <InlineLabel width={14} tooltip="This option determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server.">
         SSL Mode
       </InlineLabel>
-      <Select$1 width={42} defaultValue=\\"none\\" isSearchable={false} options={{...}} onChange={[Function (anonymous)]} value={{...}} />
+      <Select width={42} defaultValue="none" isSearchable={false} options={{...}} onChange={[Function: onModeChange]} value={{...}} />
     </div>
-    <div className=\\"gf-form\\">
+    <div className="gf-form">
       <InlineLabel width={30}>
         Use Backup Server Node
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onBackupServerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form max-width-30\\">
-      <FormField label=\\"Backup Server Node List\\" labelWidth={15} inputWidth={21} onChange={[Function (anonymous)]} value=\\"\\" placeholder=\\"host1:port,host2:port\\" disabled={true} />
+    <div className="gf-form max-width-30">
+      <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
+  <div className="gf-form-group">
     <b>
       Environment
     </b>
-    <div className=\\"gf-form\\">
-      <InlineLabel width={30} tooltip=\\"If set, the query will be distributed to vertica nodes\\">
+    <div className="gf-form">
+      <InlineLabel width={30} tooltip="If set, the query will be distributed to vertica nodes">
         Use Connection Load Balancing
       </InlineLabel>
-      <div className=\\"gf-form-switch\\">
-        <Switch value={false} onChange={[Function (anonymous)]} />
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onUseLoadBalancerChange]} />
       </div>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Open Connections\\" description=\\"Set max open connections to database, ideal + open connections\\">
-        <Slider min={0} max={100} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Open Connections" description="Set max open connections to database, ideal + open connections">
+        <Slider min={0} max={100} onChange={[Function: onMaxOpenConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Ideal Connections\\" description=\\"Set max ideal connections to database, should be less than or equal to max open connections\\">
-        <Slider min={0} max={0} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Ideal Connections" description="Set max ideal connections to database, should be less than or equal to max open connections">
+        <Slider min={0} max={0} onChange={[Function: onMaxIdealConnectionsChange]} value={0} />
       </Field>
     </div>
-    <div className=\\"gf-form\\">
-      <Field label=\\"Max Connection Ideal Time\\" description=\\"Set max ideal connections time, in minutes\\">
-        <Slider min={0} max={999} onChange={[Function (anonymous)]} value={0} />
+    <div className="gf-form">
+      <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
+        <Slider min={0} max={999} onChange={[Function: onMaxConnectionIdealTimeChange]} value={0} />
       </Field>
     </div>
   </div>
-  <div className=\\"gf-form-group\\">
-    <InfoBox title=\\"User Permission\\">
+  <div className="gf-form-group">
+    <InfoBox title="User Permission">
       <p>
         The database user should only be granted SELECT permissions on the specified database &amp; tables you want to query. Grafana does not validate that queries are safe so queries can contain any SQL statement. For example, statements like 
         <code>
