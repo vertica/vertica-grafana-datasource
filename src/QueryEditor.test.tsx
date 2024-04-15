@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { MyQuery } from './types';
 // import { DataSource } from './datasource';
 // import { render } from '@testing-library/react';
@@ -11,7 +11,7 @@ jest.mock('@grafana/ui', () => {
   const Select = ({ defaultValue }: { defaultValue: { label: string; value: string } }) => {
     return <span>{defaultValue.label}</span>;
   };
-  const InlineLabel = ({ children }: { children: React.ReactChildren }) => {
+  const InlineLabel = ({ children }: { children: ReactNode }) => {
     return <span>{children}</span>;
   };
   const ConfirmModal = ({ label }: { label: string }) => {

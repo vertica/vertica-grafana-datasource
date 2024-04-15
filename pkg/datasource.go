@@ -94,6 +94,8 @@ type configArgs struct {
 	URL                    string `json:"url"`
 	UseBackupServer        bool   `json:"useBackupserver"`
 	BackupServerNode       string `json:"backupServerNode"`
+	useOauth	           bool   `json:"useOauth"`
+	OauthToken			   string `json:"OauthToken"`
 	UsePreparedStmts       bool   `json:"usePreparedStatements"`
 	UseLoadBalancer        bool   `json:"useLoadBalancer"`
 	MaxOpenConnections     int    `json:"maxOpenConnections"`
@@ -109,7 +111,7 @@ func (config *configArgs) ConnectionURL(password string) string {
 	} else {
 		tlsmode = config.TLSMode
 	}
-	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode)
+	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s&oauth_access_token=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode, config.OauthToken)
 }
 
 type queryModel struct {

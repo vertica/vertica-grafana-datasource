@@ -61,6 +61,10 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
   useBackupserver: boolean;
 
   backupServerNode: string;
+
+  useOauth: boolean;
+
+  OauthToken: string;
 }
 
 /**
