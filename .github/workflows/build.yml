@@ -4,7 +4,7 @@ on:
   push:
     branches:
      - main
-     - update
+     - sprint1
   
 
 jobs:
