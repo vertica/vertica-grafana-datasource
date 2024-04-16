@@ -94,7 +94,6 @@ type configArgs struct {
 	URL                    string `json:"url"`
 	UseBackupServer        bool   `json:"useBackupserver"`
 	BackupServerNode       string `json:"backupServerNode"`
-	useOauth	           bool   `json:"useOauth"`
 	OauthToken			   string `json:"OauthToken"`
 	UsePreparedStmts       bool   `json:"usePreparedStatements"`
 	UseLoadBalancer        bool   `json:"useLoadBalancer"`
