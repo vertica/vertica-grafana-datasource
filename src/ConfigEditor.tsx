@@ -68,7 +68,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
   onBackupServerChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('event.target as HTMLInputElement).checked', (event.target as HTMLInputElement).checked);
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
@@ -221,7 +220,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
                 labelWidth={7}
                 inputWidth={6}
                 onChange={this.onUserChange}
-                value={jsonData.useOauth ? '' : jsonData.user || ''}
+                value={ jsonData.user || ''}
                 placeholder="user"
                 onBlur={() => this.onBlurField(FIELD_TYPES.USER)}
                 disabled={jsonData.useOauth}
