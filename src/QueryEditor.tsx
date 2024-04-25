@@ -86,6 +86,7 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const onQueryTextChange = (value?: any, override?: boolean) => {
     // comment to stop on change of runquery
     // onApplyQueryChange({ ...query, rawSql: value }, override);
+ 
     setRunValue(value);
     setQueryValue(value);
     if (!value) {
@@ -204,7 +205,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
     const label = type.split('|')[0];
     const value = type.split('|')[1];
     const partType = type.split('|')[2];
-    let defaultParams: any[] = [];
+    type Params = string | number;
+    let defaultParams: Params[] = [];
     switch (value) {
       case 'column':
         defaultParams = ['value'];
@@ -292,7 +294,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
   // handler when WHERE section part is added
   const handleWhereParamsAdd = (type: string) => {
     const clonedQuery = cloneDeep(query);
-    let defaultParams: any[] = [];
+    type Params = string | number;
+    let defaultParams: Params[] = [];
     let partName = '';
     switch (type) {
       case 'macro':
@@ -338,7 +341,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
   const handleGroupParamsAdd = (type: string, data: any = { label: '', value: '', type: '' }) => {
     // const clonedQuery = cloneDeep(query);
     const clonedQuery = cloneDeep<any | undefined>(query);
-    let defaultParams: any[] = [];
+    type Params = string | number;
+    let defaultParams: Params[] = [];
     let partName = '';
     switch (type) {
       case 'time':

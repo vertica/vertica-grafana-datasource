@@ -34,6 +34,8 @@ const setup = (propOverrides?: object) => {
         maxConnectionIdealTime: 0,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -76,6 +78,8 @@ const setupForHostname = (propOverrides?: object) => {
         maxConnectionIdealTime: 0,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -119,6 +123,8 @@ const setupForDatabasename = (propOverrides?: object) => {
         maxConnectionIdealTime: 0,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -162,6 +168,8 @@ const setupForUsername = (propOverrides?: object) => {
         maxConnectionIdealTime: 0,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -204,6 +212,8 @@ const setupForPassword = (propOverrides?: object) => {
         maxConnectionIdealTime: 0,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -246,6 +256,8 @@ const setupForSSLMode = (propOverrides?: object) => {
         maxConnectionIdealTime: 0,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -326,6 +338,8 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         maxConnectionIdealTime: 10,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -369,6 +383,8 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
         maxConnectionIdealTime: 10,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -412,6 +428,8 @@ const setUpUseBackServer = (propOverrides?: object) => {
         maxConnectionIdealTime: 10,
         useBackupserver: false,
         backupServerNode: '',
+        useOauth: false,
+        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {

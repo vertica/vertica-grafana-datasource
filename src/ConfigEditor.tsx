@@ -68,7 +68,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
   onBackupServerChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('event.target as HTMLInputElement).checked', (event.target as HTMLInputElement).checked);
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
@@ -79,6 +78,31 @@ export class ConfigEditor extends PureComponent<Props, State> {
     }
     onOptionsChange({ ...options, jsonData });
   };
+
+
+  onOauthChange = (event: ChangeEvent<HTMLInputElement>) => {
+   
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      useOauth: event.target.checked,
+    };
+    if (!event.target.checked) {
+      jsonData.OauthToken = '';
+    }
+    onOptionsChange({ ...options, jsonData });
+  };
+
+  onOauthTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      OauthToken: event.target.value,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
+
+
   // Secure field (only sent to the backend)
   onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
@@ -196,9 +220,10 @@ export class ConfigEditor extends PureComponent<Props, State> {
                 labelWidth={7}
                 inputWidth={6}
                 onChange={this.onUserChange}
-                value={jsonData.user || ''}
+                value={ jsonData.user || ''}
                 placeholder="user"
                 onBlur={() => this.onBlurField(FIELD_TYPES.USER)}
+                disabled={jsonData.useOauth}
               />
             </div>
             <div className="gf-form">
@@ -211,6 +236,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
                 inputWidth={6}
                 onReset={this.onResetPassword}
                 onChange={this.onPasswordChange}
+                disabled={jsonData.useOauth}
               />
             </div>
           </div>
@@ -250,6 +276,26 @@ export class ConfigEditor extends PureComponent<Props, State> {
               placeholder="host1:port,host2:port"
               disabled={!jsonData.useBackupserver}
               // onBlur={() => this.onBlurField(FIELD_TYPES.BACKUPSERVERNODE)}
+            />
+          </div>
+          <div className="gf-form">
+            <InlineLabel width={30}>Use Vertica OAuth  </InlineLabel>
+            <div className="gf-form-switch">
+              <Switch
+                value={!!jsonData.useOauth}
+                onChange={this.onOauthChange}
+              />
+            </div>
+          </div>
+          <div className="gf-form max-width-30">
+            <FormField
+              label="OAuth Access Token"
+              labelWidth={15}
+              inputWidth={21}
+              onChange={this.onOauthTokenChange} 
+              value={jsonData.OauthToken}
+              placeholder="OAuth Access Token"
+              disabled={!jsonData.useOauth}
             />
           </div>
         </div>

@@ -14,10 +14,10 @@ exports[`Render Render should render component with value in BackUp Server Nodes
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -36,6 +36,17 @@ exports[`Render Render should render component with value in BackUp Server Nodes
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -102,10 +113,10 @@ exports[`Render Render should render component with value in Database 1`] = `
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -124,6 +135,17 @@ exports[`Render Render should render component with value in Database 1`] = `
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -190,10 +212,10 @@ exports[`Render Render should render component with value in Host 1`] = `
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -212,6 +234,17 @@ exports[`Render Render should render component with value in Host 1`] = `
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -278,10 +311,10 @@ exports[`Render Render should render component with value in Password 1`] = `
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="Demo Password" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="Demo Password" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -300,6 +333,17 @@ exports[`Render Render should render component with value in Password 1`] = `
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -366,10 +410,10 @@ exports[`Render Render should render component with value in SSL 1`] = `
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -388,6 +432,17 @@ exports[`Render Render should render component with value in SSL 1`] = `
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -454,10 +509,10 @@ exports[`Render Render should render component with value in Use Backup Server f
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -476,6 +531,17 @@ exports[`Render Render should render component with value in Use Backup Server f
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -542,10 +608,10 @@ exports[`Render Render should render component with value in User 1`] = `
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="Vertica Admin" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="Vertica Admin" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -564,6 +630,17 @@ exports[`Render Render should render component with value in User 1`] = `
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -630,10 +707,10 @@ exports[`Render Render should render component with value in Vertica Connection 
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -652,6 +729,17 @@ exports[`Render Render should render component with value in Vertica Connection 
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
@@ -718,10 +806,10 @@ exports[`Render Render should render component with value in setUp 1`] = `
     </div>
     <div className="gf-form-inline">
       <div className="gf-form">
-        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} />
+        <FormField label="User" labelWidth={7} inputWidth={6} onChange={[Function: onUserChange]} value="" placeholder="user" onBlur={[Function: onBlur]} disabled={false} />
       </div>
       <div className="gf-form">
-        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} />
+        <SecretFormField isConfigured={[undefined]} value="" label="Password" placeholder="password" labelWidth={7} inputWidth={6} onReset={[Function: onResetPassword]} onChange={[Function: onPasswordChange]} disabled={false} />
       </div>
     </div>
     <div className="gf-form">
@@ -740,6 +828,17 @@ exports[`Render Render should render component with value in setUp 1`] = `
     </div>
     <div className="gf-form max-width-30">
       <FormField label="Backup Server Node List" labelWidth={15} inputWidth={21} onChange={[Function: onBackServerNodeChange]} value="" placeholder="host1:port,host2:port" disabled={true} />
+    </div>
+    <div className="gf-form">
+      <InlineLabel width={30}>
+        Use Vertica OAuth  
+      </InlineLabel>
+      <div className="gf-form-switch">
+        <Switch value={false} onChange={[Function: onOauthChange]} />
+      </div>
+    </div>
+    <div className="gf-form max-width-30">
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
