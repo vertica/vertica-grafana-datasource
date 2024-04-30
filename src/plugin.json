@@ -11,7 +11,7 @@
   "info": {
     "description": "Data source for Vertica and compatible databases",
     "author": {
-      "name": "Micro Focus",
+      "name": "OpenText",
       "url": "https://github.com/vertica/vertica-grafana-datasource"
     },
     "keywords": ["grafana", "vertica", "datasource"],
@@ -42,7 +42,7 @@
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaDependency": ">=7.4.0",
+    "grafanaDependency": ">=10.0.0",
     "plugins": []
   }
 }
