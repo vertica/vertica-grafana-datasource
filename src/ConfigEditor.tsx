@@ -6,9 +6,9 @@ import { SSL_MODE_OPTIONS } from './constants';
 
 const { SecretFormField, FormField } = LegacyForms;
 
-export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> {}
+export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> { }
 
-interface State {}
+interface State { }
 
 export class ConfigEditor extends PureComponent<Props, State> {
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -81,25 +81,33 @@ export class ConfigEditor extends PureComponent<Props, State> {
 
 
   onOauthChange = (event: ChangeEvent<HTMLInputElement>) => {
-   
+
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
       useOauth: event.target.checked,
     };
-    if (!event.target.checked) {
-      jsonData.OauthToken = '';
-    }
-    onOptionsChange({ ...options, jsonData });
+
+
+    onOptionsChange({
+      ...options, jsonData,
+      secureJsonData: {
+        ...options.secureJsonData,
+        OauthToken: ''
+      },
+    });
+
+
   };
 
   onOauthTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
-    const jsonData = {
-      ...options.jsonData,
-      OauthToken: event.target.value,
-    };
-    onOptionsChange({ ...options, jsonData });
+    onOptionsChange({
+      ...options,
+      secureJsonData: {
+        OauthToken: event.target.value,
+      },
+    });
   };
 
 
@@ -220,7 +228,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
                 labelWidth={7}
                 inputWidth={6}
                 onChange={this.onUserChange}
-                value={ jsonData.user || ''}
+                value={jsonData.user || ''}
                 placeholder="user"
                 onBlur={() => this.onBlurField(FIELD_TYPES.USER)}
                 disabled={jsonData.useOauth}
@@ -275,7 +283,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
               value={jsonData.backupServerNode}
               placeholder="host1:port,host2:port"
               disabled={!jsonData.useBackupserver}
-              // onBlur={() => this.onBlurField(FIELD_TYPES.BACKUPSERVERNODE)}
+            // onBlur={() => this.onBlurField(FIELD_TYPES.BACKUPSERVERNODE)}
             />
           </div>
           <div className="gf-form">
@@ -292,8 +300,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
               label="OAuth Access Token"
               labelWidth={15}
               inputWidth={21}
-              onChange={this.onOauthTokenChange} 
-              value={jsonData.OauthToken}
+              onChange={this.onOauthTokenChange}
+              value={secureJsonData.OauthToken}
               placeholder="OAuth Access Token"
               disabled={!jsonData.useOauth}
             />

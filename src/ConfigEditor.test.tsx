@@ -35,11 +35,12 @@ const setup = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: ''
       },
       version: 3,
       readOnly: false,
@@ -79,11 +80,11 @@ const setupForHostname = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: '',
       },
       version: 3,
       readOnly: false,
@@ -124,11 +125,12 @@ const setupForDatabasename = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: ''
       },
       version: 3,
       readOnly: false,
@@ -169,11 +171,12 @@ const setupForUsername = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: '',
       },
       version: 3,
       readOnly: false,
@@ -213,11 +216,12 @@ const setupForPassword = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: 'Demo Password',
+        OauthToken: ''
       },
       version: 3,
       readOnly: false,
@@ -257,11 +261,12 @@ const setupForSSLMode = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: ''
       },
       version: 3,
       readOnly: false,
@@ -339,11 +344,12 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: ''
       },
       version: 3,
       readOnly: false,
@@ -384,11 +390,12 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
+
       },
       secureJsonFields: {},
       secureJsonData: {
         password: '',
+        OauthToken: ''
       },
       version: 3,
       readOnly: false,
@@ -429,7 +436,6 @@ const setUpUseBackServer = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-        OauthToken: ''
       },
       secureJsonFields: {},
       secureJsonData: {
