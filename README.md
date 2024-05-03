@@ -36,18 +36,20 @@ After you add the Vertica data source, you need to configure it by entering the 
 | `Password`  | Database user password. |
 | `SSL Mode`  | Determines whether or with what priority a secure SSL TCP/IP connection will be negotiated with the server. When SSL Mode is disabled, SSL Method and Auth Details are not visible. |
 | `Use Backup Server Node`  | To enable backup hosts on server side. |
-| ` Backup Server Node List`  | Comma delimited list of backup host:port for the client to try to connect if the primary host is unreachable. |
+| `Backup Server Node List`  | Comma delimited list of backup host:port for the client to try to connect if the primary host is unreachable. |
+| `Use Vertica OAuth` | To enable OAuth connection to Vertica database. |
+| `OAuth Access Token` | Use OAuth Access Token for authentication to Vertica database. |
 | `Use Connection Load Balancing`  | To enable connection load balancing on the client-side.|
 | `Max Open Connections` |  Maximum number of connections a user can open concurrently on individual nodes or across the database cluster.|
 | `Max Ideal Connections` | Maximum number of idle connections. This number should be less than or equal to Max Open Connections. |
 | `Max Connection Ideal Time` | Idle time after which the session times out. |
 
-**Note:** To enable load balancing, the server side needs to be configured. For more information, see [Connection Load Balancing](https://www.vertica.com/docs/10.1.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/LoadBalancing/ConnectionLoadBalancing.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7CConnection%20Load%20Balancing%7C_____0) in the Vertica documentation.
+**Note:** 
+1. The current OAuth setup only uses access token for authentication as per vertica-sql-go driver. Consider altering your token expiration time to extend token validity.
+2. To enable load balancing, the server side needs to be configured. For more information, see [Connection Load Balancing](https://www.vertica.com/docs/10.1.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/LoadBalancing/ConnectionLoadBalancing.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7CConnection%20Load%20Balancing%7C_____0) in the Vertica documentation.
 For more information on managing client connections, see [Managing Client Connections](https://www.vertica.com/docs/11.0.x/HTML/Content/Authoring/AdministratorsGuide/ManagingClientConnections/OverviewClientConnections.htm?tocpath=Administrator%27s%20Guide%7CManaging%20Client%20Connections%7C_____0).
 
 ![Data Source Config](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/datasource-config.png)
-
-
 
 ## User Permission 
 When you add the data source, the database user you specify must only be granted SELECT permissions on the specified database and tables you want to query. Grafana does not validate that the query is safe. The query could include any SQL statement. For example, statements like `DELETE FROM user;`  and  `DROP TABLE user;`  will be executed. We **highly** recommend you create a specific Vertica user with restricted permissions.
@@ -158,19 +160,19 @@ For the plugin to load, add the following configuration parameter to the  `/etc/
 ![Allow Unsigned Plugin](https://raw.githubusercontent.com/vertica/vertica-grafana-datasource/main/src/img/allow-unsigned-plugin.png)
 
 ### Prerequisites 
-* [Grafana](https://grafana.com/docs/grafana/latest/installation/) (version 7.0.0 or higher)
+* [Grafana](https://grafana.com/docs/grafana/latest/installation/) (version 10.x)
 * [Vertica](https://www.vertica.com/download/vertica/) 
-* [NodeJS](https://nodejs.org/en/download/package-manager/) (version 14 or higher) (Package Manager: [yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable)) 
+* [NodeJS](https://nodejs.org/en/download/package-manager/) (version 18 or higher) (Package Manager: [yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable)) 
 * [Go](https://golang.org/doc/install) 
 * [Mage](https://magefile.org/)
 
 **Note:** This plugin is tested in **Linux(Ubuntu)** with the following  versions:
 
-* Grafana - v9.3.6
-* NodeJS - v16.10.0
+* Grafana - v10.1.2
+* NodeJS - v18.18.0
 * Yarn - v1.22.19
-* Npm - v7.24.0
-* Go - v1.20.1
+* Npm - v9.8.1
+* Go - v1.21.9
  
 ### Installing Vertica Grafana Data Source Plugin 
 **Note:** If you have the older version of the Vertica Grafana plugin, remove it using grafana-cli:
