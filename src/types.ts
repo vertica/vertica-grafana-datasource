@@ -72,6 +72,7 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
  */
 export interface MySecureJsonData {
   password?: string;
+  OauthToken?: string;
 }
 
 export const FIELD_TYPES = {

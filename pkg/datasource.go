@@ -103,14 +103,14 @@ type configArgs struct {
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
-func (config *configArgs) ConnectionURL(password string) string {
+func (config *configArgs) ConnectionURL(password string , OauthToken string) string {
 	var tlsmode string
 	if config.TLSMode == "" {
 		tlsmode = "none"
 	} else {
 		tlsmode = config.TLSMode
 	}
-	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s&oauth_access_token=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode, config.OauthToken)
+	return fmt.Sprintf("vertica://%s:%s@%s/%s?use_prepared_statements=%d&connection_load_balance=%d&tlsmode=%s&backup_server_node=%s&oauth_access_token=%s", config.User, password, config.URL, config.Database, boolTouint8(config.UsePreparedStmts), boolTouint8(config.UseLoadBalancer), tlsmode, config.BackupServerNode, OauthToken)
 }
 
 type queryModel struct {
@@ -192,12 +192,13 @@ func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanc
 // func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
 	secret := settings.DecryptedSecureJSONData["password"]
+	OauthToken := settings.DecryptedSecureJSONData["OauthToken"]
 
 	err := json.Unmarshal(settings.JSONData, &config)
 	if err != nil {
 		return nil, err
 	}
-	connStr := config.ConnectionURL(secret)
+	connStr := config.ConnectionURL(secret,OauthToken)
 	db, err := sql.Open("vertica", connStr)
 	if err != nil {
 		return nil, err
