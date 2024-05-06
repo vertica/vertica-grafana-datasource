@@ -541,7 +541,7 @@ exports[`Render Render should render component with value in Use Backup Server f
       </div>
     </div>
     <div className="gf-form max-width-30">
-      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value="" placeholder="OAuth Access Token" disabled={true} />
+      <FormField label="OAuth Access Token" labelWidth={15} inputWidth={21} onChange={[Function: onOauthTokenChange]} value={[undefined]} placeholder="OAuth Access Token" disabled={true} />
     </div>
   </div>
   <div className="gf-form-group">
