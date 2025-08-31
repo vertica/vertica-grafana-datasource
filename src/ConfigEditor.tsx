@@ -1,5 +1,5 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
+import { DataSourceHttpSettings, PrivateDataSourceConnection, InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
@@ -7,6 +7,7 @@ import { SSL_MODE_OPTIONS } from './constants';
 const { SecretFormField, FormField } = LegacyForms;
 
 export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> { }
+interface Props extends DataSourcePluginOptionsEditorProps<VerticaDataSourceOptions, VerticaSecureJsonData> {}
 
 interface State { }
 
@@ -184,7 +185,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
 
-  render() {
+  render({ options, onOptionsChange }) {
     const { options } = this.props;
     const { jsonData, secureJsonFields } = options;
     const selectedTLSMode = jsonData.tlsmode
