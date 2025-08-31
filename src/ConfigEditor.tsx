@@ -383,6 +383,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </p>
           </InfoBox>
         </div>
+        <div className="gf-form-group">
+          <PrivateDataSourceConnection value={jsonData.privateDataSourceConnection} onChange={conn => onOptionsChange({ ...options, jsonData: { ...jsonData, privateDataSourceConnection: conn } })}/>
+        </div>
       </>
     );
   }
