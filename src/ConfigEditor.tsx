@@ -1,5 +1,5 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { DataSourceHttpSettings, PrivateDataSourceConnection, InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
+import { PrivateDataSourceConnection, InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
@@ -383,9 +383,19 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </p>
           </InfoBox>
         </div>
-        <div className="gf-form-group">
-          <PrivateDataSourceConnection value={jsonData.privateDataSourceConnection} onChange={conn => onOptionsChange({ ...options, jsonData: { ...jsonData, privateDataSourceConnection: conn } })}/>
-        </div>
+       <div className="gf-form-group">
+  <h3 className="page-heading">Private Data Source Connect (PDC)</h3>
+  <PrivateDataSourceConnection
+    value={jsonData.privateDataSourceConnection}
+    onChange={(val) =>
+      this.props.onOptionsChange({
+        ...options,
+        jsonData: { ...jsonData, privateDataSourceConnection: val },
+      })
+    }
+  />
+</div>
+
       </>
     );
   }
