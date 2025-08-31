@@ -7,7 +7,6 @@ import { SSL_MODE_OPTIONS } from './constants';
 const { SecretFormField, FormField } = LegacyForms;
 
 export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> { }
-interface Props extends DataSourcePluginOptionsEditorProps<VerticaDataSourceOptions, VerticaSecureJsonData> {}
 
 interface State { }
 
@@ -185,8 +184,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
 
-  render({ options, onOptionsChange }) {
-    const { options } = this.props;
+  render() {
+    const { options, onOptionsChange } = this.props;
     const { jsonData, secureJsonFields } = options;
     const selectedTLSMode = jsonData.tlsmode
       ? SSL_MODE_OPTIONS.filter((mode) => mode.value === jsonData.tlsmode)[0]
