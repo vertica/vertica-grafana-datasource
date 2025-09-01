@@ -1,8 +1,8 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
+import { PrivateDataSourceConnection } from '@grafana/runtime';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
-import { PrivateDataSourceConnection } from @grafana/runtime
 import { SSL_MODE_OPTIONS } from './constants';
 
 const { SecretFormField, FormField } = LegacyForms;
