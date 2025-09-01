@@ -21,7 +21,7 @@
     "maxOpenConnections": 10,
     "maxIdealConnections": 5,
     "maxConnectionIdealTime": 10,
-    "privateDataSourceConnection": {}      // ✅ PDC binding injected by Grafana Cloud
+    "privateDataSourceConnection": {}    
   },
   "secureJsonData": {
     "password": "",
