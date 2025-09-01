@@ -1,7 +1,6 @@
 import React, { ChangeEvent, PureComponent } from 'react';
 import { InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
-import { PrivateDataSourceConnection } from '@grafana/runtime';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
 
@@ -186,7 +185,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   render() {
-    const { options, onOptionsChange } = this.props;
+    const { options } = this.props;
     const { jsonData, secureJsonFields } = options;
     const selectedTLSMode = jsonData.tlsmode
       ? SSL_MODE_OPTIONS.filter((mode) => mode.value === jsonData.tlsmode)[0]
@@ -385,16 +384,14 @@ export class ConfigEditor extends PureComponent<Props, State> {
           </InfoBox>
         </div>
        <div className="gf-form-group">
-  <h3 className="page-heading">Private Data Source Connect (PDC)</h3>
-  <PrivateDataSourceConnection
-    value={jsonData.privateDataSourceConnection}
-    onChange={(val) =>
-      this.props.onOptionsChange({
-        ...options,
-        jsonData: { ...jsonData, privateDataSourceConnection: val },
-      })
-    }
-  />
+  <h3 className="page-heading">Private Connection</h3>
+  <p>
+    If configured, this datasource will connect through a{" "}
+    <b>Grafana Private Data Source Connection</b> instead of using the host/user/password above.
+  </p>
+  {options.jsonData.privateDataSourceConnection?.id && (
+    <p><b>Selected Connection ID:</b> {options.jsonData.privateDataSourceConnection.id}</p>
+  )}
 </div>
 
       </>
