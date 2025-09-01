@@ -43,6 +43,7 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	_ "github.com/vertica/vertica-sql-go"
 )
 
@@ -207,13 +208,23 @@ func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanc
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
-	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", settings.Name))
+
+	// 🔹 Step 3: Enable PDC-aware HTTP client
+	provider := httpclient.NewProvider()
+	httpClient, err := provider.New(settings)
+	if err != nil {
+		log.DefaultLogger.Warn("falling back to default http.Client (PDC unavailable)", "err", err)
+		httpClient = &http.Client{}
+	}
+
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: datasource %s created with PDC", settings.Name))
+
 	return &instanceSettings{
-		httpClient: &http.Client{},
+		httpClient: httpClient,
 		Db:         db,
 		Name:       settings.Name,
 	}, nil
-
+	
 }
 
 
