@@ -1,7 +1,6 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { SecureSocksProxySettings ,InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
+import { DataSourceHttpSettings, SecureSocksProxySettings ,InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
-import { DataSourceHttpSettings } from '@grafana/runtime';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
 
@@ -186,7 +185,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
   };
 
   render() {
-    const { options } = this.props;
+    const { options, onOptionsChange } = this.props;
     const { jsonData, secureJsonFields } = options;
     const selectedTLSMode = jsonData.tlsmode
       ? SSL_MODE_OPTIONS.filter((mode) => mode.value === jsonData.tlsmode)[0]
