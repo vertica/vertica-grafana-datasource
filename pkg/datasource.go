@@ -101,6 +101,9 @@ type configArgs struct {
 	MaxOpenConnections     int    `json:"maxOpenConnections"`
 	MaxIdealConnections    int    `json:"maxIdealConnections"`
 	MaxConnectionIdealTime int    `json:"maxConnectionIdealTime"`
+	PrivateDataSourceConnection *struct {
+        ID string `json:"id"`
+    } `json:"privateDataSourceConnection"`
 	
 }
 
