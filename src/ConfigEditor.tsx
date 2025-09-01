@@ -11,6 +11,14 @@ export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOp
 interface State { }
 
 export class ConfigEditor extends PureComponent<Props, State> {
+  onEnablePDCChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      enableSecureSocksProxy: event.target.checked,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -194,13 +202,17 @@ export class ConfigEditor extends PureComponent<Props, State> {
 
     return (
       <>
-        <h3 className="page-heading">Vertica Connection</h3>
-        <div className="gf-form-group">
-          <PrivateDataSourceConnectionConfig
-            options={options}
-            onOptionsChange={this.props.onOptionsChange}
+          <div className="gf-form-group">
+          <InlineLabel width={20} tooltip="Route connection over Grafana Cloud’s secure SOCKS5 proxy (PDC)">
+            Enable Secure SOCKS Proxy
+          </InlineLabel>
+          <Switch
+            value={!!jsonData.enableSecureSocksProxy}
+            onChange={this.onEnablePDCChange}
           />
         </div>
+        <h3 className="page-heading">Vertica Connection</h3>
+       
         <div className="gf-form-group">
           <div className="gf-form max-width-30">
             <FormField
