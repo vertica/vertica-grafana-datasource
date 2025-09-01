@@ -35,7 +35,7 @@ const setup = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
-
+        enableSecureSocksProxy: false,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -80,6 +80,7 @@ const setupForHostname = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -125,6 +126,7 @@ const setupForDatabasename = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
 
       },
       secureJsonFields: {},
@@ -171,6 +173,7 @@ const setupForUsername = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
 
       },
       secureJsonFields: {},
@@ -216,6 +219,7 @@ const setupForPassword = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
 
       },
       secureJsonFields: {},
@@ -261,6 +265,7 @@ const setupForSSLMode = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
 
       },
       secureJsonFields: {},
@@ -344,6 +349,7 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
 
       },
       secureJsonFields: {},
@@ -390,6 +396,7 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
 
       },
       secureJsonFields: {},
@@ -436,6 +443,7 @@ const setUpUseBackServer = (propOverrides?: object) => {
         useBackupserver: false,
         backupServerNode: '',
         useOauth: false,
+        enableSecureSocksProxy: false,
       },
       secureJsonFields: {},
       secureJsonData: {
