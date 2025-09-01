@@ -190,7 +190,7 @@ type instanceSettings struct {
 }
 
 // Create new datasource.
-func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func newDataSourceInstance(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 // func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
 	secret := settings.DecryptedSecureJSONData["password"]
@@ -212,7 +212,7 @@ func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanc
 
 	// 🔹 Step 3: Enable PDC-aware HTTP client
 	provider := httpclient.NewProvider()
-	opts, err := settings.HTTPClientOptions()
+	opts, err := settings.HTTPClientOptions(ctx)
 	if err != nil {
         return nil, err
     }
