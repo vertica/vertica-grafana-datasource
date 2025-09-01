@@ -1,6 +1,7 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
+import { SecureSocksProxySettings ,InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
+import { DataSourceHttpSettings } from '@grafana/runtime';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
 
@@ -383,16 +384,18 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </p>
           </InfoBox>
         </div>
-       <div className="gf-form-group">
-  <h3 className="page-heading">Private Connection</h3>
-  <p>
-    If configured, this datasource will connect through a{" "}
-    <b>Grafana Private Data Source Connection</b> instead of using the host/user/password above.
-  </p>
-  {options.jsonData.privateDataSourceConnection?.id && (
-    <p><b>Selected Connection ID:</b> {options.jsonData.privateDataSourceConnection.id}</p>
-  )}
-</div>
+         <DataSourceHttpSettings
+        defaultUrl="http://localhost:5433"
+        dataSourceConfig={options}
+        onChange={onOptionsChange}
+      />
+
+      {/* This renders the Secure Socks Proxy toggle */}
+      <SecureSocksProxySettings
+        options={options}
+        onOptionsChange={onOptionsChange}
+      />
+   
 
       </>
     );
