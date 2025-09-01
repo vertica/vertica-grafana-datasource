@@ -101,7 +101,7 @@ type configArgs struct {
 	MaxOpenConnections     int    `json:"maxOpenConnections"`
 	MaxIdealConnections    int    `json:"maxIdealConnections"`
 	MaxConnectionIdealTime int    `json:"maxConnectionIdealTime"`
-	PrivateDataSourceConnection *backend.PrivateDataSourceRef `json:"privateDataSourceConnection,omitempty"`
+	
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
@@ -212,7 +212,12 @@ func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanc
 
 	// 🔹 Step 3: Enable PDC-aware HTTP client
 	provider := httpclient.NewProvider()
-	httpClient, err := provider.New(settings)
+	opts, err := settings.HTTPClientOptions()
+	if err != nil {
+        return nil, err
+    }
+
+	httpClient, err := provider.New(opts)
 	if err != nil {
 		log.DefaultLogger.Warn("falling back to default http.Client (PDC unavailable)", "err", err)
 		httpClient = &http.Client{}
