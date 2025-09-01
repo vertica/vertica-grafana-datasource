@@ -9,6 +9,28 @@
   "pdc": true,
   "executable": "gpx_vertica-grafana-plugin",
   "alerting" : true,
+  "jsonData": {
+    "url": "",
+    "database": "",
+    "user": "",
+    "tlsmode": "none",
+    "useBackupserver": false,
+    "backupServerNode": "",
+    "usePreparedStatements": false,
+    "useLoadBalancer": false,
+    "maxOpenConnections": 10,
+    "maxIdealConnections": 5,
+    "maxConnectionIdealTime": 10,
+    "privateDataSourceConnection": {}      // ✅ PDC binding injected by Grafana Cloud
+  },
+  "secureJsonData": {
+    "password": "",
+    "OauthToken": ""
+  },
+ "secureJsonFields": {
+    "password": true,
+    "OauthToken": true
+  },
   "info": {
     "description": "Data source for Vertica and compatible databases",
     "author": {
