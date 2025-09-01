@@ -101,6 +101,7 @@ type configArgs struct {
 	MaxOpenConnections     int    `json:"maxOpenConnections"`
 	MaxIdealConnections    int    `json:"maxIdealConnections"`
 	MaxConnectionIdealTime int    `json:"maxConnectionIdealTime"`
+	PrivateDataSourceConnection *backend.PrivateDataSourceRef `json:"privateDataSourceConnection,omitempty"`
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
