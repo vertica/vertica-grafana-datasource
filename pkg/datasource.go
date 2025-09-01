@@ -104,6 +104,7 @@ type configArgs struct {
 	PrivateDataSourceConnection *struct {
         ID string `json:"id"`
     } `json:"privateDataSourceConnection"`
+	EnableSecureSocksProxy bool `json:"enableSecureSocksProxy,omitempty"`
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
