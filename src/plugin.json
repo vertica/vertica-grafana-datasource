@@ -6,7 +6,7 @@
   "category": "sql",
   "metrics": true,
   "backend": true,
-  "pdc": true
+  "pdc": true,
   "executable": "gpx_vertica-grafana-plugin",
   "alerting" : true,
   "info": {
