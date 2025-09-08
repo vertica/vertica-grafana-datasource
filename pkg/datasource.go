@@ -37,14 +37,15 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"net"
 	"net/http"
 	"time"
+	"golang.org/x/net/proxy"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
-	_ "github.com/vertica/vertica-sql-go"
+	vertica "github.com/vertica/vertica-sql-go"
 )
 
 func newDatasource() datasource.ServeOpts {
@@ -61,8 +62,29 @@ func newDatasource() datasource.ServeOpts {
 	}
 }
 
+type dialContextWrapper struct {
+	proxy.Dialer
+}
 
+func (d *dialContextWrapper) DialContext(ctx context.Context, network, addr string) (net.Conn, error) {
+	type result struct {
+		conn net.Conn
+		err  error
+	}
+	ch := make(chan result, 1)
 
+	go func() {
+		c, err := d.Dialer.Dial(network, addr)
+		ch <- result{c, err}
+	}()
+
+	select {
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	case res := <-ch:
+		return res.conn, res.err
+	}
+}
 
 // VerticaDatasource is an datasource used to create
 // new datasource plugins with a backend.
@@ -101,10 +123,7 @@ type configArgs struct {
 	MaxOpenConnections     int    `json:"maxOpenConnections"`
 	MaxIdealConnections    int    `json:"maxIdealConnections"`
 	MaxConnectionIdealTime int    `json:"maxConnectionIdealTime"`
-	PrivateDataSourceConnection *struct {
-        ID string `json:"id"`
-    } `json:"privateDataSourceConnection"`
-	EnableSecureSocksProxy bool `json:"enableSecureSocksProxy,omitempty"`
+	EnableSecureSocksProxy bool   `json:"enableSecureSocksProxy,omitempty"`
 }
 
 // ConnectionURL , generates a vertica connection URL for configArgs. Requires password as input.
@@ -193,51 +212,56 @@ type instanceSettings struct {
 }
 
 // Create new datasource.
-func newDataSourceInstance(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 // func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
 	secret := settings.DecryptedSecureJSONData["password"]
 	OauthToken := settings.DecryptedSecureJSONData["OauthToken"]
-
+	
 	err := json.Unmarshal(settings.JSONData, &config)
 	if err != nil {
 		return nil, err
 	}
+    ctx := context.Background()
+	var db *sql.DB
+	proxyClient, err := settings.ProxyClient(ctx)
+		if err != nil {
+			return nil, err
+		}
+
 	connStr := config.ConnectionURL(secret,OauthToken)
-	db, err := sql.Open("vertica", connStr)
+	
+
+	if proxyClient.SecureSocksProxyEnabled() {
+		pdialer, err := proxyClient.NewSecureSocksProxyContextDialer()
+		if err != nil {
+			return nil, err
+		}
+	dialer := &dialContextWrapper{Dialer: pdialer}
+	connector, err := vertica.NewConnector(connStr,dialer.DialContext)
 	if err != nil {
 		return nil, err
 	}
-
+	db = sql.OpenDB(connector)
+		
+	} else {
+		db, err = sql.Open("vertica", connStr)
+		if err != nil {
+			return nil, fmt.Errorf("failed to open Vertica connection: %w", err)
+		}
+	} 
+	
 	db.SetMaxOpenConns(config.MaxOpenConnections)
 	db.SetMaxIdleConns(config.MaxIdealConnections)
 	db.SetConnMaxIdleTime(time.Minute * time.Duration(config.MaxConnectionIdealTime))
-	
-	opts, err := settings.HTTPClientOptions(ctx)
-	if err != nil {
-		return nil, fmt.Errorf("http client options: %w", err)
-	}
-	
-	provider := httpclient.NewProvider()
-	httpClient, err := provider.New(opts)
-	if err != nil {
-		log.DefaultLogger.Warn("Falling back to default http.Client (PDC unavailable)", "err", err)
-		httpClient = &http.Client{}
-	}
-
-	if config.PrivateDataSourceConnection != nil {
-		log.DefaultLogger.Info("Using PDC", "id", config.PrivateDataSourceConnection.ID, "datasource", settings.Name)
-	}
-
+	log.DefaultLogger.Info(fmt.Sprintf("newDataSourceInstance: new instance of datasource created: %+v", settings.Name))
 	return &instanceSettings{
-		httpClient: httpClient,
+		httpClient: &http.Client{},
 		Db:         db,
 		Name:       settings.Name,
 	}, nil
 	
 }
-
-
 
 // CheckHealth handles health checks sent from Grafana to the plugin.
 // The main use case for these health checks is the test button on the

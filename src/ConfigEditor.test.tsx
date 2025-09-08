@@ -36,6 +36,7 @@ const setup = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -81,6 +82,7 @@ const setupForHostname = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -127,7 +129,7 @@ const setupForDatabasename = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
-
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -174,7 +176,7 @@ const setupForUsername = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
-
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -220,7 +222,7 @@ const setupForPassword = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
-
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -266,7 +268,7 @@ const setupForSSLMode = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
-
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -350,7 +352,7 @@ const setupForVerticaConnections = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
-
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -397,7 +399,7 @@ const setUpBackUpServerNode = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
-
+        
       },
       secureJsonFields: {},
       secureJsonData: {
@@ -444,6 +446,7 @@ const setUpUseBackServer = (propOverrides?: object) => {
         backupServerNode: '',
         useOauth: false,
         enableSecureSocksProxy: false,
+        
       },
       secureJsonFields: {},
       secureJsonData: {
