@@ -1,6 +1,6 @@
 {
   "name": "vertica-grafana-plugin",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Data source for Vertica and compatible databases",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",

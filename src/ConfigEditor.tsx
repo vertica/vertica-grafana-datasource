@@ -1,8 +1,10 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider } from '@grafana/ui';
-import { DataSourcePluginOptionsEditorProps, SelectableValue } from '@grafana/data';
+import { gte } from 'semver';
+import { InlineField, InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider, } from '@grafana/ui';
+import { DataSourcePluginOptionsEditorProps, FeatureToggles, SelectableValue } from '@grafana/data';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
+import { config } from '@grafana/runtime';
 
 const { SecretFormField, FormField } = LegacyForms;
 
@@ -11,6 +13,14 @@ export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOp
 interface State { }
 
 export class ConfigEditor extends PureComponent<Props, State> {
+  onEnablePDCChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      enableSecureSocksProxy: event.target.checked,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
   onHostChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -194,7 +204,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
 
     return (
       <>
+          
         <h3 className="page-heading">Vertica Connection</h3>
+       
         <div className="gf-form-group">
           <div className="gf-form max-width-30">
             <FormField
@@ -383,6 +395,39 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </p>
           </InfoBox>
         </div>
+        {config.featureToggles['secureSocksDSProxyEnabled' as keyof FeatureToggles] &&
+        gte(config.buildInfo.version, '10.4.8') && (
+          <>
+          <div className="gf-form-group">
+            <InlineField
+              label="Secure Socks Proxy"
+              tooltip={
+                <>
+                  Enable proxying the data source connection through the secure SOCKS proxy to a
+                  different network.
+                  See{' '}
+                  <a
+                    href="https://grafana.com/docs/grafana/next/setup-grafana/configure-grafana/proxy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Configure a data source connection proxy.
+                  </a>
+                </>
+              }
+            >
+            <div className="gf-form-switch">
+            <Switch
+              value={!!jsonData.enableSecureSocksProxy}
+              onChange={this.onEnablePDCChange}
+            />
+          </div>
+          </InlineField>
+          </div>
+          </>
+        )}
+   
+
       </>
     );
   }

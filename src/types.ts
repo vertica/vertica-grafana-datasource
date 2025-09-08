@@ -63,6 +63,9 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
   backupServerNode: string;
 
   useOauth: boolean;
+
+  enableSecureSocksProxy?: boolean;
+
 }
 
 /**

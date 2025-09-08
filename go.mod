@@ -9,7 +9,8 @@ require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/grafana/grafana-plugin-sdk-go v0.250.1
 	github.com/stretchr/testify v1.9.0
-	github.com/vertica/vertica-sql-go v1.3.3
+	github.com/vertica/vertica-sql-go v1.3.4-0.20250904102752-dcec3142b479
+	golang.org/x/net v0.29.0
 )
 
 require (
@@ -92,7 +93,6 @@ require (
 	go.opentelemetry.io/proto/otlp v1.3.1 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
