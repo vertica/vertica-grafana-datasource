@@ -400,7 +400,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
           <>
           <div className="gf-form-group">
             <InlineField
-              label="Secure SOCKS Proxy"
+              label="Secure Socks Proxy"
               tooltip={
                 <>
                   Enable proxying the data source connection through the secure SOCKS proxy to a
