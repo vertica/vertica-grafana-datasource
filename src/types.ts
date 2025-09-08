@@ -64,13 +64,8 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 
   useOauth: boolean;
 
-  //privateDataSourceConnection?: {
-  //  id: string;
-  //};
-
   enableSecureSocksProxy?: boolean;
 
-//  socksProxyAddress: string;
 }
 
 /**
