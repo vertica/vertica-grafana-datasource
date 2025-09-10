@@ -418,7 +418,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
             >
             <div className="gf-form-switch">
             <Switch
-              value={!!jsonData.enableSecureSocksProxy}
+              value={jsonData.enableSecureSocksProxy || false}
               onChange={this.onEnablePDCChange}
             />
           </div>

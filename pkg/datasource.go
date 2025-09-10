@@ -212,7 +212,7 @@ type instanceSettings struct {
 }
 
 // Create new datasource.
-func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func newDataSourceInstance(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 // func newDataSourceInstance(setting backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var config configArgs
 	secret := settings.DecryptedSecureJSONData["password"]
@@ -222,7 +222,7 @@ func newDataSourceInstance(_ context.Context, settings backend.DataSourceInstanc
 	if err != nil {
 		return nil, err
 	}
-    ctx := context.Background()
+   
 	var db *sql.DB
 	proxyClient, err := settings.ProxyClient(ctx)
 		if err != nil {
