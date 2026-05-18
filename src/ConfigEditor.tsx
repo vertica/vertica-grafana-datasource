@@ -1,18 +1,17 @@
-import React, { ChangeEvent, PureComponent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { gte } from 'semver';
-import { InlineField, InfoBox, InlineLabel, Switch, LegacyForms, Select, Field, Slider, } from '@grafana/ui';
+import { InlineField, InfoBox, InlineLabel, Switch, Combobox, Field, Slider, Input, SecretInput } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps, FeatureToggles, SelectableValue } from '@grafana/data';
 import { MyDataSourceOptions, MySecureJsonData, FIELD_TYPES } from './types';
 import { SSL_MODE_OPTIONS } from './constants';
 import { config } from '@grafana/runtime';
 
-const { SecretFormField, FormField } = LegacyForms;
 
 export interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> { }
 
 interface State { }
 
-export class ConfigEditor extends PureComponent<Props, State> {
+export class ConfigEditor extends React.PureComponent<Props, State> {
   onEnablePDCChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -196,7 +195,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
 
   render() {
     const { options } = this.props;
-    const { jsonData, secureJsonFields } = options;
+    const { jsonData } = options;
     const selectedTLSMode = jsonData.tlsmode
       ? SSL_MODE_OPTIONS.filter((mode) => mode.value === jsonData.tlsmode)[0]
       : SSL_MODE_OPTIONS[0];
@@ -209,55 +208,61 @@ export class ConfigEditor extends PureComponent<Props, State> {
        
         <div className="gf-form-group">
           <div className="gf-form max-width-30">
-            <FormField
+            <InlineField
               required
               label="Host"
-              labelWidth={7}
-              inputWidth={21}
-              onChange={this.onHostChange}
-              value={options.url || jsonData.url || ''}
-              placeholder="Ipv4/[Ipv6]:Port"
-              onBlur={() => this.onBlurField(FIELD_TYPES.URL)}
-            />
+            >
+              <Input
+                onChange={this.onHostChange}
+                value={options.url || jsonData.url || ''}
+                placeholder="Ipv4/[Ipv6]:Port"
+                onBlur={() => this.onBlurField(FIELD_TYPES.URL)}
+                required
+              />
+            </InlineField>
           </div>
 
           <div className="gf-form max-width-30">
-            <FormField
+            <InlineField
               required
               label="Database"
-              labelWidth={7}
-              inputWidth={21}
-              onChange={this.onDBnameChange}
-              value={jsonData.database || ''}
-              placeholder="database name"
-              onBlur={() => this.onBlurField(FIELD_TYPES.DATABASE)}
-            />
+            >
+              <Input
+                onChange={this.onDBnameChange}
+                value={jsonData.database || ''}
+                placeholder="database name"
+                onBlur={() => this.onBlurField(FIELD_TYPES.DATABASE)}
+                required
+              />
+            </InlineField>
           </div>
           <div className="gf-form-inline">
             <div className="gf-form">
-              <FormField
+              <InlineField
                 label="User"
-                labelWidth={7}
-                inputWidth={6}
-                onChange={this.onUserChange}
-                value={jsonData.user || ''}
-                placeholder="user"
-                onBlur={() => this.onBlurField(FIELD_TYPES.USER)}
-                disabled={jsonData.useOauth}
-              />
+              >
+                <Input
+                  onChange={this.onUserChange}
+                  value={jsonData.user || ''}
+                  placeholder="user"
+                  onBlur={() => this.onBlurField(FIELD_TYPES.USER)}
+                  disabled={jsonData.useOauth}
+                />
+              </InlineField>
             </div>
             <div className="gf-form">
-              <SecretFormField
-                isConfigured={(secureJsonFields && secureJsonFields.password) as boolean}
-                value={secureJsonData.password || ''}
+              <InlineField
                 label="Password"
-                placeholder="password"
-                labelWidth={7}
-                inputWidth={6}
-                onReset={this.onResetPassword}
-                onChange={this.onPasswordChange}
-                disabled={jsonData.useOauth}
-              />
+              >
+                <SecretInput
+                  value={secureJsonData.password || ''}
+                  placeholder="password"
+                  onChange={this.onPasswordChange}
+                  disabled={jsonData.useOauth}
+                    isConfigured={(options.secureJsonFields?.password || false) as boolean}
+                    onReset={this.onResetPassword}
+                />
+              </InlineField>
             </div>
           </div>
           <div className="gf-form">
@@ -268,10 +273,9 @@ export class ConfigEditor extends PureComponent<Props, State> {
               SSL Mode
             </InlineLabel>
 
-            <Select
+            <Combobox
               width={42}
-              defaultValue="none"
-              isSearchable={false}
+              isClearable={false}
               options={SSL_MODE_OPTIONS}
               onChange={this.onModeChange}
               value={selectedTLSMode}
@@ -287,16 +291,16 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </div>
           </div>
           <div className="gf-form max-width-30">
-            <FormField
+            <InlineField
               label="Backup Server Node List"
-              labelWidth={15}
-              inputWidth={21}
-              onChange={this.onBackServerNodeChange}
-              value={jsonData.backupServerNode}
-              placeholder="host1:port,host2:port"
-              disabled={!jsonData.useBackupserver}
-            // onBlur={() => this.onBlurField(FIELD_TYPES.BACKUPSERVERNODE)}
-            />
+            >
+              <Input
+                onChange={this.onBackServerNodeChange}
+                value={jsonData.backupServerNode}
+                placeholder="host1:port,host2:port"
+                disabled={!jsonData.useBackupserver}
+              />
+            </InlineField>
           </div>
           <div className="gf-form">
             <InlineLabel width={30}>Use Vertica OAuth  </InlineLabel>
@@ -308,15 +312,16 @@ export class ConfigEditor extends PureComponent<Props, State> {
             </div>
           </div>
           <div className="gf-form max-width-30">
-            <FormField
+            <InlineField
               label="OAuth Access Token"
-              labelWidth={15}
-              inputWidth={21}
-              onChange={this.onOauthTokenChange}
-              value={secureJsonData.OauthToken}
-              placeholder="OAuth Access Token"
-              disabled={!jsonData.useOauth}
-            />
+            >
+              <Input
+                onChange={this.onOauthTokenChange}
+                value={secureJsonData.OauthToken}
+                placeholder="OAuth Access Token"
+                disabled={!jsonData.useOauth}
+              />
+            </InlineField>
           </div>
         </div>
         <div className="gf-form-group">
@@ -353,6 +358,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
               description="Set max open connections to database, ideal + open connections"
             >
               <Slider
+                inputId="max-open-connections"
                 min={0}
                 max={100}
                 onChange={this.onMaxOpenConnectionsChange}
@@ -366,6 +372,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
               description="Set max ideal connections to database, should be less than or equal to max open connections"
             >
               <Slider
+                inputId="max-ideal-connections"
                 min={0}
                 max={jsonData.maxOpenConnections}
                 onChange={this.onMaxIdealConnectionsChange}
@@ -376,6 +383,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
           <div className="gf-form">
             <Field label="Max Connection Ideal Time" description="Set max ideal connections time, in minutes">
               <Slider
+                inputId="max-connection-ideal-time"
                 min={0}
                 max={999}
                 onChange={this.onMaxConnectionIdealTimeChange}

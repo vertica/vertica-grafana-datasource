@@ -9,7 +9,7 @@ type Props = {
   onAdd: (v: string, t?: any) => void;
 };
 
-export const AddButton = ({ loadOptions, allowCustomValue, onAdd }: Props): JSX.Element => {
+export const AddButton = ({ loadOptions, allowCustomValue, onAdd }: Props): React.JSX.Element => {
   return (
     <SegmentAsync
       Component={

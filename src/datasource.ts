@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 
 import { DataSourceInstanceSettings, DataQueryRequest, DataQueryResponse, MetricFindValue } from '@grafana/data';
@@ -40,7 +39,7 @@ export class DataSource extends DataSourceWithBackend<MyQuery, MyDataSourceOptio
     return super.query(options);
   }
 
-  interpolateVariable(value: any, variable: any) {
+  interpolateVariable(value: string | string[] | number, variable: any){
     if (typeof value === 'string') {
       if (variable.multi || variable.includeAll) {
         return "'" + value.replace(/'/g, `''`) + "'";
@@ -53,7 +52,7 @@ export class DataSource extends DataSourceWithBackend<MyQuery, MyDataSourceOptio
       return value;
     }
 
-    const quotedValues = _.map(value, (v: string) => {
+    const quotedValues = value.map((v: string) => {
       return "'" + v.replace(/'/g, `''`) + "'";
     });
     return quotedValues.join(',');
@@ -68,35 +67,40 @@ export class DataSource extends DataSourceWithBackend<MyQuery, MyDataSourceOptio
       rawSql: getTemplateSrv().replace(query, {}, this.interpolateVariable),
       format: 'table',
     };
-    return super
-      .query({
-        ...optionalOptions, // includes 'range'
-        targets: [interpolatedQuery],
-      })
-      .toPromise()
-      .then((rsp) => {
-        if (rsp.data?.length) {
-          const f = frameToMetricFindValue(rsp.data[0]);
-          // TODO: split this out to a method
-          const frame = rsp.data[0];
-          // frameToMetricFindValue is OK if the lookup is text-only (one column, __text)
-          if (frame.fields.length === 1) {
-            return f;
-          }
-          // if there are two fields, one is __text and the other __value, parse them out so we send the __value instead of the __text
-          const textFieldIdx = frame.fields[0].name === '__text' ? 0 : 1;
-          const valueFieldIdx = textFieldIdx === 0 ? 1 : 0;
-          let metricResponse: MetricFindValue[] = [];
-          let idx: number;
-          for (idx = 0; idx < frame.length; idx++) {
-            metricResponse.push({
-              text: frame.fields[textFieldIdx].values.get(idx),
-              value: frame.fields[valueFieldIdx].values.get(idx),
-            });
-          }
-          return metricResponse;
-        }
-        return [];
-      });
+    return new Promise<MetricFindValue[]>((resolve, reject) => {
+      super
+        .query({
+          ...optionalOptions, // includes 'range'
+          targets: [interpolatedQuery],
+        })
+        .subscribe({
+          next: (rsp: DataQueryResponse) => {
+            if (rsp.data?.length) {
+              const f = frameToMetricFindValue(rsp.data[0]);
+              // TODO: split this out to a method
+              const frame = rsp.data[0];
+              // frameToMetricFindValue is OK if the lookup is text-only (one column, __text)
+              if (frame.fields.length === 1) {
+                resolve(f);
+                return;
+              }
+              // if there are two fields, one is __text and the other __value, parse them out so we send the __value instead of the __text
+              const textFieldIdx = frame.fields[0].name === '__text' ? 0 : 1;
+              const valueFieldIdx = textFieldIdx === 0 ? 1 : 0;
+              const metricResponse: MetricFindValue[] = [];
+              for (let idx = 0; idx < frame.length; idx++) {
+                metricResponse.push({
+                  text: frame.fields[textFieldIdx].values.get(idx),
+                  value: frame.fields[valueFieldIdx].values.get(idx),
+                });
+              }
+              resolve(metricResponse);
+              return;
+            }
+            resolve([]);
+          },
+          error: reject,
+        });
+    });
   }
 }

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { MyQuery } from './types';
 // import { DataSource } from './datasource';
 // import { render } from '@testing-library/react';
@@ -8,8 +8,8 @@ jest.mock('@grafana/ui', () => {
   const SegmentAsync = ({ value }: { value: string }) => {
     return <span>[{value}]</span>;
   };
-  const Select = ({ defaultValue }: { defaultValue: { label: string; value: string } }) => {
-    return <span>{defaultValue.label}</span>;
+  const Combobox = ({ value }: { value: { label: string; value: string } }) => {
+    return <span>{value.label}</span>;
   };
   const InlineLabel = ({ children }: { children: ReactNode }) => {
     return <span>{children}</span>;
@@ -24,7 +24,7 @@ jest.mock('@grafana/ui', () => {
     ...orig,
     SegmentAsync,
     QueryField,
-    Select,
+    Combobox,
     InlineLabel,
     ConfirmModal,
   };

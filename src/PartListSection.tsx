@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme, SegmentAsync, ClickOutsideWrapper } from '@grafana/ui';
+import { SegmentAsync, ClickOutsideWrapper } from '@grafana/ui';
 import { SelectableValue } from '@grafana/data';
 import { toSelectableValue } from './toSelectableValue';
 import { AddButton } from './AddButton';
@@ -32,11 +32,10 @@ const noRightMarginPaddingClass = {
 const RemovableName = ({ name, onRemove }: { name: string; onRemove: () => void }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [position, setPosition] = React.useState({ x: '0px', y: '0px' });
-  const theme = useTheme();
 
   const renderRemovableNameMenuItems = (onClick: () => void) => {
     const normalStyle = {
-      background: `${theme.colors.dropdownBg}`,
+      background: 'var(--dropdown-bg, #1f1f1f)',
       cursor: 'pointer',
       padding: '5px 12px 5px 10px',
       boxShadow: 'rgb(0 0 0) 0px 2px 5px 0px',
@@ -44,7 +43,7 @@ const RemovableName = ({ name, onRemove }: { name: string; onRemove: () => void 
 
     /** we have made use of event listeners like MouseOver and MouseOut to immitate hover functionality since the Grafana <8 does not support use of @emotion/css package to generate classes  */
     const handleMouseOverStyle = (e: any) => {
-      e.target.style.backgroundColor = `${theme.colors.dropdownOptionHoverBg}`;
+      e.target.style.backgroundColor = 'var(--dropdown-option-hover-bg, #2a2f36)';
     };
 
     const handleMouseOutStyle = (e: any) => {
@@ -111,9 +110,7 @@ const noHorizMarginPaddingClass = {
   marginRight: '0',
 };
 
-const Part = ({ name, params, onChange, onRemove }: PartProps): JSX.Element => {
-  const theme = useTheme();
-
+const Part = ({ name, params, onChange, onRemove }: PartProps): React.JSX.Element => {
   const onParamChange = (par: string, i: number) => {
     if (par.trim()) {
       const newParams = params.map((p) => p.value);
@@ -128,8 +125,8 @@ const Part = ({ name, params, onChange, onRemove }: PartProps): JSX.Element => {
         paddingLeft: '0',
         // gf-form-label class makes certain css attributes incorrect
         // for the selectbox-dropdown, so we have to "reset" them back
-        lineHeight: theme.typography.lineHeight.sm,
-        fontSize: theme.typography.size.sm,
+        lineHeight: 'var(--line-height-sm, 20px)',
+        fontSize: 'var(--font-size-sm, 12px)',
         marginBottom: '4px',
       }}
       className="gf-form-label"
@@ -166,7 +163,7 @@ export const PartListSection = ({
   onAddNewPart,
   onRemovePart,
   onChange,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   return (
     <>
       {parts.map((part, index) => (

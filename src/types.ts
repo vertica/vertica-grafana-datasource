@@ -1,4 +1,5 @@
-import { DataQuery, DataSourceJsonData, SelectableValue } from '@grafana/data';
+import { DataQuery } from '@grafana/schema';
+import { DataSourceJsonData, SelectableValue } from '@grafana/data';
 
 export interface QueryPart {
   type: string;
