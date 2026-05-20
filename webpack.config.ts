@@ -8,7 +8,15 @@ const config = async (env: Env): Promise<Configuration> => {
   const baseConfig = await grafanaConfig(env);
 
   return merge(baseConfig, {
-    externals: ['react/jsx-runtime', 'react/jsx-dev-runtime'],
+    externals: [
+      ...(Array.isArray(baseConfig.externals)
+        ? baseConfig.externals
+        : baseConfig.externals
+        ? [baseConfig.externals]
+        : []),
+      'react/jsx-runtime',
+      'react/jsx-dev-runtime',
+    ],
     performance: {
       maxAssetSize: 600000,
       maxEntrypointSize: 600000,
