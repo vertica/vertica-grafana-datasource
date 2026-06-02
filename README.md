@@ -19,11 +19,13 @@ For the plugin to load, add the following configuration parameter to the  `/etc/
 
 **Note:** This plugin is tested in **Linux(Ubuntu)** with the following  versions:
 
-* Grafana - v10.1.2
-* NodeJS - v18.18.0
+* Grafana - v13.0.0
+* NodeJS -  v20.20.2
 * Yarn - v1.22.19
-* Npm - v9.8.1
+* Npm - v10.8.0
 * Go - v1.21.9
+* React - v19
+
  
 ### Installing Vertica Grafana Data Source Plugin 
 **Note:** If you have the older version of the Vertica Grafana plugin, remove it using grafana-cli:

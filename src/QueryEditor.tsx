@@ -27,6 +27,7 @@ const normalizeQuery = (query: MyQuery) => {
   return new QueryModel(queryCopy).target;
 };
 
+
 const noHorizMarginPaddingClass = {
   paddingLeft: '0',
   paddingRight: '0',
@@ -35,6 +36,7 @@ const noHorizMarginPaddingClass = {
 };
 
 export const QueryEditor = (props: Props): React.JSX.Element => {
+  const rawSqlMinWidth = 800;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFirstTime = useRef(true);
   const { datasource, onBlur, onRunQuery, onChange } = props;
@@ -58,6 +60,26 @@ export const QueryEditor = (props: Props): React.JSX.Element => {
     justifyContent: 'right',
   };
 
+  const rawSqlPaneStyle: React.CSSProperties = hide
+    ? {
+        cursor: 'none',
+        display: 'block',
+        width: '100%',
+        minWidth: rawSqlMinWidth,
+        maxWidth: 'none',
+        flexShrink: 0,
+        overflowX: 'auto',
+      }
+    : {
+        cursor: 'pointer',
+        display: 'block',
+        width: '100%',
+        minWidth: rawSqlMinWidth,
+        maxWidth: 'none',
+        flexShrink: 0,
+        overflowX: 'auto',
+      };
+
   // this is to make sure query is executed first time when user opens a new panel or adds new query
   useEffect(() => {
     if (isFirstTime.current) {
@@ -66,6 +88,20 @@ export const QueryEditor = (props: Props): React.JSX.Element => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!rawQuery) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [rawQuery]);
 
   // handler for query field change action
   const onQueryTextChange = (value?: any, override?: boolean) => {
@@ -643,9 +679,9 @@ export const QueryEditor = (props: Props): React.JSX.Element => {
               Run query
             </Button>
           </div>
-          <div className="gf-form" style={hide ? { cursor: 'none' } : { cursor: 'pointer' }}>
+          <div style={rawSqlPaneStyle}>
             <CodeEditor
-              width="100%"
+              width={`max(${rawSqlMinWidth}px, 100%)`}
               height={320}
               language="sql"
               value={queryValue ?? ''}
