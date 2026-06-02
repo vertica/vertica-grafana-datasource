@@ -1,19 +1,14 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { Select, InlineLabel, SegmentAsync, ConfirmModal, useTheme, Button } from '@grafana/ui';
+import { Combobox, InlineLabel, SegmentAsync, ConfirmModal, Button, CodeEditor } from '@grafana/ui';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { MetaQuery } from './meta_query';
 import QueryModel from './query_model';
 import { MyDataSourceOptions, MyQuery } from './types';
 import { getTemplateSrv } from '@grafana/runtime';
-import { cloneDeep } from 'lodash';
-import { PartListSection } from 'PartListSection';
+import cloneDeep from 'lodash/cloneDeep';
+import { PartListSection } from './PartListSection';
 import { SELECT_OPTIONS, WHERE_OPTIONS, FORMAT_OPTIONS } from './constants';
 import { DataSource } from './datasource';
-// added for autoSuggestion in SQL Field
-import AceEditor from 'react-ace';
-import 'ace-builds/src-min-noconflict/ext-language_tools';
-import 'brace/mode/mysql';
-import 'brace/theme/monokai';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
@@ -39,29 +34,19 @@ const noHorizMarginPaddingClass = {
   marginRight: '0',
 };
 
-export const QueryEditor = (props: Props): JSX.Element => {
+export const QueryEditor = (props: Props): React.JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFirstTime = useRef(true);
   const { datasource, onBlur, onRunQuery, onChange } = props;
   const query = normalizeQuery(props.query);
   const { table, timeColumn, metricColumn, format, rawQuery, rawSql, hide, schema } = query;
   const formatData = FORMAT_OPTIONS.filter((formatItem) => formatItem.value === format)[0];
-  const theme = useTheme();
   const divStyle = {
-    color: theme.colors.textBlue,
+    color: 'var(--link-color, #3274d9)',
   };
   const buttonStyle = {
-    color: theme.colors.textBlue,
+    color: 'var(--link-color, #3274d9)',
     marginLeft: '5px',
-  };
-  const editorColor = {
-    backgroundColor: '#111217',
-    color: '#ccccdc',
-    lineHeight: '18px',
-    backgroundImage: 'none',
-    border: '1px solid #ccccdc26',
-    borderRadius: '2px',
-    caretColor: 'red',
   };
   // this is to run query variable declared here with styling
   const [runValue, setRunValue] = useState<string | undefined>('');
@@ -96,11 +81,11 @@ export const QueryEditor = (props: Props): JSX.Element => {
   };
 
   // handler for change action for formats dropdown
-  const onFormatChange = (value: SelectableValue) => {
+  const onFormatChange = (value: SelectableValue<string>) => {
     // if (query.rawQuery) {
     //   onCommonApplyAQuery({ ...query, format: value.value });
     // } else {
-    onApplyQueryChange({ ...query, format: value.value });
+    onApplyQueryChange({ ...query, format: (value.value ?? format) as MyQuery['format'] });
     // }
   };
   const onCommonApplyAQuery = (changedQuery: MyQuery, runQuery = true) => {};
@@ -645,8 +630,8 @@ export const QueryEditor = (props: Props): JSX.Element => {
 
   const selectStyle = {
     paddingLeft: '0',
-    lineHeight: theme.typography.lineHeight.sm,
-    fontSize: theme.typography.size.sm,
+    lineHeight: 'var(--line-height-sm, 20px)',
+    fontSize: 'var(--font-size-sm, 12px)',
   };
 
   return (
@@ -659,30 +644,17 @@ export const QueryEditor = (props: Props): JSX.Element => {
             </Button>
           </div>
           <div className="gf-form" style={hide ? { cursor: 'none' } : { cursor: 'pointer' }}>
-            <AceEditor
-              // id="editorAutoComplete"
-              key={datasource?.name}
-              aria-label="editorAutoComplete"
-              mode="mysql"
-              theme="monokai"
-              name="editorAutoComplete"
-              fontSize={16}
-              style={{ ...editorColor }}
-              minLines={15}
-              maxLines={10}
+            <CodeEditor
               width="100%"
-              showPrintMargin={false}
-              showGutter
-              editorProps={{ $blockScrolling: true }}
-              setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
-              }}
-              value={queryValue}
+              height={320}
+              language="sql"
+              value={queryValue ?? ''}
               readOnly={hide}
-              onBlur={onBlur}
-              onChange={onQueryTextChange}
+              showMiniMap={false}
+              showLineNumbers={true}
+              wordWrap={true}
+              onBlur={() => onBlur?.()}
+              onChange={(value) => onQueryTextChange(value)}
             />
           </div>
 
@@ -690,7 +662,13 @@ export const QueryEditor = (props: Props): JSX.Element => {
             <InlineLabel style={divStyle} width={10}>
               Format as
             </InlineLabel>
-            <Select onChange={onFormatChange} options={FORMAT_OPTIONS} width={16} defaultValue={formatData} />
+            <Combobox
+              onChange={onFormatChange}
+              options={FORMAT_OPTIONS}
+              width={16}
+              isClearable={false}
+              value={formatData}
+            />
             <InlineLabel style={{ ...buttonStyle, cursor: 'pointer' }} width={14} onClick={showConfirmPrompt}>
               {rawQuery ? `Query Builder` : `Edit SQL`}
             </InlineLabel>
@@ -831,7 +809,13 @@ export const QueryEditor = (props: Props): JSX.Element => {
             <InlineLabel style={divStyle} width={10}>
               Format as
             </InlineLabel>
-            <Select onChange={onFormatChange} options={FORMAT_OPTIONS} width={16} defaultValue={formatData} />
+            <Combobox
+              onChange={onFormatChange}
+              options={FORMAT_OPTIONS}
+              width={16}
+              isClearable={false}
+              value={formatData}
+            />
             <InlineLabel style={{ ...buttonStyle, cursor: 'pointer' }} width={10} onClick={showConfirmPrompt}>
               {rawQuery ? `Query Builder` : `Edit SQL`}
             </InlineLabel>

@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
+  "module": "module.js",
   "name": "Vertica",
   "id": "vertica-grafana-datasource",
   "category": "sql",
@@ -42,7 +43,7 @@
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaDependency": ">=10.4.8",
+    "grafanaDependency": ">=13.0.0",
     "plugins": []
   }
 }

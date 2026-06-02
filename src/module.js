@@ -3,9 +3,11 @@ import { DataSource } from './datasource';
 import { ConfigEditor } from './ConfigEditor';
 import { QueryEditor } from './QueryEditor';
 import { QueryEditorHelp } from './QueryEditorHelp';
-import { MyQuery, MyDataSourceOptions } from './types';
 
-export const plugin = new DataSourcePlugin<DataSource, MyQuery, MyDataSourceOptions>(DataSource)
+export const plugin = new DataSourcePlugin(DataSource)
   .setConfigEditor(ConfigEditor)
   .setQueryEditor(QueryEditor)
   .setQueryEditorHelp(QueryEditorHelp);
+
+// Legacy compatibility export expected by some Grafana loader paths.
+export { DataSource as Datasource };

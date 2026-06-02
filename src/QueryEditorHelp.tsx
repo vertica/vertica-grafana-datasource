@@ -1,7 +1,8 @@
 import React from 'react';
 import { QueryEditorHelpProps } from '@grafana/data';
+import { MyQuery } from './types';
 
-interface Props extends QueryEditorHelpProps {}
+interface Props extends QueryEditorHelpProps<MyQuery> {}
 
 export class QueryEditorHelp extends React.PureComponent<Props> {
   render() {

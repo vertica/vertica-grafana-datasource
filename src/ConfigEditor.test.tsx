@@ -1,505 +1,146 @@
-import React from 'react';
-import { shallow, configure } from 'enzyme';
-import { Props, ConfigEditor } from './ConfigEditor';
+import { ChangeEvent } from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
 
-// setup file
-import Adapter from 'enzyme-adapter-react-16';
-configure({ adapter: new Adapter() });
+jest.mock('@grafana/ui', () => ({
+  InlineField: () => null,
+  InfoBox: () => null,
+  InlineLabel: () => null,
+  Switch: () => null,
+  Combobox: () => null,
+  Field: ({ children }: { children?: unknown }) => children ?? null,
+  Slider: () => null,
+  Input: () => null,
+  SecretInput: () => null,
+}));
 
-// setting up the props verifying Rendering of config screen
-const setup = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        url: 'localhost:verticaserver',
-        usePreparedStatements: false,
-        tlsmode: 'none',
-        useLoadBalancer: false,
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: ''
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props verifying Rendering the Config Screen with value in host field
-const setupForHostname = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'none',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: '',
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props for verifying Rendering the Config Screen with value in Database field
-const setupForDatabasename = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        url: 'localhost:verticaserver',
-        usePreparedStatements: false,
-        tlsmode: 'none',
-        useLoadBalancer: false,
-        database: 'Vertica DB',
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: ''
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props for verifying Rendering the Config Screen with value in User field
-const setupForUsername = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        url: 'localhost:verticaserver',
-        usePreparedStatements: false,
-        tlsmode: 'none',
-        useLoadBalancer: false,
-        user: 'Vertica Admin',
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: '',
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props for Verifying Rendering the Config Screen with value in Password field
-const setupForPassword = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'none',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: 'Demo Password',
-        OauthToken: ''
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props verifying Rendering the Config Screen with value in SSL Mode
-const setupForSSLMode = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'server',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        maxOpenConnections: 0,
-        maxIdealConnections: 0,
-        maxConnectionIdealTime: 0,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: ''
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-// setting up the props for veriifying Rendering the Config Screen with use unprepared statements on
-// const setupForUseUnpreparedStatements = (propOverrides?: object) => {
-//   const props: Props = {
-//     options: {
-//       id: 11,
-//       orgId: 1,
-//       name: 'vertica-grafana-plugin',
-//       type: 'datasource',
-//       typeName: 'vertica',
-//       typeLogoUrl: '',
-//       access: 'proxy',
-//       url: '',
-//       password: '',
-//       user: '',
-//       database: '',
-//       basicAuth: false,
-//       basicAuthUser: '',
-//       basicAuthPassword: '',
-//       withCredentials: false,
-//       isDefault: false,
-//       jsonData: {
-//         url: 'localhost:verticaserver',
-//         usePreparedStatements: true,
-//         tlsmode: 'none',
-//         useLoadBalancer: false,
-//       },
-//       secureJsonFields: {},
-//       secureJsonData: {
-//         password: '',
-//       },
-//       version: 3,
-//       readOnly: false,
-//     },
-//     onOptionsChange: jest.fn(),
-//   };
-//   Object.assign(props, propOverrides);
-//   return shallow(<ConfigEditor {...props} />);
-// };
-// setting up the props verifying Rendering the Config Screen with value in SSL Mode
-const setupForVerticaConnections = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'server',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        maxOpenConnections: 3,
-        maxIdealConnections: 2,
-        maxConnectionIdealTime: 10,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: ''
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
+jest.mock('@grafana/runtime', () => ({
+  config: {
+    featureToggles: {},
+    buildInfo: { version: '13.0.0' },
+  },
+}));
 
-// setting up the props verifying Rendering the Config Screen with value in SSL Mode
-const setUpBackUpServerNode = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'server',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        maxOpenConnections: 3,
-        maxIdealConnections: 2,
-        maxConnectionIdealTime: 10,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-        OauthToken: ''
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
-    },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
+type Props = import('./ConfigEditor').Props;
 
-// setting up the props verifying Rendering the Config Screen with value in SSL Mode
-const setUpUseBackServer = (propOverrides?: object) => {
-  const props: Props = {
-    options: {
-      id: 11,
-      orgId: 1,
-      name: 'vertica-grafana-plugin',
-      type: 'datasource',
-      typeName: 'vertica',
-      typeLogoUrl: '',
-      access: 'proxy',
-      url: '',
-      user: '',
-      database: '',
-      basicAuth: false,
-      basicAuthUser: '',
-      withCredentials: false,
-      isDefault: false,
-      jsonData: {
-        usePreparedStatements: false,
-        tlsmode: 'server',
-        useLoadBalancer: false,
-        url: 'localhost:verticaserver',
-        maxOpenConnections: 3,
-        maxIdealConnections: 2,
-        maxConnectionIdealTime: 10,
-        useBackupserver: false,
-        backupServerNode: '',
-        useOauth: false,
-        enableSecureSocksProxy: false,
-        
-      },
-      secureJsonFields: {},
-      secureJsonData: {
-        password: '',
-      },
-      version: 3,
-      readOnly: false,
-      uid: ''
+const { ConfigEditor } = require('./ConfigEditor') as typeof import('./ConfigEditor');
+
+const getProps = (): Props => ({
+  options: {
+    id: 11,
+    orgId: 1,
+    name: 'vertica-grafana-plugin',
+    type: 'datasource',
+    typeName: 'vertica',
+    typeLogoUrl: '',
+    access: 'proxy',
+    url: '',
+    user: '',
+    database: '',
+    basicAuth: false,
+    basicAuthUser: '',
+    withCredentials: false,
+    isDefault: false,
+    jsonData: {
+      url: 'localhost:5433',
+      database: 'vertica',
+      user: 'dbuser',
+      tlsmode: 'none',
+      usePreparedStatements: false,
+      useLoadBalancer: false,
+      maxOpenConnections: 0,
+      maxIdealConnections: 0,
+      maxConnectionIdealTime: 0,
+      useBackupserver: false,
+      backupServerNode: '',
+      useOauth: false,
+      enableSecureSocksProxy: false,
     },
-    onOptionsChange: jest.fn(),
-  };
-  Object.assign(props, propOverrides);
-  return shallow(<ConfigEditor {...props} />);
-};
-describe('Render', () => {
-  it('Render should render component with value in BackUp Server Nodes', () => {
-    const wrapper = setUpBackUpServerNode();
-    expect(wrapper.debug()).toMatchSnapshot();
+    secureJsonFields: {},
+    secureJsonData: {
+      password: '',
+      OauthToken: '',
+    },
+    version: 3,
+    readOnly: false,
+    uid: '',
+  },
+  onOptionsChange: jest.fn(),
+});
+
+describe('ConfigEditor', () => {
+  it('updates host value in options and jsonData', () => {
+    const props = getProps();
+    const component = new ConfigEditor(props);
+
+    component.onHostChange({ target: { value: 'db.internal:5433' } } as ChangeEvent<HTMLInputElement>);
+
+    expect(props.onOptionsChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        url: 'db.internal:5433',
+        jsonData: expect.objectContaining({
+          url: 'db.internal:5433',
+        }),
+      })
+    );
   });
-  it('Render should render component with value in Use Backup Server field', () => {
-    const wrapper = setUpUseBackServer();
-    expect(wrapper.debug()).toMatchSnapshot();
+
+  it('updates database value in jsonData', () => {
+    const props = getProps();
+    const component = new ConfigEditor(props);
+
+    component.onDBnameChange({ target: { value: 'analytics' } } as ChangeEvent<HTMLInputElement>);
+
+    expect(props.onOptionsChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        jsonData: expect.objectContaining({
+          database: 'analytics',
+        }),
+      })
+    );
   });
-  it('Render should render component with value in Host', () => {
-    const wrapper = setupForHostname();
-    expect(wrapper.debug()).toMatchSnapshot();
+
+  it('updates user value in jsonData', () => {
+    const props = getProps();
+    const component = new ConfigEditor(props);
+
+    component.onUserChange({ target: { value: 'readonly' } } as ChangeEvent<HTMLInputElement>);
+
+    expect(props.onOptionsChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        jsonData: expect.objectContaining({
+          user: 'readonly',
+        }),
+      })
+    );
   });
-  it('Render should render component with value in Database', () => {
-    const wrapper = setupForDatabasename();
-    expect(wrapper.debug()).toMatchSnapshot();
+
+  it('updates oauth token in secureJsonData', () => {
+    const props = getProps();
+    const component = new ConfigEditor(props);
+
+    component.onOauthTokenChange({ target: { value: 'token-123' } } as ChangeEvent<HTMLInputElement>);
+
+    expect(props.onOptionsChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        secureJsonData: expect.objectContaining({
+          OauthToken: 'token-123',
+        }),
+      })
+    );
   });
-  it('Render should render component with value in User', () => {
-    const wrapper = setupForUsername();
-    expect(wrapper.debug()).toMatchSnapshot();
+
+  it('sets load balancer toggle value', () => {
+    const props = getProps();
+    const component = new ConfigEditor(props);
+
+    component.onUseLoadBalancerChange({ target: { checked: true } } as ChangeEvent<HTMLInputElement>);
+
+    expect(props.onOptionsChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        jsonData: expect.objectContaining({
+          useLoadBalancer: true,
+        }),
+      })
+    );
   });
-  it('Render should render component with value in Password', () => {
-    const wrapper = setupForPassword();
-    expect(wrapper.debug()).toMatchSnapshot();
-  });
-  it('Render should render component with value in SSL', () => {
-    const wrapper = setupForSSLMode();
-    expect(wrapper.debug()).toMatchSnapshot();
-  });
-  it('Render should render component with value in setUp', () => {
-    const wrapper = setup();
-    expect(wrapper.debug()).toMatchSnapshot();
-  });
-  it('Render should render component with value in Vertica Connection', () => {
-    const wrapper = setupForVerticaConnections();
-    expect(wrapper.debug()).toMatchSnapshot();
-  });
-  // it('should render component with value in Use Unprepared Statements switch on', () => {
-  //   const wrapper = setupForUseUnpreparedStatements();
-  //   expect(wrapper.debug()).toMatchSnapshot();
-  // });
 });

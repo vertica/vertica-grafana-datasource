@@ -5,6 +5,12 @@ if (typeof TextEncoder === 'undefined') {
     const { TextEncoder } = require('util');
     global.TextEncoder = TextEncoder;
   }
+
+// Polyfill MessageChannel for React 19 server rendering in Jest
+if (typeof MessageChannel === 'undefined') {
+    const { MessageChannel } = require('worker_threads');
+    global.MessageChannel = MessageChannel;
+  }
   
   // Mock matchMedia for window.matchMedia used by some components
   Object.defineProperty(global, 'matchMedia', {

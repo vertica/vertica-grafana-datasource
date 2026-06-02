@@ -1,4 +1,3 @@
-import { map, find } from 'lodash';
 import { MyQuery } from './types';
 import { ScopedVars } from '@grafana/data';
 import { TemplateSrv } from '@grafana/runtime';
@@ -65,7 +64,7 @@ export default class QueryModel {
   }
 
   hasTimeGroup() {
-    return find(this.target.group, (g: any) => g.type === 'time');
+    return this.target.group.find((g: any) => g.type === 'time');
   }
 
   hasMetricColumn() {
@@ -82,7 +81,7 @@ export default class QueryModel {
       return this.quoteLiteral(value);
     }
 
-    const escapedValues = map(value, this.quoteLiteral);
+    const escapedValues = value.map(this.quoteLiteral);
     return escapedValues.join(',');
   }
 
@@ -155,11 +154,11 @@ export default class QueryModel {
   buildValueColumn(column: any) {
     let query = '';
 
-    const columnName: any = find(column, (g: any) => g.type === 'column');
+    const columnName: any = column.find((g: any) => g.type === 'column');
     query = columnName.params[0];
 
-    const aggregate: any = find(column, (g: any) => g.type === 'aggregate' || g.type === 'percentile');
-    const windows: any = find(column, (g: any) => g.type === 'window' || g.type === 'moving_window');
+    const aggregate: any = column.find((g: any) => g.type === 'aggregate' || g.type === 'percentile');
+    const windows: any = column.find((g: any) => g.type === 'window' || g.type === 'moving_window');
 
     if (aggregate) {
       const func = aggregate.params[0];
@@ -187,7 +186,7 @@ export default class QueryModel {
       const over = overParts.join(' ');
       let curr: string;
       let prev: string;
-      const hasAlias = find(column, (g: any) => g.type === 'alias');
+      const hasAlias = column.find((g: any) => g.type === 'alias');
       switch (windows.type) {
         case 'window':
           switch (windows.params[0]) {
@@ -237,7 +236,7 @@ export default class QueryModel {
       }
     }
 
-    const alias: any = find(column, (g: any) => g.type === 'alias');
+    const alias: any = column.find((g: any) => g.type === 'alias');
     if (alias) {
       query += ' AS ' + this.quoteIdentifier(alias.params[0]);
     }
@@ -247,7 +246,7 @@ export default class QueryModel {
 
   buildWhereClause() {
     let query = '';
-    const conditions = map(this.target.where, (tag) => {
+    const conditions = this.target.where.map((tag: any) => {
       switch (tag.type) {
         case 'macro':
           return tag.name + '(' + this.target.timeColumn + ')';
