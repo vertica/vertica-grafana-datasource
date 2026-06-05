@@ -68,8 +68,8 @@ func evaluateMacro(name string, args []string, timeRange backend.TimeRange) (str
 		}
 		return fmt.Sprintf("%s BETWEEN '%s' AND '%s'",
 				args[0],
-				time.Unix(0, timeRange.From.UnixNano()).Format(time.RFC3339Nano),
-				time.Unix(0, timeRange.To.UnixNano()).Format(time.RFC3339Nano)),
+				time.Unix(0, timeRange.From.UnixNano()).UTC().Format(time.RFC3339),
+				time.Unix(0, timeRange.To.UnixNano()).UTC().Format(time.RFC3339)),
 			nil
 	case "__timeFrom":
 		log.DefaultLogger.Info("QueryData", "timeR", timeRange.From)
@@ -77,14 +77,14 @@ func evaluateMacro(name string, args []string, timeRange backend.TimeRange) (str
 			return "", fmt.Errorf("macro %v should have no arguments", name)
 		}
 		return fmt.Sprintf("'%s'",
-				time.Unix(0, timeRange.From.UnixNano()).Format(time.RFC3339Nano)),
+				time.Unix(0, timeRange.From.UnixNano()).UTC().Format(time.RFC3339)),
 			nil
 	case "__timeTo":
 		if len(args) != 0 {
 			return "", fmt.Errorf("macro %v should have no arguments", name)
 		}
 		return fmt.Sprintf("'%s'",
-				time.Unix(0, timeRange.To.UnixNano()).Format(time.RFC3339Nano)),
+				time.Unix(0, timeRange.To.UnixNano()).UTC().Format(time.RFC3339)),
 			nil
 	case "__expandMultiString":
 		if len(args) == 0 {
