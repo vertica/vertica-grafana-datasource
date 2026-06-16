@@ -23,7 +23,7 @@ For the plugin to load, add the following configuration parameter to the  `/etc/
 * NodeJS -  v20.20.2
 * Yarn - v1.22.19
 * Npm - v10.8.0
-* Go - v1.21.9
+* Go - v1.26.3
 * React - v19
 
  
