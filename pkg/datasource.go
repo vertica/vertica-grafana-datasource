@@ -231,11 +231,10 @@ func newDataSourceInstance(ctx context.Context, settings backend.DataSourceInsta
 
 	connStr := config.ConnectionURL(secret,OauthToken)
 	
-
-	if proxyClient.SecureSocksProxyEnabled() {
+	if config.EnableSecureSocksProxy {
 		pdialer, err := proxyClient.NewSecureSocksProxyContextDialer()
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("secure SOCKS proxy is enabled on datasource, but unavailable in Grafana runtime; verify secure_socks_datasource_proxy settings and feature toggles: %w", err)
 		}
 	dialer := &dialContextWrapper{Dialer: pdialer}
 	connector, err := vertica.NewConnector(connStr,dialer.DialContext)
